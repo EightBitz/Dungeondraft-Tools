@@ -53,11 +53,16 @@ textures\objects and/or textures\portals folder structure for Dungeondraft. This
 assets as well, but Campaign Cartographer has two important naming conventions that this tool uses to
 manage how it copies assets.
 
+### Copy Tiles
+This tool is similar to Copy Assets, except that it allows you to copy assets as patterns, terrain or tilesets.
+
+### Map Details
+This tool provides details for selected maps, such as when they were created, which version of Dungeondraft they were created with, which cusom asset packs they use, and which assets they use from those asset packs.
+
 ### Pack Assets
 
 This tool will create .dungeondraft_pack files from selected asset folders.
 
 ### Unpack Assets
 
-This tool will unpack .dungeondraft_pack files.
 This tool will unpack .dungeondraft_pack files.
