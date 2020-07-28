@@ -231,6 +231,6 @@ Module TagAssetsModule
         OutputForm.OutputTextBox.AppendText(Message)
         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
         'Write the JSON string as a default.dungeondraft_tags file to the data folder.
-        My.Computer.FileSystem.WriteAllText(TagsFile, JSONString, False)
+        My.Computer.FileSystem.WriteAllText(TagsFile, JSONString, False, System.Text.Encoding.ASCII)
     End Sub
 End Module

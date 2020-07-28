@@ -11,7 +11,7 @@ Module ConvertAssetsModule
         Dim OtherFiles = Nothing
         Dim DestinationFile As String
 
-        'Check if the parent destination folder exists, and if if doesn't, create it.
+        'Check if the parent destination folder exists, and if it doesn't, create it.
         If My.Computer.FileSystem.DirectoryExists(Destination) Then
             Message = Indent & "Destination folder exists: " & Destination & vbCrLf
             OutputForm.OutputTextBox.AppendText(Message)

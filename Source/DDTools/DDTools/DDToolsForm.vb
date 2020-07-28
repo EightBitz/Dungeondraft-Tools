@@ -1,102 +1,536 @@
 ﻿Imports System.IO
+Imports System.Configuration
+Imports Newtonsoft.Json
 Public Class DDToolsForm
-
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub DDToolsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        PreferencesToolStripMenu.Visible = False
+        'TitlePanel.Hide()
+        TagAssetsGroupBox.Hide()
         ConvertAssetsGroupBox.Hide()
         ConvertPacksGroupBox.Hide()
         CopyAssetsGroupBox.Hide()
-        TagAssetsGroupBox.Hide()
-        UnpackGroupBox.Hide()
-        PackGroupBox.Hide()
+        CopyTilesGroupBox.Hide()
+        MapDetailsGroupBox.Hide()
+        PackAssetsGroupBox.Hide()
+        UnpackAssetsGroupBox.Hide()
 
-        Me.Size = New Size(798, 245)
+        Me.Size = New Size(802, 249)
         TitlePanel.BringToFront()
         TitlePanel.Show()
     End Sub
 
-    '###### Menu Items ######
-    Private Sub ConvertAssetssMenuItem_Click(sender As Object, e As EventArgs) Handles ConvertAssetsMenuItem.Click
+    '###### Main Menu Items ######
+    Private Sub TagAssetsMenuItem_Click(sender As Object, e As EventArgs) Handles TagAssetsMenuItem.Click
         TitlePanel.Hide()
-        'DDConvertAssetsGroupBox.Hide()
+        'TagAssetsGroupBox.Hide()
+        ConvertAssetsGroupBox.Hide()
         ConvertPacksGroupBox.Hide()
         CopyAssetsGroupBox.Hide()
-        TagAssetsGroupBox.Hide()
-        UnpackGroupBox.Hide()
-        PackGroupBox.Hide()
+        CopyTilesGroupBox.Hide()
+        MapDetailsGroupBox.Hide()
+        PackAssetsGroupBox.Hide()
+        UnpackAssetsGroupBox.Hide()
 
-        Me.Size = New Size(798, 649)
+        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+            Dim ConfigObject = GetSavedConfig(ConfigFileName)
+            Dim ActiveTool As String = "tag_assets"
+            GetSavedConfig(ConfigFileName)
+
+            TagAssetsSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+            TagAssetsDefaultTagTextBox.Text = ConfigObject(ActiveTool)("default_tag")
+            TagAssetsLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+            TagAssetsSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+
+            TagAssetsSourceTextBox_LostFocus(sender, e)
+        End If
+
+        Me.Size = New Size(802, 653)
+        PreferencesToolStripMenu.Visible = True
+        TagAssetsGroupBox.BringToFront()
+        TagAssetsGroupBox.Show()
+    End Sub
+
+    Private Sub ConvertAssetssMenuItem_Click(sender As Object, e As EventArgs) Handles ConvertAssetsMenuItem.Click
+        TitlePanel.Hide()
+        TagAssetsGroupBox.Hide()
+        'ConvertAssetsGroupBox.Hide()
+        ConvertPacksGroupBox.Hide()
+        CopyAssetsGroupBox.Hide()
+        CopyTilesGroupBox.Hide()
+        MapDetailsGroupBox.Hide()
+        PackAssetsGroupBox.Hide()
+        UnpackAssetsGroupBox.Hide()
+
+        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+            Dim ConfigObject = GetSavedConfig(ConfigFileName)
+            Dim ActiveTool As String = "convert_assets"
+            GetSavedConfig(ConfigFileName)
+
+            ConvertAssetsSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+            ConvertAssetsDestinationTextBox.Text = ConfigObject(ActiveTool)("destination")
+            ConvertAssetsLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+            ConvertAssetsSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+
+            ConvertAssetsSourceTextBox_LostFocus(sender, e)
+        End If
+
+        Me.Size = New Size(802, 653)
+        PreferencesToolStripMenu.Visible = True
         ConvertAssetsGroupBox.BringToFront()
         ConvertAssetsGroupBox.Show()
     End Sub
 
     Private Sub ConvertPacksMenuItem_Click(sender As Object, e As EventArgs) Handles ConvertPacksMenuItem.Click
         TitlePanel.Hide()
-        ConvertAssetsGroupBox.Hide()
-        'DDConvertPacksGroupBox.Hide()
-        CopyAssetsGroupBox.Hide()
         TagAssetsGroupBox.Hide()
-        UnpackGroupBox.Hide()
-        PackGroupBox.Hide()
+        ConvertAssetsGroupBox.Hide()
+        'ConvertPacksGroupBox.Hide()
+        CopyAssetsGroupBox.Hide()
+        CopyTilesGroupBox.Hide()
+        MapDetailsGroupBox.Hide()
+        PackAssetsGroupBox.Hide()
+        UnpackAssetsGroupBox.Hide()
 
-        Me.Size = New Size(798, 649)
+        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+            Dim ConfigObject = GetSavedConfig(ConfigFileName)
+            Dim ActiveTool As String = "convert_packs"
+            GetSavedConfig(ConfigFileName)
+
+            ConvertPacksSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+            ConvertPacksDestinationTextBox.Text = ConfigObject(ActiveTool)("destination")
+            ConvertPacksCleanUpCheckBox.Checked = ConfigObject(ActiveTool)("cleanup")
+            ConvertPacksLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+            ConvertPacksSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+
+            ConvertPacksSourceTextBox_LostFocus(sender, e)
+        End If
+
+        Me.Size = New Size(802, 653)
+        PreferencesToolStripMenu.Visible = True
         ConvertPacksGroupBox.BringToFront()
         ConvertPacksGroupBox.Show()
     End Sub
 
     Private Sub CopyAssetsMenuItem_Click(sender As Object, e As EventArgs) Handles CopyAssetsMenuItem.Click
         TitlePanel.Hide()
+        TagAssetsGroupBox.Hide()
         ConvertAssetsGroupBox.Hide()
         ConvertPacksGroupBox.Hide()
-        'DDCopyAssetsGroupBox.Hide()
-        TagAssetsGroupBox.Hide()
-        UnpackGroupBox.Hide()
-        PackGroupBox.Hide()
+        'CopyAssetsGroupBox.Hide()
+        CopyTilesGroupBox.Hide()
+        MapDetailsGroupBox.Hide()
+        PackAssetsGroupBox.Hide()
+        UnpackAssetsGroupBox.Hide()
 
-        Me.Size = New Size(798, 649)
+        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+            Dim ConfigObject = GetSavedConfig(ConfigFileName)
+            Dim ActiveTool As String = "copy_assets"
+            GetSavedConfig(ConfigFileName)
+
+            CopyAssetsSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+            CopyAssetsDestinationTextBox.Text = ConfigObject(ActiveTool)("destination")
+            CopyAssetsCreateTagsCheckBox.Checked = ConfigObject(ActiveTool)("create_tags")
+            CopyAssetsPortalsCheckBox.Checked = ConfigObject(ActiveTool)("separate_portals")
+            CopyAssetsLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+            CopyAssetsSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+
+            CopyAssetsSourceTextBox_LostFocus(sender, e)
+        End If
+
+        Me.Size = New Size(802, 653)
+        PreferencesToolStripMenu.Visible = True
         CopyAssetsGroupBox.BringToFront()
         CopyAssetsGroupBox.Show()
     End Sub
-
-    Private Sub TagAssetsMenuItem_Click(sender As Object, e As EventArgs) Handles TagAssetsMenuItem.Click
+    Private Sub CopyTilesMenuItem_Click(sender As Object, e As EventArgs) Handles CopyTilesMenuItem.Click
         TitlePanel.Hide()
+        TagAssetsGroupBox.Hide()
         ConvertAssetsGroupBox.Hide()
         ConvertPacksGroupBox.Hide()
         CopyAssetsGroupBox.Hide()
-        'TagAssetsGroupBox.Hide()
-        UnpackGroupBox.Hide()
-        PackGroupBox.Hide()
+        'CopyTilesGroupBox.Hide()
+        MapDetailsGroupBox.Hide()
+        PackAssetsGroupBox.Hide()
+        UnpackAssetsGroupBox.Hide()
 
-        Me.Size = New Size(798, 649)
-        TagAssetsGroupBox.BringToFront()
-        TagAssetsGroupBox.Show()
+        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+            Dim ConfigObject = GetSavedConfig(ConfigFileName)
+            Dim ActiveTool As String = "copy_tiles"
+            GetSavedConfig(ConfigFileName)
+
+            CopyTilesSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+            CopyTilesDestinationTextBox.Text = ConfigObject(ActiveTool)("destination")
+            CopyTilesLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+            CopyTilesSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+
+            CopyTilesSourceTextBox_LostFocus(sender, e)
+        End If
+
+        Me.Size = New Size(802, 653)
+        PreferencesToolStripMenu.Visible = True
+        CopyTilesGroupBox.BringToFront()
+        CopyTilesGroupBox.Show()
+    End Sub
+    Private Sub MapDetailsMenuItem_Click(sender As Object, e As EventArgs) Handles MapDetailsMenuItem.Click
+        TitlePanel.Hide()
+        TagAssetsGroupBox.Hide()
+        ConvertAssetsGroupBox.Hide()
+        ConvertPacksGroupBox.Hide()
+        CopyAssetsGroupBox.Hide()
+        CopyTilesGroupBox.Hide()
+        'MapDetailsGroupBox.Hide()
+        PackAssetsGroupBox.Hide()
+        UnpackAssetsGroupBox.Hide()
+
+        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+            Dim ConfigObject = GetSavedConfig(ConfigFileName)
+            Dim ActiveTool As String = "map_details"
+            GetSavedConfig(ConfigFileName)
+
+            MapDetailsSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+            MapDetailsLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+            MapDetailsSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+
+            MapDetailsSourceTextBox_LostFocus(sender, e)
+        End If
+
+        Me.Size = New Size(802, 653)
+        PreferencesToolStripMenu.Visible = True
+        MapDetailsGroupBox.BringToFront()
+        MapDetailsGroupBox.Show()
     End Sub
 
-    Private Sub DungeondraftunpackexeMenuItem_Click(sender As Object, e As EventArgs) Handles DungeondraftunpackexeMenuItem.Click
+    Private Sub PackAssetsMenuItem_Click(sender As Object, e As EventArgs) Handles PackAssetsMenuItem.Click
         TitlePanel.Hide()
+        TagAssetsGroupBox.Hide()
         ConvertAssetsGroupBox.Hide()
         ConvertPacksGroupBox.Hide()
         CopyAssetsGroupBox.Hide()
-        TagAssetsGroupBox.Hide()
-        'DDUnpackGroupBox.Hide()
-        PackGroupBox.Hide()
+        CopyTilesGroupBox.Hide()
+        MapDetailsGroupBox.Hide()
+        'PackAssetsGroupBox.Hide()
+        UnpackAssetsGroupBox.Hide()
 
-        Me.Size = New Size(798, 649)
-        UnpackGroupBox.BringToFront()
-        UnpackGroupBox.Show()
+        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+            Dim ConfigObject = GetSavedConfig(ConfigFileName)
+            Dim ActiveTool As String = "pack_assets"
+            GetSavedConfig(ConfigFileName)
+
+            PackAssetsSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+            PackAssetsDestinationTextBox.Text = ConfigObject(ActiveTool)("destination")
+            PackAssetsOverwriteCheckBox.Checked = ConfigObject(ActiveTool)("overwrite")
+            PackAssetsLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+            PackAssetsSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+
+            PackAssetsSourceTextBox_LostFocus(sender, e)
+        End If
+
+        Me.Size = New Size(1000, 653)
+        PreferencesToolStripMenu.Visible = True
+        PackAssetsGroupBox.BringToFront()
+        PackAssetsGroupBox.Show()
     End Sub
 
-    Private Sub DungeondraftpackexeMenuItem_Click(sender As Object, e As EventArgs) Handles DungeondraftpackexeMenuItem.Click
+    Private Sub UnpackAssetsMenuItem_Click(sender As Object, e As EventArgs) Handles UnpackAssetsMenuItem.Click
         TitlePanel.Hide()
+        TagAssetsGroupBox.Hide()
         ConvertAssetsGroupBox.Hide()
         ConvertPacksGroupBox.Hide()
         CopyAssetsGroupBox.Hide()
-        TagAssetsGroupBox.Hide()
-        UnpackGroupBox.Hide()
-        'DDPackGroupBox.Hide()
+        CopyTilesGroupBox.Hide()
+        MapDetailsGroupBox.Hide()
+        PackAssetsGroupBox.Hide()
+        'UnpackAssetsGroupBox.Hide()
 
-        Me.Size = New Size(798, 649)
-        PackGroupBox.BringToFront()
-        PackGroupBox.Show()
+        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+            Dim ConfigObject = GetSavedConfig(ConfigFileName)
+            Dim ActiveTool As String = "unpack_assets"
+            GetSavedConfig(ConfigFileName)
+
+            UnpackAssetsSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+            UnpackAssetsDestinationTextBox.Text = ConfigObject(ActiveTool)("destination")
+            UnpackAssetsLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+            PackAssetsSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+
+            UnpackAssetsSourceTextBox_LostFocus(sender, e)
+        End If
+
+        Me.Size = New Size(802, 653)
+        PreferencesToolStripMenu.Visible = True
+        UnpackAssetsGroupBox.BringToFront()
+        UnpackAssetsGroupBox.Show()
+    End Sub
+
+    '###### Preference Menu Items ######
+    Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        Dim ConfigObject
+        Dim ActiveTool As String
+        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+            ConfigObject = GetSavedConfig(ConfigFileName)
+        Else
+            ConfigObject = BuildConfigObject()
+        End If
+
+        If TagAssetsGroupBox.Visible = True Then
+            ActiveTool = "tag_assets"
+            ConfigObject(ActiveTool)("source") = TagAssetsSourceTextBox.Text
+            ConfigObject(ActiveTool)("default_tag") = TagAssetsDefaultTagTextBox.Text
+            ConfigObject(ActiveTool)("create_log") = TagAssetsLogCheckBox.Checked
+            ConfigObject(ActiveTool)("select_all") = TagAssetsSelectAllCheckBox.Checked
+        ElseIf ConvertAssetsGroupBox.Visible = True Then
+            ActiveTool = "convert_assets"
+            ConfigObject(ActiveTool)("source") = ConvertAssetsSourceTextBox.Text
+            ConfigObject(ActiveTool)("destination") = ConvertAssetsDestinationTextBox.Text
+            ConfigObject(ActiveTool)("create_log") = ConvertAssetsLogCheckBox.Checked
+            ConfigObject(ActiveTool)("select_all") = ConvertAssetsSelectAllCheckBox.Checked
+        ElseIf ConvertPacksGroupBox.Visible = True Then
+            ActiveTool = "convert_packs"
+            ConfigObject(ActiveTool)("source") = ConvertPacksSourceTextBox.Text
+            ConfigObject(ActiveTool)("destination") = ConvertPacksDestinationTextBox.Text
+            ConfigObject(ActiveTool)("cleanup") = ConvertPacksCleanUpCheckBox.Checked
+            ConfigObject(ActiveTool)("create_log") = ConvertPacksLogCheckBox.Checked
+            ConfigObject(ActiveTool)("select_all") = ConvertPacksSelectAllCheckBox.Checked
+        ElseIf CopyAssetsGroupBox.Visible = True Then
+            ActiveTool = "copy_assets"
+            ConfigObject(ActiveTool)("source") = CopyAssetsSourceTextBox.Text
+            ConfigObject(ActiveTool)("destination") = CopyAssetsDestinationTextBox.Text
+            ConfigObject(ActiveTool)("create_tags") = CopyAssetsCreateTagsCheckBox.Checked
+            ConfigObject(ActiveTool)("separate_portals") = CopyAssetsPortalsCheckBox.Checked
+            ConfigObject(ActiveTool)("create_log") = CopyAssetsLogCheckBox.Checked
+            ConfigObject(ActiveTool)("select_all") = CopyAssetsSelectAllCheckBox.Checked
+        ElseIf CopyTilesGroupBox.Visible = True Then
+            ActiveTool = "copy_tiles"
+            ConfigObject(ActiveTool)("source") = CopyTilesSourceTextBox.Text
+            ConfigObject(ActiveTool)("destination") = CopyTilesDestinationTextBox.Text
+            ConfigObject(ActiveTool)("create_log") = CopyTilesLogCheckBox.Checked
+            ConfigObject(ActiveTool)("select_all") = CopyTilesSelectAllCheckBox.Checked
+        ElseIf MapDetailsGroupBox.Visible = True Then
+            ActiveTool = "map_details"
+            ConfigObject(ActiveTool)("source") = MapDetailsSourceTextBox.Text
+            ConfigObject(ActiveTool)("create_log") = MapDetailsLogCheckBox.Checked
+            ConfigObject(ActiveTool)("select_all") = MapDetailsSelectAllCheckBox.Checked
+        ElseIf PackAssetsGroupBox.Visible = True Then
+            ActiveTool = "pack_assets"
+            ConfigObject(ActiveTool)("source") = PackAssetsSourceTextBox.Text
+            ConfigObject(ActiveTool)("destination") = PackAssetsDestinationTextBox.Text
+            ConfigObject(ActiveTool)("overwrite") = PackAssetsOverwriteCheckBox.Checked
+            ConfigObject(ActiveTool)("create_log") = PackAssetsLogCheckBox.Checked
+            ConfigObject(ActiveTool)("select_all") = PackAssetsSelectAllCheckBox.Checked
+        ElseIf UnpackAssetsGroupBox.Visible = True Then
+            ActiveTool = "unpack_assets"
+            ConfigObject(ActiveTool)("source") = UnpackAssetsSourceTextBox.Text
+            ConfigObject(ActiveTool)("destination") = UnpackAssetsDestinationTextBox.Text
+            ConfigObject(ActiveTool)("create_log") = UnpackAssetsLogCheckBox.Checked
+            ConfigObject(ActiveTool)("select_all") = UnpackAssetsSelectAllCheckBox.Checked
+        End If
+
+        SaveNewConfig(ConfigObject, ConfigFileName)
+    End Sub
+
+    Private Sub LoadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LoadToolStripMenuItem.Click
+        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        Dim ActiveTool As String
+
+        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+            Dim ConfigObject = GetSavedConfig(ConfigFileName)
+
+            If TagAssetsGroupBox.Visible = True Then
+                ActiveTool = "tag_assets"
+                TagAssetsSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+                TagAssetsDefaultTagTextBox.Text = ConfigObject(ActiveTool)("default_tag")
+                TagAssetsLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+                TagAssetsSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+                TagAssetsSourceTextBox_LostFocus(sender, e)
+            ElseIf ConvertAssetsGroupBox.Visible = True Then
+                ActiveTool = "convert_assets"
+                ConvertAssetsSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+                ConvertAssetsDestinationTextBox.Text = ConfigObject(ActiveTool)("destination")
+                ConvertAssetsLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+                ConvertAssetsSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+                ConvertAssetsSourceTextBox_LostFocus(sender, e)
+            ElseIf ConvertPacksGroupBox.Visible = True Then
+                ActiveTool = "convert_packs"
+                ConvertPacksSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+                ConvertPacksDestinationTextBox.Text = ConfigObject(ActiveTool)("destination")
+                ConvertPacksCleanUpCheckBox.Checked = ConfigObject(ActiveTool)("cleanup")
+                ConvertPacksLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+                ConvertPacksSelectAllCheckBox.Checked = ConfigObject("convertpacks")("select_all")
+                ConvertPacksSourceTextBox_LostFocus(sender, e)
+            ElseIf CopyAssetsGroupBox.Visible = True Then
+                ActiveTool = "copy_assets"
+                CopyAssetsSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+                CopyAssetsDestinationTextBox.Text = ConfigObject(ActiveTool)("destination")
+                CopyAssetsCreateTagsCheckBox.Checked = ConfigObject(ActiveTool)("create_tags")
+                CopyAssetsPortalsCheckBox.Checked = ConfigObject(ActiveTool)("separate_portals")
+                CopyAssetsLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+                CopyAssetsSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+                CopyAssetsSourceTextBox_LostFocus(sender, e)
+            ElseIf CopyTilesGroupBox.Visible = True Then
+                ActiveTool = "copy_tiles"
+                CopyTilesSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+                CopyTilesDestinationTextBox.Text = ConfigObject(ActiveTool)("destination")
+                CopyTilesLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+                CopyTilesSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+                CopyTilesSourceTextBox_LostFocus(sender, e)
+            ElseIf MapDetailsGroupBox.Visible = True Then
+                ActiveTool = "map_details"
+                MapDetailsSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+                MapDetailsLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+                MapDetailsSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+                MapDetailsSourceTextBox_LostFocus(sender, e)
+            ElseIf PackAssetsGroupBox.Visible = True Then
+                ActiveTool = "pack_assets"
+                PackAssetsSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+                PackAssetsDestinationTextBox.Text = ConfigObject(ActiveTool)("destination")
+                PackAssetsOverwriteCheckBox.Checked = ConfigObject(ActiveTool)("overwrite")
+                PackAssetsLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+                PackAssetsSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+                PackAssetsSourceTextBox_LostFocus(sender, e)
+            ElseIf UnpackAssetsGroupBox.Visible = True Then
+                ActiveTool = "unpack_assets"
+                UnpackAssetsSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+                UnpackAssetsDestinationTextBox.Text = ConfigObject(ActiveTool)("destination")
+                UnpackAssetsLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+                UnpackAssetsSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
+                UnpackAssetsSourceTextBox_LostFocus(sender, e)
+            End If
+        End If
+    End Sub
+
+    '###### Tag Assets Group Box ######
+    Private Sub TagAssetsSourceTextBox_LostFocus(sender As Object, e As EventArgs) Handles TagAssetsSourceTextBox.LostFocus
+        TagAssetsCheckedListBox.Items.Clear()
+        Dim SourceFolderName As String
+        Dim IsFolderNameValid As Boolean
+        Dim DoesFolderExist As Boolean
+        SourceFolderName = TagAssetsSourceTextBox.Text
+        IsFolderNameValid = IsValidPathName(SourceFolderName)
+        DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
+        If IsFolderNameValid And DoesFolderExist Then
+            If My.Computer.FileSystem.DirectoryExists(SourceFolderName & "\textures\objects") Then
+                Dim SourceFolderInfo = My.Computer.FileSystem.GetDirectoryInfo(SourceFolderName)
+                TagAssetsSourceTextBox.Text = SourceFolderInfo.Parent.FullName
+                TagAssetsCheckedListBox.Items.Add(SourceFolderInfo.Name)
+                TagAssetsCheckedListBox.SetItemChecked(TagAssetsCheckedListBox.Items.Count - 1, True)
+            Else
+                For Each TagFolder As String In My.Computer.FileSystem.GetDirectories(SourceFolderName)
+                    If My.Computer.FileSystem.DirectoryExists(TagFolder & "\textures\objects") Then
+                        Dim FolderName As New System.IO.DirectoryInfo(TagFolder)
+                        TagAssetsCheckedListBox.Items.Add(FolderName.Name)
+                        If TagAssetsSelectAllCheckBox.Checked Then TagAssetsCheckedListBox.SetItemChecked(TagAssetsCheckedListBox.Items.Count - 1, True)
+                    End If
+                Next
+            End If
+        End If
+    End Sub
+
+    Private Sub TagAssetsBrowseButton_Click(sender As Object, e As EventArgs) Handles TagAssetsBrowseButton.Click
+        TagAssetsCheckedListBox.Items.Clear()
+        TagAssetsSourceBrowserDialog.ShowDialog()
+        TagAssetsSourceTextBox.Text = TagAssetsSourceBrowserDialog.SelectedPath
+
+        Dim SourceFolderName As String
+        Dim IsFolderNameValid As Boolean
+        Dim DoesFolderExist As Boolean
+        SourceFolderName = TagAssetsSourceTextBox.Text
+        IsFolderNameValid = IsValidPathName(SourceFolderName)
+        DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
+        If IsFolderNameValid And DoesFolderExist Then
+            If My.Computer.FileSystem.DirectoryExists(SourceFolderName & "\textures\objects") Then
+                Dim SourceFolderInfo = My.Computer.FileSystem.GetDirectoryInfo(SourceFolderName)
+                TagAssetsSourceTextBox.Text = SourceFolderInfo.Parent.FullName
+                TagAssetsCheckedListBox.Items.Add(SourceFolderInfo.Name)
+                TagAssetsCheckedListBox.SetItemChecked(TagAssetsCheckedListBox.Items.Count - 1, True)
+            Else
+                For Each TagFolder As String In My.Computer.FileSystem.GetDirectories(SourceFolderName)
+                    If My.Computer.FileSystem.DirectoryExists(TagFolder & "\textures\objects") Then
+                        Dim FolderName As New System.IO.DirectoryInfo(TagFolder)
+                        TagAssetsCheckedListBox.Items.Add(FolderName.Name)
+                        If TagAssetsSelectAllCheckBox.Checked Then TagAssetsCheckedListBox.SetItemChecked(TagAssetsCheckedListBox.Items.Count - 1, True)
+                    End If
+                Next
+            End If
+        End If
+    End Sub
+
+    Private Sub TagAssetsSelectAllCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles TagAssetsSelectAllCheckBox.CheckedChanged
+        If TagAssetsSelectAllCheckBox.Checked Then
+            TagAssetsSelectAllButton_Click(sender, e)
+        Else
+            TagAssetsSelectNoneButton_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub TagAssetsSelectAllButton_Click(sender As Object, e As EventArgs) Handles TagAssetsSelectAllButton.Click
+        Dim Count As Integer
+        For Count = 0 To TagAssetsCheckedListBox.Items.Count - 1
+            TagAssetsCheckedListBox.SetItemChecked(Count, True)
+        Next
+    End Sub
+
+    Private Sub TagAssetsSelectNoneButton_Click(sender As Object, e As EventArgs) Handles TagAssetsSelectNoneButton.Click
+        Dim Count As Integer
+        For Count = 0 To TagAssetsCheckedListBox.Items.Count - 1
+            TagAssetsCheckedListBox.SetItemChecked(Count, False)
+        Next
+    End Sub
+
+    Private Sub TagAssetsStartButton_Click(sender As Object, e As EventArgs) Handles TagAssetsStartButton.Click
+        Dim SourceFolderName As String = TagAssetsSourceTextBox.Text
+        Dim IsSourceFolderNameValid As String
+        Dim DoesSourceFolderExist As Boolean
+        Dim DefaultTag As String = TagAssetsDefaultTagTextBox.Text
+        Dim CreateLog As Boolean = TagAssetsLogCheckBox.Checked
+        Dim LogFileName As String = "TagAssets.log"
+        Dim TagSource As String
+        Dim Indent As String = "    " '4 spaces
+        Dim SubIndent As String = "        " '8 spaces
+        Dim Message As String
+
+        IsSourceFolderNameValid = IsValidPathName(SourceFolderName)
+        DoesSourceFolderExist = System.IO.Directory.Exists(SourceFolderName)
+        If SourceFolderName <> "" And IsSourceFolderNameValid And DoesSourceFolderExist Then
+            If TagAssetsCheckedListBox.CheckedItems.Count >= 1 Then
+                OutputForm.OutputTextBox.Text = ""
+                OutputForm.Show()
+                OutputForm.BringToFront()
+                Message = "### Starting selected folders at " & DateTime.Now & "." & vbCrLf & vbCrLf
+                OutputForm.OutputTextBox.AppendText(Message)
+                If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, False)
+                Dim SelectedFolders = TagAssetsCheckedListBox.CheckedItems
+                For Each AssetFolder In SelectedFolders
+                    If SourceFolderName.EndsWith("\") Then
+                        TagSource = SourceFolderName & AssetFolder
+                    Else
+                        TagSource = SourceFolderName & "\" & AssetFolder
+                    End If
+                    Message = Indent & "Starting " & AssetFolder & " at " & DateTime.Now & vbCrLf
+                    OutputForm.OutputTextBox.AppendText(Message)
+                    If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                    TagAssetsSub(TagSource, AssetFolder, DefaultTag, CreateLog, LogFileName, SubIndent)
+                    Message = Indent & "Finished " & AssetFolder & " at " & DateTime.Now & vbCrLf & vbCrLf
+                    OutputForm.OutputTextBox.AppendText(Message)
+                    If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                Next
+                Message = "### Finished selected folders at " & DateTime.Now & "." & vbCrLf
+                OutputForm.OutputTextBox.AppendText(Message)
+                If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+            Else
+                MsgBox("Nothing was selected.")
+            End If
+        Else
+            MsgBox("Source folder name is either invalid or does not exist.")
+        End If
+
     End Sub
 
     '###### Convert Assets Group Box ######
@@ -115,11 +549,11 @@ Public Class DDToolsForm
         If IsFolderNameValid And DoesFolderExist Then
             SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
             DestinationFolderName = UserFolder & "\Dungeondraft\Converted Assets\" & SourceFolder.Name
-            ConvertAssetsDestinationTextBox.Text = DestinationFolderName
+            If ConvertAssetsDestinationTextBox.Text = "" Then ConvertAssetsDestinationTextBox.Text = DestinationFolderName
             For Each AssetFolder As String In My.Computer.FileSystem.GetDirectories(SourceFolderName)
                 Dim FolderName As New System.IO.DirectoryInfo(AssetFolder)
                 ConvertAssetsCheckedListBox.Items.Add(FolderName.Name)
-                ConvertAssetsCheckedListBox.SetItemChecked(ConvertAssetsCheckedListBox.Items.Count - 1, True)
+                If ConvertAssetsSelectAllCheckBox.Checked Then ConvertAssetsCheckedListBox.SetItemChecked(ConvertAssetsCheckedListBox.Items.Count - 1, True)
             Next
         End If
     End Sub
@@ -142,11 +576,11 @@ Public Class DDToolsForm
         If IsFolderNameValid And DoesFolderExist Then
             SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
             DestinationFolderName = UserFolder & "\Dungeondraft\Converted Assets\" & SourceFolder.Name
-            ConvertAssetsDestinationTextBox.Text = DestinationFolderName
+            If ConvertAssetsDestinationTextBox.Text = "" Then ConvertAssetsDestinationTextBox.Text = DestinationFolderName
             For Each AssetFolder As String In My.Computer.FileSystem.GetDirectories(SourceFolderName)
                 Dim FolderName As New System.IO.DirectoryInfo(AssetFolder)
                 ConvertAssetsCheckedListBox.Items.Add(FolderName.Name)
-                ConvertAssetsCheckedListBox.SetItemChecked(ConvertAssetsCheckedListBox.Items.Count - 1, True)
+                If ConvertAssetsSelectAllCheckBox.Checked Then ConvertAssetsCheckedListBox.SetItemChecked(ConvertAssetsCheckedListBox.Items.Count - 1, True)
             Next
         End If
     End Sub
@@ -155,6 +589,15 @@ Public Class DDToolsForm
         ConvertAssetsDestinationBrowserDialog.ShowDialog()
         ConvertAssetsDestinationTextBox.Text = ConvertAssetsDestinationBrowserDialog.SelectedPath
     End Sub
+
+    Private Sub ConvertAssetsSelectAllCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles ConvertAssetsSelectAllCheckBox.CheckedChanged
+        If ConvertAssetsSelectAllCheckBox.Checked Then
+            ConvertAssetsSelectAllButton_Click(sender, e)
+        Else
+            ConvertAssetsSelectNoneButton_Click(sender, e)
+        End If
+    End Sub
+
     Private Sub ConvertAssetsSelectAllButton_Click(sender As Object, e As EventArgs) Handles ConvertAssetsSelectAllButton.Click
         Dim Count As Integer
         For Count = 0 To ConvertAssetsCheckedListBox.Items.Count - 1
@@ -175,7 +618,7 @@ Public Class DDToolsForm
         Dim DoesSourceFolderExist As Boolean
         Dim IsDestinationFolderNameValid As String
         Dim LogFileName As String = "ConvertAssets.log"
-        Dim CreateLog = CopyAssetsLogCheckBox.Checked
+        Dim CreateLog = ConvertAssetsLogCheckBox.Checked
         Dim CopySource As String
         Dim CopyDestination As String
         Dim Indent As String = "    " '4 spaces
@@ -229,7 +672,7 @@ Public Class DDToolsForm
                             OutputForm.OutputTextBox.AppendText(Message)
                             If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
                         Next
-                        Message = "### Finished selected folders " & DateTime.Now & "." & vbCrLf
+                        Message = "### Finished selected folders at " & DateTime.Now & "." & vbCrLf
                         OutputForm.OutputTextBox.AppendText(Message)
                         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
                     End If
@@ -260,13 +703,13 @@ Public Class DDToolsForm
         DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
         If IsFolderNameValid And DoesFolderExist Then
             SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
-            DestinationFolderName = UserFolder & "\Dungeondraft"
-            ConvertPacksDestinationTextBox.Text = DestinationFolderName
+            DestinationFolderName = UserFolder & "\Dungeondraft\" & SourceFolder.Name
+            If ConvertPacksDestinationTextBox.Text = "" Then ConvertPacksDestinationTextBox.Text = DestinationFolderName
             For Each PackFile As String In My.Computer.FileSystem.GetFiles(SourceFolderName)
                 Dim PackName As New System.IO.DirectoryInfo(PackFile)
                 If PackName.Extension = ".dungeondraft_pack" Then
                     ConvertPacksCheckedListBox.Items.Add(PackName.Name)
-                    ConvertPacksCheckedListBox.SetItemChecked(ConvertPacksCheckedListBox.Items.Count - 1, True)
+                    If ConvertPacksSelectAllCheckBox.Checked Then ConvertPacksCheckedListBox.SetItemChecked(ConvertPacksCheckedListBox.Items.Count - 1, True)
                 End If
             Next
         End If
@@ -289,13 +732,13 @@ Public Class DDToolsForm
         DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
         If IsFolderNameValid And DoesFolderExist Then
             SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
-            DestinationFolderName = UserFolder & "\Dungeondraft" & SourceFolder.Name
-            ConvertPacksDestinationTextBox.Text = DestinationFolderName
+            DestinationFolderName = UserFolder & "\Dungeondraft\" & SourceFolder.Name
+            If ConvertPacksDestinationTextBox.Text = "" Then ConvertPacksDestinationTextBox.Text = DestinationFolderName
             For Each PackFile As String In My.Computer.FileSystem.GetFiles(SourceFolderName)
                 Dim PackName As New System.IO.DirectoryInfo(PackFile)
                 If PackName.Extension = ".dungeondraft_pack" Then
                     ConvertPacksCheckedListBox.Items.Add(PackName.Name)
-                    ConvertPacksCheckedListBox.SetItemChecked(ConvertPacksCheckedListBox.Items.Count - 1, True)
+                    If ConvertPacksSelectAllCheckBox.Checked Then ConvertPacksCheckedListBox.SetItemChecked(ConvertPacksCheckedListBox.Items.Count - 1, True)
                 End If
             Next
         End If
@@ -304,6 +747,14 @@ Public Class DDToolsForm
     Private Sub ConvertPacksDestinationBrowseButton_Click(sender As Object, e As EventArgs) Handles ConvertPacksDestinationBrowseButton.Click
         ConvertPacksDestinationBrowserDialog.ShowDialog()
         ConvertPacksDestinationTextBox.Text = ConvertPacksDestinationBrowserDialog.SelectedPath
+    End Sub
+
+    Private Sub ConvertPacksSelectAllCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles ConvertPacksSelectAllCheckBox.CheckedChanged
+        If ConvertPacksSelectAllCheckBox.Checked Then
+            ConvertPacksSelectAllButton_Click(sender, e)
+        Else
+            ConvertPacksSelectNoneButton_Click(sender, e)
+        End If
     End Sub
 
     Private Sub ConvertPacksSelectAllButton_Click(sender As Object, e As EventArgs) Handles ConvertPacksSelectAllButton.Click
@@ -336,7 +787,7 @@ Public Class DDToolsForm
         Dim ProgramFiles As String = Environment.GetEnvironmentVariable("ProgramFiles")
         Dim ImageMagickEXE As String
         Dim Message As String
-        Dim CreateLog = CopyAssetsLogCheckBox.Checked
+        Dim CreateLog = ConvertPacksLogCheckBox.Checked
         Dim Indent As String = "    " '4 spaces
         Dim SubIndent As String = "        " '8 spaces
 
@@ -356,7 +807,7 @@ Public Class DDToolsForm
         DoesSourceFolderExist = System.IO.Directory.Exists(SourceFolderName)
         IsDestinationFolderNameValid = IsValidPathName(DestinationFolderName)
 
-        If Not UnpackEXEexists And Not PackEXEexists And MagickExists Then
+        If UnpackEXEexists And PackEXEexists And MagickExists Then
             If SourceFolderName <> "" And IsSourceFolderNameValid And DoesSourceFolderExist Then
                 If DestinationFolderName <> "" And IsDestinationFolderNameValid Then
                     If ConvertPacksCheckedListBox.CheckedItems.Count >= 1 Then
@@ -380,7 +831,7 @@ Public Class DDToolsForm
                             OutputForm.OutputTextBox.AppendText(Message)
                             If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
                         Next
-                        Message = "### Finished selected packs " & DateTime.Now & "." & vbCrLf
+                        Message = "### Finished selected packs at " & DateTime.Now & "." & vbCrLf
                         OutputForm.OutputTextBox.AppendText(Message)
                         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
                     Else
@@ -418,11 +869,11 @@ Public Class DDToolsForm
         If IsFolderNameValid And DoesFolderExist Then
             SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
             DestinationFolderName = UserFolder & "\Dungeondraft\Copied Assets\" & SourceFolder.Name
-            CopyAssetsDestinationTextBox.Text = DestinationFolderName
+            If CopyAssetsDestinationTextBox.Text = "" Then CopyAssetsDestinationTextBox.Text = DestinationFolderName
             For Each AssetFolder As String In My.Computer.FileSystem.GetDirectories(SourceFolderName)
                 Dim FolderName As New System.IO.DirectoryInfo(AssetFolder)
                 CopyAssetsCheckedListBox.Items.Add(FolderName.Name)
-                CopyAssetsCheckedListBox.SetItemChecked(CopyAssetsCheckedListBox.Items.Count - 1, True)
+                If CopyAssetsSelectAllCheckBox.Checked Then CopyAssetsCheckedListBox.SetItemChecked(CopyAssetsCheckedListBox.Items.Count - 1, True)
             Next
         End If
     End Sub
@@ -445,11 +896,11 @@ Public Class DDToolsForm
         If IsFolderNameValid And DoesFolderExist Then
             SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
             DestinationFolderName = UserFolder & "\Dungeondraft\Copied Assets\" & SourceFolder.Name
-            CopyAssetsDestinationTextBox.Text = DestinationFolderName
+            If CopyAssetsDestinationTextBox.Text = "" Then CopyAssetsDestinationTextBox.Text = DestinationFolderName
             For Each AssetFolder As String In My.Computer.FileSystem.GetDirectories(SourceFolderName)
                 Dim FolderName As New System.IO.DirectoryInfo(AssetFolder)
                 CopyAssetsCheckedListBox.Items.Add(FolderName.Name)
-                CopyAssetsCheckedListBox.SetItemChecked(CopyAssetsCheckedListBox.Items.Count - 1, True)
+                If CopyAssetsSelectAllCheckBox.Checked Then CopyAssetsCheckedListBox.SetItemChecked(CopyAssetsCheckedListBox.Items.Count - 1, True)
             Next
         End If
     End Sub
@@ -458,6 +909,15 @@ Public Class DDToolsForm
         CopyAssetsDestinationBrowserDialog.ShowDialog()
         CopyAssetsDestinationTextBox.Text = CopyAssetsDestinationBrowserDialog.SelectedPath
     End Sub
+
+    Private Sub CopyAssetsSelectAllCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles CopyAssetsSelectAllCheckBox.CheckedChanged
+        If CopyAssetsSelectAllCheckBox.Checked Then
+            CopyAssetsSelectAllButton_Click(sender, e)
+        Else
+            CopyAssetsSelectNoneButton_Click(sender, e)
+        End If
+    End Sub
+
     Private Sub CopyAssetsSelectAllButton_Click(sender As Object, e As EventArgs) Handles CopyAssetsSelectAllButton.Click
         Dim Count As Integer
         For Count = 0 To CopyAssetsCheckedListBox.Items.Count - 1
@@ -487,6 +947,12 @@ Public Class DDToolsForm
         Dim Indent As String = "    " '4 spaces
         Dim SubIndent As String = "        " '8 spaces
         Dim Message As String
+        Dim DefaultTag As String = ""
+
+        If CopyAssetsCreateTagsCheckBox.Checked Then
+            Dim ConfigObject = GetSavedConfig(GlobalVariables.ConfigFileName)
+            DefaultTag = ConfigObject("tag_assets")("default_tag")
+        End If
 
         IsSourceFolderNameValid = IsValidPathName(SourceFolderName)
         DoesSourceFolderExist = System.IO.Directory.Exists(SourceFolderName)
@@ -499,7 +965,7 @@ Public Class DDToolsForm
                     OutputForm.OutputTextBox.Text = ""
                     OutputForm.Show()
                     OutputForm.BringToFront()
-                    Message = "### Starting selected folders " & DateTime.Now & "." & vbCrLf & vbCrLf
+                    Message = "### Starting selected folders at " & DateTime.Now & "." & vbCrLf & vbCrLf
                     OutputForm.OutputTextBox.AppendText(Message)
                     If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, False)
                     Dim SelectedFolders = CopyAssetsCheckedListBox.CheckedItems
@@ -519,12 +985,12 @@ Public Class DDToolsForm
                         Message = Indent & "Starting " & AssetFolder & " at " & DateTime.Now & vbCrLf
                         OutputForm.OutputTextBox.AppendText(Message)
                         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
-                        CopyAssetsSub(CopySource, CopyDestination, CreateTagFile, Portals, CreateLog, LogFileName, SubIndent)
+                        CopyAssetsSub(CopySource, CopyDestination, CreateTagFile, DefaultTag, Portals, CreateLog, LogFileName, SubIndent)
                         Message = Indent & "Finished " & AssetFolder & " at " & DateTime.Now & vbCrLf & vbCrLf
                         OutputForm.OutputTextBox.AppendText(Message)
                         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
                     Next
-                    Message = "### Finished selected folders " & DateTime.Now & "." & vbCrLf
+                    Message = "### Finished selected folders at " & DateTime.Now & "." & vbCrLf
                     OutputForm.OutputTextBox.AppendText(Message)
                     If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
                 Else
@@ -538,115 +1004,334 @@ Public Class DDToolsForm
         End If
     End Sub
 
-    '###### Tag Assets Group Box ######
-    Private Sub TagAssetsTextBox_LostFocus(sender As Object, e As EventArgs) Handles TagAssetsSourceTextBox.LostFocus
-        TagAssetsCheckedListBox.Items.Clear()
+    '###### Copy Tiles Group Box ######
+    Private Sub CopyTilesSourceTextBox_LostFocus(sender As Object, e As EventArgs) Handles CopyTilesSourceTextBox.LostFocus
+        CopyTilesDataGridView.Rows.Clear()
+        CopyTilesDataGridView.Columns.Clear()
+        Dim UserFolder As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
         Dim SourceFolderName As String
         Dim IsFolderNameValid As Boolean
         Dim DoesFolderExist As Boolean
-        SourceFolderName = TagAssetsSourceTextBox.Text
+        Dim SourceFolder As System.IO.DirectoryInfo
+        Dim DestinationFolderName As String
+        Dim CreateLog As Boolean = TagAssetsLogCheckBox.Checked
+        Dim LogFileName As String = "CopyTiles.log"
+        Dim SubIndent As String = "        "
+        Dim SelectAll As Boolean = CopyTilesSelectAllCheckBox.Checked
+
+        SourceFolderName = CopyTilesSourceTextBox.Text
         IsFolderNameValid = IsValidPathName(SourceFolderName)
         DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
         If IsFolderNameValid And DoesFolderExist Then
-            If My.Computer.FileSystem.DirectoryExists(SourceFolderName & "\textures\objects") Then
-                Dim SourceFolderInfo = My.Computer.FileSystem.GetDirectoryInfo(SourceFolderName)
-                TagAssetsSourceTextBox.Text = SourceFolderInfo.Parent.FullName
-                TagAssetsCheckedListBox.Items.Add(SourceFolderInfo.Name)
-                TagAssetsCheckedListBox.SetItemChecked(TagAssetsCheckedListBox.Items.Count - 1, True)
-            Else
-                For Each TagFolder As String In My.Computer.FileSystem.GetDirectories(SourceFolderName)
-                    If My.Computer.FileSystem.DirectoryExists(TagFolder & "\textures\objects") Then
-                        Dim FolderName As New System.IO.DirectoryInfo(TagFolder)
-                        TagAssetsCheckedListBox.Items.Add(FolderName.Name)
-                        TagAssetsCheckedListBox.SetItemChecked(TagAssetsCheckedListBox.Items.Count - 1, True)
-                    End If
-                Next
-            End If
+            SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
+            DestinationFolderName = UserFolder & "\Dungeondraft\Copied Assets\" & SourceFolder.Name
+            If CopyTilesDestinationTextBox.Text = "" Then CopyTilesDestinationTextBox.Text = DestinationFolderName
+            LoadTilesSub(SourceFolderName, CreateLog, LogFileName, SelectAll, SubIndent)
         End If
     End Sub
 
-    Private Sub TagAssetsBrowseButton_Click(sender As Object, e As EventArgs) Handles TagAssetsBrowseButton.Click
-        TagAssetsCheckedListBox.Items.Clear()
-        TagAssetsSourceBrowserDialog.ShowDialog()
-        TagAssetsSourceTextBox.Text = TagAssetsSourceBrowserDialog.SelectedPath
+    Private Sub CopyTilesSourceBrowseButton_Click(sender As Object, e As EventArgs) Handles CopyTilesSourceBrowseButton.Click
+        CopyTilesDataGridView.Rows.Clear()
+        CopyTilesDataGridView.Columns.Clear()
+        CopyTilesSourceBrowserDialog.ShowDialog()
+        CopyTilesSourceTextBox.Text = CopyTilesSourceBrowserDialog.SelectedPath
+
+        Dim UserFolder As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+        Dim SourceFolderName As String
+        Dim IsFolderNameValid As Boolean
+        Dim DoesFolderExist As Boolean
+        Dim SourceFolder As System.IO.DirectoryInfo
+        Dim DestinationFolderName As String
+        Dim CreateLog As Boolean = TagAssetsLogCheckBox.Checked
+        Dim LogFileName As String = "CopyTiles.log"
+        Dim SubIndent As String = "        "
+        Dim SelectAll As Boolean = CopyTilesSelectAllCheckBox.Checked
+
+        SourceFolderName = CopyTilesSourceTextBox.Text
+        IsFolderNameValid = IsValidPathName(SourceFolderName)
+        DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
+        If IsFolderNameValid And DoesFolderExist Then
+            SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
+            DestinationFolderName = UserFolder & "\Dungeondraft\Copied Assets\" & SourceFolder.Name
+            If CopyTilesDestinationTextBox.Text = "" Then CopyTilesDestinationTextBox.Text = DestinationFolderName
+            LoadTilesSub(SourceFolderName, CreateLog, LogFileName, SelectAll, SubIndent)
+        End If
+    End Sub
+
+    Private Sub CopyTileSelectAllCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles CopyTilesSelectAllCheckBox.CheckedChanged
+        For RowIndex As Integer = 0 To CopyTilesDataGridView.Rows.Count - 1
+            CopyTilesDataGridView.Rows(RowIndex).Cells(0).Value = CopyTilesSelectAllCheckBox.Checked
+            CopyTilesDataGridView.Rows(RowIndex).Cells(3).Value = CopyTilesSelectAllCheckBox.Checked
+            CopyTilesDataGridView.Rows(RowIndex).Cells(4).Value = CopyTilesSelectAllCheckBox.Checked
+            CopyTilesDataGridView.Rows(RowIndex).Cells(5).Value = CopyTilesSelectAllCheckBox.Checked
+        Next
+    End Sub
+
+    Private Sub CopyTilesStartButton_Click(sender As Object, e As EventArgs) Handles CopyTilesStartButton.Click
+        Dim SourceFolderName As String = CopyTilesSourceTextBox.Text
+        Dim DestinationFolderName As String = CopyTilesDestinationTextBox.Text
+        Dim CopySource As String
+        Dim CopyDestination As String
+        Dim FileName As String
+        Dim BaseName As String
+        Dim Extension As String
+        Dim TileName As String
+        Dim Message As String
+        Dim CreateLog As Boolean = CopyTilesLogCheckBox.Checked
+        Dim LogFileName As String = "CopyTiles.log"
+        Dim Indent As String = "    "
+
+        If Not SourceFolderName.EndsWith("\") Then SourceFolderName &= "\"
+        If Not DestinationFolderName.EndsWith("\") Then DestinationFolderName &= "\"
+
+        Dim PatternsPath As String = DestinationFolderName & "textures\patterns\normal\"
+        Dim TerrainPath As String = DestinationFolderName & "textures\terrain\"
+        Dim SimpleTilePath As String = DestinationFolderName & "textures\tilesets\simple\"
+        Dim SimpleTileDataPath As String = DestinationFolderName & "data\tilesets\"
+        Dim SimpleTileBaseName As String
+        Dim SimpleTileFileName As String
+        Dim SimpleTileSetDataFile As String
+
+
+        Dim Row As DataGridViewRow
+
+        OutputForm.OutputTextBox.Text = ""
+        OutputForm.Show()
+        OutputForm.BringToFront()
+        Message = "### Starting selected tiles at " & DateTime.Now & "." & vbCrLf
+        OutputForm.OutputTextBox.AppendText(Message)
+        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, False)
+
+        For RowIndex = 1 To CopyTilesDataGridView.Rows.Count - 1
+            Row = CopyTilesDataGridView.Rows(RowIndex)
+            TileName = Row.Cells(2).Value
+            If TileName <> "" Then
+                CopySource = SourceFolderName & TileName
+
+                For ColumnIndex = 3 To 5
+                    Row.Cells(ColumnIndex).Value = Convert.ToBoolean(Row.Cells(ColumnIndex).EditedFormattedValue)
+                Next
+
+                FileName = Path.GetFileName(CopySource)
+                BaseName = Path.GetFileNameWithoutExtension(CopySource)
+                Extension = Path.GetExtension(CopySource)
+
+                If Row.Cells("Patterns").Value Then
+                    CopyDestination = PatternsPath & FileName
+                    If My.Computer.FileSystem.FileExists(CopyDestination) Then
+                        Message = Indent & "Destination file already exists: " & CopyDestination & vbCrLf
+                        OutputForm.OutputTextBox.AppendText(Message)
+                        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                    Else
+                        If Not My.Computer.FileSystem.DirectoryExists(PatternsPath) Then My.Computer.FileSystem.CreateDirectory(PatternsPath)
+                        Message = Indent & "Copying from: " & CopySource & vbCrLf
+                        Message &= Indent & "          to: " & CopyDestination & vbCrLf
+                        OutputForm.OutputTextBox.AppendText(Message)
+                        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                        My.Computer.FileSystem.CopyFile(CopySource, CopyDestination)
+                    End If
+                End If
+
+                If Row.Cells("Terrain").Value Then
+                    CopyDestination = TerrainPath & BaseName & "_terrain" & Extension
+                    If My.Computer.FileSystem.FileExists(CopyDestination) Then
+                        Message = Indent & "Destination file already exists: " & CopyDestination & vbCrLf
+                        OutputForm.OutputTextBox.AppendText(Message)
+                        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                    Else
+                        If Not My.Computer.FileSystem.DirectoryExists(TerrainPath) Then My.Computer.FileSystem.CreateDirectory(TerrainPath)
+                        Message = Indent & "Copying from: " & CopySource & vbCrLf
+                        Message &= Indent & "          to: " & CopyDestination & vbCrLf
+                        OutputForm.OutputTextBox.AppendText(Message)
+                        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                        My.Computer.FileSystem.CopyFile(CopySource, CopyDestination)
+                    End If
+                End If
+
+                If Row.Cells("SimpleTile").Value Then
+                    SimpleTileBaseName = BaseName & "_simple"
+                    SimpleTileFileName = BaseName & Extension
+                    CopyDestination = SimpleTilePath & BaseName & "_simple" & Extension
+
+                    If My.Computer.FileSystem.FileExists(CopyDestination) Then
+                        Message = Indent & "Destination file already exists: " & CopyDestination & vbCrLf
+                        OutputForm.OutputTextBox.AppendText(Message)
+                        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                    Else
+                        If Not My.Computer.FileSystem.DirectoryExists(SimpleTilePath) Then My.Computer.FileSystem.CreateDirectory(SimpleTilePath)
+                        Message = Indent & "Copying from: " & CopySource & vbCrLf
+                        Message &= Indent & "          to: " & CopyDestination & vbCrLf
+                        OutputForm.OutputTextBox.AppendText(Message)
+                        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                        My.Computer.FileSystem.CopyFile(CopySource, CopyDestination)
+
+                        Dim SimpleTileSetData As New System.Collections.Specialized.OrderedDictionary
+                        SimpleTileSetData.Add("path", "textures/tilesets/simple/" & BaseName & "_simple" & Extension)
+                        SimpleTileSetData.Add("name", BaseName)
+                        SimpleTileSetData.Add("type", "normal")
+                        SimpleTileSetData.Add("color", "ffffff")
+
+                        If Not My.Computer.FileSystem.DirectoryExists(SimpleTileDataPath) Then My.Computer.FileSystem.CreateDirectory(SimpleTileDataPath)
+                        SimpleTileSetDataFile = SimpleTileDataPath & SimpleTileBaseName & ".dungeondraft_tileset"
+                        Dim JSONString As String = JsonConvert.SerializeObject(SimpleTileSetData, Formatting.Indented)
+                        My.Computer.FileSystem.WriteAllText(SimpleTileSetDataFile, JSONString, False, System.Text.Encoding.ASCII)
+                    End If
+                End If
+                End If
+        Next
+        Message = "### Finished selected tiles at " & DateTime.Now & "." & vbCrLf & vbCrLf
+        OutputForm.OutputTextBox.AppendText(Message)
+        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+    End Sub
+
+    Public Sub CopyTilesDataGridView_CellClick(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs)
+        'Dim opposite As Boolean
+        'Check to ensure that the row CheckBox is clicked.
+        'If e.RowIndex >= 0 AndAlso e.ColumnIndex >= 2 Then
+        If e.ColumnIndex <> 1 And e.ColumnIndex <> 2 Then
+
+            'Reference the GridView Row.
+            Dim row As DataGridViewRow = CopyTilesDataGridView.Rows(e.RowIndex)
+            Dim toprow As DataGridViewRow = CopyTilesDataGridView.Rows(0)
+            Dim checkrow As DataGridViewRow
+            Dim checkcolumn As DataGridViewColumn
+
+            'Set the CheckBox selection.
+            'For column As Integer = 1 To 6
+            row.Cells(e.ColumnIndex).Value = Convert.ToBoolean(row.Cells(e.ColumnIndex).EditedFormattedValue)
+            If e.RowIndex = 0 And e.ColumnIndex = 0 Then
+                For eachrow As Integer = 0 To CopyTilesDataGridView.Rows.Count - 1
+                    checkrow = CopyTilesDataGridView.Rows(eachrow)
+                    If checkrow.Cells(2).Value <> "" Then
+                        checkrow.Cells(e.ColumnIndex).Value = row.Cells(e.ColumnIndex).Value
+                        For eachcolumn As Integer = 3 To 5
+                            checkcolumn = CopyTilesDataGridView.Columns(eachcolumn)
+                            If row.Cells(2).Value <> "" Then checkrow.Cells(eachcolumn).Value = row.Cells(e.ColumnIndex).Value
+                        Next
+
+                    End If
+                Next
+            ElseIf e.RowIndex = 0 Then
+                For eachrow As Integer = 1 To CopyTilesDataGridView.Rows.Count - 1
+                    checkrow = CopyTilesDataGridView.Rows(eachrow)
+                    If checkrow.Cells(2).Value <> "" Then checkrow.Cells(e.ColumnIndex).Value = row.Cells(e.ColumnIndex).Value
+                Next
+            ElseIf e.ColumnIndex = 0 Then
+                For eachcolumn As Integer = 3 To 5
+                    checkcolumn = CopyTilesDataGridView.Columns(eachcolumn)
+                    If row.Cells(2).Value <> "" Then row.Cells(eachcolumn).Value = row.Cells(e.ColumnIndex).Value
+                Next
+            Else
+                If Not row.Cells(e.ColumnIndex).Value Then
+                    toprow.Cells(e.ColumnIndex).Value = False
+                    row.Cells(0).Value = False
+                End If
+            End If
+
+        End If
+    End Sub
+
+    '###### Map Details Group Box ######
+    Private Sub MapDetailsSourceTextBox_LostFocus(sender As Object, e As EventArgs) Handles MapDetailsSourceTextBox.LostFocus
+        MapDetailsCheckedListBox.Items.Clear()
+        Dim SourceFolderName As String
+        Dim IsFolderNameValid As Boolean
+        Dim DoesFolderExist As Boolean
+        SourceFolderName = MapDetailsSourceTextBox.Text
+        IsFolderNameValid = IsValidPathName(SourceFolderName)
+        DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
+        If IsFolderNameValid And DoesFolderExist Then
+            Dim SourceFiles = Directory.GetFiles(SourceFolderName, "*.dungeondraft_map")
+            'Where Path.GetExtension(File).ToLower() = ".dungeondraft_map"
+
+            For Each File In SourceFiles
+                Dim FileName As New System.IO.FileInfo(File)
+                MapDetailsCheckedListBox.Items.Add(FileName.Name)
+                If MapDetailsSelectAllCheckBox.Checked Then MapDetailsCheckedListBox.SetItemChecked(MapDetailsCheckedListBox.Items.Count - 1, True)
+            Next
+        End If
+    End Sub
+
+    Private Sub MapDetailsBrowseButton_Click(sender As Object, e As EventArgs) Handles MapDetailsBrowseButton.Click
+        MapDetailsCheckedListBox.Items.Clear()
+        MapDetailsSourceBrowserDialog.ShowDialog()
+        MapDetailsSourceTextBox.Text = MapDetailsSourceBrowserDialog.SelectedPath
 
         Dim SourceFolderName As String
         Dim IsFolderNameValid As Boolean
         Dim DoesFolderExist As Boolean
-        SourceFolderName = TagAssetsSourceTextBox.Text
+        SourceFolderName = MapDetailsSourceTextBox.Text
         IsFolderNameValid = IsValidPathName(SourceFolderName)
         DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
         If IsFolderNameValid And DoesFolderExist Then
-            If My.Computer.FileSystem.DirectoryExists(SourceFolderName & "\textures\objects") Then
-                Dim SourceFolderInfo = My.Computer.FileSystem.GetDirectoryInfo(SourceFolderName)
-                TagAssetsSourceTextBox.Text = SourceFolderInfo.Parent.FullName
-                TagAssetsCheckedListBox.Items.Add(SourceFolderInfo.Name)
-                TagAssetsCheckedListBox.SetItemChecked(TagAssetsCheckedListBox.Items.Count - 1, True)
-            Else
-                For Each TagFolder As String In My.Computer.FileSystem.GetDirectories(SourceFolderName)
-                    If My.Computer.FileSystem.DirectoryExists(TagFolder & "\textures\objects") Then
-                        Dim FolderName As New System.IO.DirectoryInfo(TagFolder)
-                        TagAssetsCheckedListBox.Items.Add(FolderName.Name)
-                        TagAssetsCheckedListBox.SetItemChecked(TagAssetsCheckedListBox.Items.Count - 1, True)
-                    End If
-                Next
-            End If
+            Dim SourceFiles = Directory.GetFiles(SourceFolderName, "*.dungeondraft_map")
+            For Each File In SourceFiles
+                Dim FileName As New System.IO.FileInfo(File)
+                MapDetailsCheckedListBox.Items.Add(FileName.Name)
+                If MapDetailsSelectAllCheckBox.Checked Then MapDetailsCheckedListBox.SetItemChecked(MapDetailsCheckedListBox.Items.Count - 1, True)
+            Next
         End If
     End Sub
 
-    Private Sub TagAssetsSelectAllButton_Click(sender As Object, e As EventArgs) Handles TagAssetsSelectAllButton.Click
+    Private Sub MapDetailsSelectAllCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles MapDetailsSelectAllCheckBox.CheckedChanged
+        If MapDetailsSelectAllCheckBox.Checked Then
+            MapDetailsSelectAllButton_Click(sender, e)
+        Else
+            MapDetailsSelectNoneButton_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub MapDetailsSelectAllButton_Click(sender As Object, e As EventArgs) Handles MapDetailsSelectAllButton.Click
         Dim Count As Integer
-        For Count = 0 To TagAssetsCheckedListBox.Items.Count - 1
-            TagAssetsCheckedListBox.SetItemChecked(Count, True)
+        For Count = 0 To MapDetailsCheckedListBox.Items.Count - 1
+            MapDetailsCheckedListBox.SetItemChecked(Count, True)
         Next
     End Sub
 
-    Private Sub TagAssetsSelectNoneButton_Click(sender As Object, e As EventArgs) Handles TagAssetsSelectNoneButton.Click
+    Private Sub MapDetailsSelectNoneButton_Click(sender As Object, e As EventArgs) Handles MapDetailsSelectNoneButton.Click
         Dim Count As Integer
-        For Count = 0 To TagAssetsCheckedListBox.Items.Count - 1
-            TagAssetsCheckedListBox.SetItemChecked(Count, False)
+        For Count = 0 To MapDetailsCheckedListBox.Items.Count - 1
+            MapDetailsCheckedListBox.SetItemChecked(Count, False)
         Next
     End Sub
 
-    Private Sub TagAssetsStartButton_Click(sender As Object, e As EventArgs) Handles TagAssetsStartButton.Click
-        Dim SourceFolderName As String = TagAssetsSourceTextBox.Text
+    Private Sub MapDetailsStartButton_Click(sender As Object, e As EventArgs) Handles MapDetailsStartButton.Click
+        Dim SourceFolderName As String = MapDetailsSourceTextBox.Text
         Dim IsSourceFolderNameValid As String
         Dim DoesSourceFolderExist As Boolean
-        Dim DefaultTag As String = TagAssetsDefaultTagTextBox.Text
-        Dim CreateLog As Boolean = TagAssetsLogCheckBox.Checked
-        Dim LogFileName As String = "TagAssets.log"
-        Dim TagSource As String
+        Dim CreateLog As Boolean = MapDetailsLogCheckBox.Checked
+        Dim LogFileName As String = "MapDetails.log"
+        Dim MapSource As String
         Dim Indent As String = "    " '4 spaces
         Dim SubIndent As String = "        " '8 spaces
         Dim Message As String
 
-
         IsSourceFolderNameValid = IsValidPathName(SourceFolderName)
         DoesSourceFolderExist = System.IO.Directory.Exists(SourceFolderName)
         If SourceFolderName <> "" And IsSourceFolderNameValid And DoesSourceFolderExist Then
-            If TagAssetsCheckedListBox.CheckedItems.Count >= 1 Then
+            If MapDetailsCheckedListBox.CheckedItems.Count >= 1 Then
                 OutputForm.OutputTextBox.Text = ""
                 OutputForm.Show()
                 OutputForm.BringToFront()
-                Message = "### Starting selected folders " & DateTime.Now & "." & vbCrLf & vbCrLf
+                Message = "### Starting selected map files at " & DateTime.Now & "." & vbCrLf & vbCrLf
                 OutputForm.OutputTextBox.AppendText(Message)
                 If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, False)
-                Dim SelectedFolders = TagAssetsCheckedListBox.CheckedItems
-                For Each AssetFolder In SelectedFolders
+                Dim SelectedFiles = MapDetailsCheckedListBox.CheckedItems
+                For Each MapFile In SelectedFiles
                     If SourceFolderName.EndsWith("\") Then
-                        TagSource = SourceFolderName & AssetFolder
+                        MapSource = SourceFolderName & MapFile
                     Else
-                        TagSource = SourceFolderName & "\" & AssetFolder
+                        MapSource = SourceFolderName & "\" & MapFile
                     End If
-                    Message = Indent & "Starting " & AssetFolder & " at " & DateTime.Now & vbCrLf
+                    Message = Indent & "Starting " & MapFile & " at " & DateTime.Now & vbCrLf
                     OutputForm.OutputTextBox.AppendText(Message)
                     If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
-                    TagAssetsSub(TagSource, AssetFolder, DefaultTag, CreateLog, LogFileName, SubIndent)
-                    Message = Indent & "Finished " & AssetFolder & " at " & DateTime.Now & vbCrLf & vbCrLf
+                    MapDetailsSub(MapSource, MapFile, CreateLog, LogFileName, SubIndent)
+                    Message = Indent & "Finished " & MapFile & " at " & DateTime.Now & vbCrLf & vbCrLf
                     OutputForm.OutputTextBox.AppendText(Message)
                     If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
                 Next
-                Message = "### Finished selected folders " & DateTime.Now & "." & vbCrLf
+                Message = "### Finished selected folders at " & DateTime.Now & "." & vbCrLf
                 OutputForm.OutputTextBox.AppendText(Message)
                 If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
             Else
@@ -655,41 +1340,215 @@ Public Class DDToolsForm
         Else
             MsgBox("Source folder name is either invalid or does not exist.")
         End If
-
     End Sub
 
-    '###### Unpack Group Box ######
-    Private Sub UnpackSourceTextBox_LostFocus(sender As Object, e As EventArgs) Handles UnpackSourceTextBox.LostFocus
-        UnpackCheckedListBox.Items.Clear()
-
+    '###### Pack Assets Group Box ######
+    Private Sub PackAssetsSourceTextBox_LostFocus(sender As Object, e As EventArgs) Handles PackAssetsSourceTextBox.LostFocus
+        PackAssetsDataGridView.Rows.Clear()
+        PackAssetsDataGridView.Columns.Clear()
         Dim UserFolder As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
         Dim SourceFolderName As String
         Dim IsFolderNameValid As Boolean
         Dim DoesFolderExist As Boolean
         Dim SourceFolder As System.IO.DirectoryInfo
         Dim DestinationFolderName As String
+        Dim CreateLog As Boolean = PackAssetsLogCheckBox.Checked
+        Dim LogFileName As String = "PackAssets.log"
+        Dim SubIndent As String = "        "
+        Dim SelectAll As Boolean = PackAssetsSelectAllCheckBox.Checked
 
-        SourceFolderName = UnpackSourceTextBox.Text
+        SourceFolderName = PackAssetsSourceTextBox.Text
         IsFolderNameValid = IsValidPathName(SourceFolderName)
         DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
         If IsFolderNameValid And DoesFolderExist Then
             SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
             DestinationFolderName = UserFolder & "\Dungeondraft"
-            UnpackDestinationTextBox.Text = DestinationFolderName
-            For Each PackFile As String In My.Computer.FileSystem.GetFiles(SourceFolderName)
-                Dim PackName As New System.IO.DirectoryInfo(PackFile)
-                If PackName.Extension = ".dungeondraft_pack" Then
-                    UnpackCheckedListBox.Items.Add(PackName.Name)
-                    UnpackCheckedListBox.SetItemChecked(UnpackCheckedListBox.Items.Count - 1, True)
-                End If
-            Next
+            If PackAssetsDestinationTextBox.Text = "" Then PackAssetsDestinationTextBox.Text = DestinationFolderName
+            LoadAssetFolders(SourceFolderName, CreateLog, LogFileName, SelectAll, SubIndent)
         End If
     End Sub
 
-    Private Sub UnpackSourceBrowseButton_Click(sender As Object, e As EventArgs) Handles UnpackSourceBrowseButton.Click
-        UnpackCheckedListBox.Items.Clear()
-        UnpackSourceBrowserDialog.ShowDialog()
-        UnpackSourceTextBox.Text = UnpackSourceBrowserDialog.SelectedPath
+    Private Sub PackAssetsSourceBrowseButton_Click(sender As Object, e As EventArgs) Handles PackAssetsSourceBrowseButton.Click
+        PackAssetsDataGridView.Rows.Clear()
+        PackAssetsDataGridView.Columns.Clear()
+        PackAssetsSourceBrowserDialog.ShowDialog()
+        PackAssetsSourceTextBox.Text = PackAssetsSourceBrowserDialog.SelectedPath
+        Dim UserFolder As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+        Dim SourceFolderName As String
+        Dim IsFolderNameValid As Boolean
+        Dim DoesFolderExist As Boolean
+        Dim SourceFolder As System.IO.DirectoryInfo
+        Dim DestinationFolderName As String
+        Dim CreateLog As Boolean = PackAssetsLogCheckBox.Checked
+        Dim LogFileName As String = "PackAssets.log"
+        Dim SubIndent As String = "        "
+        Dim SelectAll As Boolean = PackAssetsSelectAllCheckBox.Checked
+
+        SourceFolderName = PackAssetsSourceTextBox.Text
+        IsFolderNameValid = IsValidPathName(SourceFolderName)
+        DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
+        If IsFolderNameValid And DoesFolderExist Then
+            SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
+            DestinationFolderName = UserFolder & "\Dungeondraft\Repacked\" & SourceFolder.Name
+            If PackAssetsDestinationTextBox.Text = "" Then PackAssetsDestinationTextBox.Text = DestinationFolderName
+            LoadAssetFolders(SourceFolderName, CreateLog, LogFileName, SelectAll, SubIndent)
+        End If
+    End Sub
+
+    Private Sub PackAssetsDestinationBrowseButton_Click(sender As Object, e As EventArgs) Handles PackAssetsDestinationBrowseButton.Click
+        PackAssetsDestinationBrowserDialog.ShowDialog()
+        PackAssetsDestinationTextBox.Text = PackAssetsDestinationBrowserDialog.SelectedPath
+    End Sub
+
+    Private Sub PackAssetsSelectAllCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles PackAssetsSelectAllCheckBox.CheckedChanged
+        If PackAssetsSelectAllCheckBox.Checked Then
+            PackAssetsSelectAllButton_Click(sender, e)
+        Else
+            PackAssetsSelectNoneButton_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub PackAssetsRefreshButton_Click(sender As Object, e As EventArgs) Handles PackAssetsRefreshButton.Click
+        PackAssetsDataGridView.Rows.Clear()
+        PackAssetsDataGridView.Columns.Clear()
+        Dim SourceFolderName As String
+        Dim IsFolderNameValid As Boolean
+        Dim DoesFolderExist As Boolean
+        Dim CreateLog As Boolean = PackAssetsLogCheckBox.Checked
+        Dim LogFileName As String = "PackAssets.log"
+        Dim SubIndent As String = "        "
+        Dim SelectAll As Boolean = PackAssetsSelectAllCheckBox.Checked
+
+        SourceFolderName = PackAssetsSourceTextBox.Text
+        IsFolderNameValid = IsValidPathName(SourceFolderName)
+        DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
+        If IsFolderNameValid And DoesFolderExist Then
+            LoadAssetFolders(SourceFolderName, CreateLog, LogFileName, SelectAll, SubIndent)
+        End If
+    End Sub
+    Private Sub PackAssetsSelectAllButton_Click(sender As Object, e As EventArgs) Handles PackAssetsSelectAllButton.Click
+        Dim RowIndex As Integer
+        For RowIndex = 0 To PackAssetsDataGridView.Rows.Count - 1
+            If PackAssetsDataGridView.Rows(RowIndex).Cells(1).Value <> "" Then
+                PackAssetsDataGridView.Rows(RowIndex).Cells(0).Value = True
+            End If
+        Next
+    End Sub
+
+    Private Sub PackAssetsSelectNoneButton_Click(sender As Object, e As EventArgs) Handles PackAssetsSelectNoneButton.Click
+        Dim RowIndex As Integer
+        For RowIndex = 0 To PackAssetsDataGridView.Rows.Count - 1
+            If PackAssetsDataGridView.Rows(RowIndex).Cells(1).Value <> "" Then
+                PackAssetsDataGridView.Rows(RowIndex).Cells(0).Value = True
+            End If
+        Next
+    End Sub
+
+    Private Sub PackAssetsStartButton_Click(sender As Object, e As EventArgs) Handles PackAssetsStartButton.Click
+        Dim PackEXE As String = "dungeondraft-pack.exe"
+        Dim SourceFolderName As String = PackAssetsSourceTextBox.Text
+        Dim DestinationFolderName As String = PackAssetsDestinationTextBox.Text
+        Dim IsSourceFolderNameValid As String
+        Dim DoesSourceFolderExist As Boolean
+        Dim IsDestinationFolderNameValid As String
+        Dim PackEXEexists As Boolean
+        Dim Message As String
+        Dim Indent As String = "    " '4 spaces
+        Dim SubIndent As String = "        " '8 spaces
+        Dim RowIndex As Integer
+        Dim CreateLog As Boolean = PackAssetsLogCheckBox.Checked
+        Dim LogFileName As String = "PackAssets.log"
+        Dim Overwrite As Boolean = PackAssetsOverwriteCheckBox.Checked
+        Dim SelectAll As Boolean = PackAssetsSelectAllCheckBox.Checked
+
+        Dim PackSource As String
+        Dim PackDestination As String
+
+        Dim FolderName As String
+        Dim PackName As String
+        Dim Version As String
+        Dim Author As String
+
+
+        IsSourceFolderNameValid = IsValidPathName(SourceFolderName)
+        DoesSourceFolderExist = System.IO.Directory.Exists(SourceFolderName)
+        IsDestinationFolderNameValid = IsValidPathName(DestinationFolderName)
+
+        PackEXEexists = My.Computer.FileSystem.FileExists(PackEXE)
+
+        If PackEXEexists Then
+            If SourceFolderName <> "" And IsSourceFolderNameValid And DoesSourceFolderExist Then
+                If DestinationFolderName <> "" And IsDestinationFolderNameValid Then
+
+                    If PackAssetsDataGridView.Rows.Count >= 1 Then
+                        If Not SourceFolderName.EndsWith("\") Then SourceFolderName &= "\"
+                        If Not DestinationFolderName.EndsWith("\") Then DestinationFolderName &= "\"
+                        'If Not DestinationFolderName.EndsWith("\") Then DestinationFolderName &= "\"
+
+                        OutputForm.OutputTextBox.Text = ""
+                        OutputForm.Show()
+                        OutputForm.BringToFront()
+                        Message = "### Starting selected asset folders at " & DateTime.Now & "." & vbCrLf
+                        If PackAssetsOverwriteCheckBox.Checked Then
+                            Message &= Indent & "(Overwrite is enabled.)" & vbCrLf & vbCrLf
+                        Else
+                            Message &= Indent & "(Overwrite is disabled.)" & vbCrLf & vbCrLf
+                        End If
+                        OutputForm.OutputTextBox.AppendText(Message)
+                        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, False)
+
+                        If Not My.Computer.FileSystem.DirectoryExists(DestinationFolderName) Then My.Computer.FileSystem.CreateDirectory(DestinationFolderName)
+                        For RowIndex = 0 To PackAssetsDataGridView.Rows.Count - 1
+                            If PackAssetsDataGridView.Rows(RowIndex).Cells(0).Value And PackAssetsDataGridView.Rows(RowIndex).Cells(1).Value <> "" Then
+
+                                FolderName = PackAssetsDataGridView.Rows(RowIndex).Cells(1).Value
+                                PackName = PackAssetsDataGridView.Rows(RowIndex).Cells(2).Value & ".dungeondraft_pack"
+                                Version = PackAssetsDataGridView.Rows(RowIndex).Cells(4).Value
+                                Author = PackAssetsDataGridView.Rows(RowIndex).Cells(5).Value
+                                If Author = "" Then Author = "<no author name>"
+
+                                PackSource = SourceFolderName & FolderName
+                                PackDestination = DestinationFolderName & PackName
+
+                                If My.Computer.FileSystem.FileExists(PackDestination) And Not Overwrite Then
+                                    Message = Indent & "Destination file already exists: " & PackAssetsDataGridView.Rows(RowIndex).Cells(1).Value & vbCrLf
+                                    OutputForm.OutputTextBox.AppendText(Message)
+                                    If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                                Else
+                                    Message = Indent & "Packaging: " & FolderName & ", Version " & Version & ", by " & Author & vbCrLf
+                                    Message &= Indent & "       to: " & PackDestination & vbCrLf
+                                    OutputForm.OutputTextBox.AppendText(Message)
+                                    If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                                    PackAssetsSub(PackSource, DestinationFolderName, RowIndex, CreateLog, LogFileName, SubIndent, PackEXE, Overwrite)
+                                End If
+                            End If
+                        Next
+
+                        Message = "### Finished selected asset folders at " & DateTime.Now & "." & vbCrLf
+                        OutputForm.OutputTextBox.AppendText(Message)
+                        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                        PackAssetsDataGridView.Rows.Clear()
+                        PackAssetsDataGridView.Columns.Clear()
+                        SourceFolderName = PackAssetsSourceTextBox.Text
+                        LoadAssetFolders(SourceFolderName, CreateLog, LogFileName, SelectAll, SubIndent)
+                    Else
+                        MsgBox("Asset folder list is empty.")
+                    End If
+
+                Else
+                    MsgBox("Destination folder name is invalid.")
+                End If
+            Else
+                MsgBox("Source folder name is either invalid or does not exist.")
+            End If
+        Else
+            MsgBox(PackEXE & " not found.")
+        End If
+    End Sub
+
+    '###### Unpack Assets Group Box ######
+    Private Sub UnpackAssetsSourceTextBox_LostFocus(sender As Object, e As EventArgs) Handles UnpackAssetsSourceTextBox.LostFocus
+        UnpackAssetsCheckedListBox.Items.Clear()
 
         Dim UserFolder As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
         Dim SourceFolderName As String
@@ -698,46 +1557,83 @@ Public Class DDToolsForm
         Dim SourceFolder As System.IO.DirectoryInfo
         Dim DestinationFolderName As String
 
-        SourceFolderName = UnpackSourceTextBox.Text
+        SourceFolderName = UnpackAssetsSourceTextBox.Text
         IsFolderNameValid = IsValidPathName(SourceFolderName)
         DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
         If IsFolderNameValid And DoesFolderExist Then
             SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
-            DestinationFolderName = UserFolder & "\Dungeondraft\Unpacked\" & SourceFolder.Name
-            UnpackDestinationTextBox.Text = DestinationFolderName
+            DestinationFolderName = UserFolder & "\Dungeondraft"
+            If UnpackAssetsDestinationTextBox.Text = "" Then UnpackAssetsDestinationTextBox.Text = DestinationFolderName
             For Each PackFile As String In My.Computer.FileSystem.GetFiles(SourceFolderName)
                 Dim PackName As New System.IO.DirectoryInfo(PackFile)
                 If PackName.Extension = ".dungeondraft_pack" Then
-                    UnpackCheckedListBox.Items.Add(PackName.Name)
-                    UnpackCheckedListBox.SetItemChecked(UnpackCheckedListBox.Items.Count - 1, True)
+                    UnpackAssetsCheckedListBox.Items.Add(PackName.Name)
+                    If UnpackAssetsSelectAllCheckBox.Checked Then UnpackAssetsCheckedListBox.SetItemChecked(UnpackAssetsCheckedListBox.Items.Count - 1, True)
                 End If
             Next
         End If
     End Sub
 
-    Private Sub UnpackDestinationBrowseButton_Click(sender As Object, e As EventArgs) Handles UnpackDestinationBrowseButton.Click
-        UnpackDestinationBrowserDialog.ShowDialog()
-        UnpackDestinationTextBox.Text = UnpackDestinationBrowserDialog.SelectedPath
+    Private Sub UnpackAssetsSourceBrowseButton_Click(sender As Object, e As EventArgs) Handles UnpackAssetsSourceBrowseButton.Click
+        UnpackAssetsCheckedListBox.Items.Clear()
+        UnpackAssetsSourceBrowserDialog.ShowDialog()
+        UnpackAssetsSourceTextBox.Text = UnpackAssetsSourceBrowserDialog.SelectedPath
+
+        Dim UserFolder As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+        Dim SourceFolderName As String
+        Dim IsFolderNameValid As Boolean
+        Dim DoesFolderExist As Boolean
+        Dim SourceFolder As System.IO.DirectoryInfo
+        Dim DestinationFolderName As String
+
+        SourceFolderName = UnpackAssetsSourceTextBox.Text
+        IsFolderNameValid = IsValidPathName(SourceFolderName)
+        DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
+        If IsFolderNameValid And DoesFolderExist Then
+            SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
+            DestinationFolderName = UserFolder & "\Dungeondraft\Unpacked\" & SourceFolder.Name
+            If UnpackAssetsDestinationTextBox.Text = "" Then UnpackAssetsDestinationTextBox.Text = DestinationFolderName
+            For Each PackFile As String In My.Computer.FileSystem.GetFiles(SourceFolderName)
+                Dim PackName As New System.IO.DirectoryInfo(PackFile)
+                If PackName.Extension = ".dungeondraft_pack" Then
+                    UnpackAssetsCheckedListBox.Items.Add(PackName.Name)
+                    If UnpackAssetsSelectAllCheckBox.Checked Then UnpackAssetsCheckedListBox.SetItemChecked(UnpackAssetsCheckedListBox.Items.Count - 1, True)
+                End If
+            Next
+        End If
     End Sub
 
-    Private Sub UnpackSelectAllButton_Click(sender As Object, e As EventArgs) Handles UnpackSelectAllButton.Click
+    Private Sub UnpackAssetsDestinationBrowseButton_Click(sender As Object, e As EventArgs) Handles UnpackAssetsDestinationBrowseButton.Click
+        UnpackAssetsDestinationBrowserDialog.ShowDialog()
+        UnpackAssetsDestinationTextBox.Text = UnpackAssetsDestinationBrowserDialog.SelectedPath
+    End Sub
+
+    Private Sub UnpackAssetsSelectAllCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles UnpackAssetsSelectAllCheckBox.CheckedChanged
+        If UnpackAssetsSelectAllCheckBox.Checked Then
+            UnpackAssetsSelectAllButton_Click(sender, e)
+        Else
+            UnpackAssetsSelectNoneButton_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub UnpackAssetsSelectAllButton_Click(sender As Object, e As EventArgs) Handles UnpackAssetsSelectAllButton.Click
         Dim Count As Integer
-        For Count = 0 To UnpackCheckedListBox.Items.Count - 1
-            UnpackCheckedListBox.SetItemChecked(Count, True)
+        For Count = 0 To UnpackAssetsCheckedListBox.Items.Count - 1
+            UnpackAssetsCheckedListBox.SetItemChecked(Count, True)
         Next
     End Sub
 
-    Private Sub UnpackSelectNoneButton_Click(sender As Object, e As EventArgs) Handles UnpackSelectNoneButton.Click
+    Private Sub UnpackAssetsSelectNoneButton_Click(sender As Object, e As EventArgs) Handles UnpackAssetsSelectNoneButton.Click
         Dim Count As Integer
-        For Count = 0 To UnpackCheckedListBox.Items.Count - 1
-            UnpackCheckedListBox.SetItemChecked(Count, False)
+        For Count = 0 To UnpackAssetsCheckedListBox.Items.Count - 1
+            UnpackAssetsCheckedListBox.SetItemChecked(Count, False)
         Next
     End Sub
 
-    Private Sub UnpackStartButton_Click(sender As Object, e As EventArgs) Handles UnpackStartButton.Click
+    Private Sub UnpackAssetsStartButton_Click(sender As Object, e As EventArgs) Handles UnpackAssetsStartButton.Click
         Dim UnpackEXE As String = "dungeondraft-unpack.exe"
-        Dim SourceFolderName As String = UnpackSourceTextBox.Text
-        Dim DestinationFolderName As String = UnpackDestinationTextBox.Text
+        Dim SourceFolderName As String = UnpackAssetsSourceTextBox.Text
+        Dim DestinationFolderName As String = UnpackAssetsDestinationTextBox.Text
         Dim IsSourceFolderNameValid As String
         Dim DoesSourceFolderExist As Boolean
         Dim IsDestinationFolderNameValid As String
@@ -745,6 +1641,8 @@ Public Class DDToolsForm
         Dim Message As String
         Dim Indent As String = "    " '4 spaces
         Dim PackBaseName As String
+        Dim LogFileName As String = "UnpackAssets.log"
+        Dim CreateLog As Boolean = UnpackAssetsLogCheckBox.Checked
 
         IsSourceFolderNameValid = IsValidPathName(SourceFolderName)
         DoesSourceFolderExist = System.IO.Directory.Exists(SourceFolderName)
@@ -755,17 +1653,19 @@ Public Class DDToolsForm
         If UnpackEXEexists Then
             If SourceFolderName <> "" And IsSourceFolderNameValid And DoesSourceFolderExist Then
                 If DestinationFolderName <> "" And IsDestinationFolderNameValid Then
-
-                    If UnpackCheckedListBox.CheckedItems.Count >= 1 Then
+                    If UnpackAssetsCheckedListBox.CheckedItems.Count >= 1 Then
                         OutputForm.OutputTextBox.Text = ""
                         OutputForm.Show()
                         OutputForm.BringToFront()
-                        Message = "### Starting selected pack files " & DateTime.Now & "." & vbCrLf
+                        Message = "### Starting selected pack files at " & DateTime.Now & "." & vbCrLf
                         OutputForm.OutputTextBox.AppendText(Message)
-                        For Each PackFile As String In UnpackCheckedListBox.CheckedItems
+                        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, False)
+                        For Each PackFile As String In UnpackAssetsCheckedListBox.CheckedItems
                             PackBaseName = Path.GetFileNameWithoutExtension(SourceFolderName & "\" & PackFile)
-                            Message = Indent & "Unpacking " & PackFile & " to " & DestinationFolderName & "\" & PackBaseName & vbCrLf
+                            Message = Indent & "Unpacking: " & SourceFolderName & "\" & PackFile & vbCrLf
+                            Message &= Indent & "       to: " & DestinationFolderName & "\" & PackBaseName & vbCrLf
                             OutputForm.OutputTextBox.AppendText(Message)
+                            If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
                             Dim UnpackArguments As String = """" & SourceFolderName & "\" & PackFile & """ " & """" & DestinationFolderName & """"
                             Dim UnpackStartInfo As New ProcessStartInfo With {
                                 .FileName = UnpackEXE,
@@ -778,8 +1678,9 @@ Public Class DDToolsForm
                             Dim Unpack As Process = Process.Start(UnpackStartInfo)
                             Unpack.WaitForExit()
                         Next
-                        Message = "### Finished selected pack files " & DateTime.Now & "." & vbCrLf
+                        Message = "### Finished selected pack files at " & DateTime.Now & "." & vbCrLf
                         OutputForm.OutputTextBox.AppendText(Message)
+                        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
                     Else
                         MsgBox("Nothing was selected.")
                     End If
@@ -795,142 +1696,7 @@ Public Class DDToolsForm
         End If
     End Sub
 
-    '###### Pack Group Box ######
-    Private Sub PackSourceTextBox_LostFocus(sender As Object, e As EventArgs) Handles PackSourceTextBox.LostFocus
-        PackCheckedListBox.Items.Clear()
-
-        Dim UserFolder As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-        Dim SourceFolderName As String
-        Dim IsFolderNameValid As Boolean
-        Dim DoesFolderExist As Boolean
-        Dim SourceFolder As System.IO.DirectoryInfo
-        Dim DestinationFolderName As String
-
-        SourceFolderName = PackSourceTextBox.Text
-        IsFolderNameValid = IsValidPathName(SourceFolderName)
-        DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
-        If IsFolderNameValid And DoesFolderExist Then
-            SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
-            DestinationFolderName = UserFolder & "\Dungeondraft"
-            PackDestinationTextBox.Text = DestinationFolderName
-            For Each PackFolder As String In My.Computer.FileSystem.GetDirectories(SourceFolderName)
-                Dim PackName As New System.IO.DirectoryInfo(PackFolder)
-                Dim JSONFile As String = PackName.FullName & "\" & "pack.json"
-                If My.Computer.FileSystem.FileExists(JSONFile) Then
-                    PackCheckedListBox.Items.Add(PackName.Name)
-                    PackCheckedListBox.SetItemChecked(PackCheckedListBox.Items.Count - 1, True)
-                End If
-            Next
-        End If
-    End Sub
-
-    Private Sub PackSourceBrowseButton_Click(sender As Object, e As EventArgs) Handles PackSourceBrowseButton.Click
-        PackCheckedListBox.Items.Clear()
-        PackSourceBrowserDialog.ShowDialog()
-        PackSourceTextBox.Text = PackSourceBrowserDialog.SelectedPath
-
-        Dim UserFolder As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-        Dim SourceFolderName As String
-        Dim IsFolderNameValid As Boolean
-        Dim DoesFolderExist As Boolean
-        Dim SourceFolder As System.IO.DirectoryInfo
-        Dim DestinationFolderName As String
-
-        SourceFolderName = PackSourceTextBox.Text
-        IsFolderNameValid = IsValidPathName(SourceFolderName)
-        DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
-        If IsFolderNameValid And DoesFolderExist Then
-            SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
-            DestinationFolderName = UserFolder & "\Dungeondraft\Repacked\" & SourceFolder.Name
-            PackDestinationTextBox.Text = DestinationFolderName
-            For Each PackFolder As String In My.Computer.FileSystem.GetDirectories(SourceFolderName)
-                Dim PackName As New System.IO.DirectoryInfo(PackFolder)
-                Dim JSONFile As String = PackName.FullName & "\" & "pack.json"
-                If My.Computer.FileSystem.FileExists(JSONFile) Then
-                    PackCheckedListBox.Items.Add(PackName.Name)
-                    PackCheckedListBox.SetItemChecked(PackCheckedListBox.Items.Count - 1, True)
-                End If
-            Next
-        End If
-    End Sub
-
-    Private Sub PackDestinationBrowseButton_Click(sender As Object, e As EventArgs) Handles PackDestinationBrowseButton.Click
-        PackDestinationBrowserDialog.ShowDialog()
-        PackDestinationTextBox.Text = PackDestinationBrowserDialog.SelectedPath
-    End Sub
-
-    Private Sub PackSelectAllButton_Click(sender As Object, e As EventArgs) Handles PackSelectAllButton.Click
-        Dim Count As Integer
-        For Count = 0 To PackCheckedListBox.Items.Count - 1
-            PackCheckedListBox.SetItemChecked(Count, True)
-        Next
-    End Sub
-
-    Private Sub PackSelectNoneButton_Click(sender As Object, e As EventArgs) Handles PackSelectNoneButton.Click
-        Dim Count As Integer
-        For Count = 0 To PackCheckedListBox.Items.Count - 1
-            PackCheckedListBox.SetItemChecked(Count, False)
-        Next
-    End Sub
-
-    Private Sub PackStartButton_Click(sender As Object, e As EventArgs) Handles PackStartButton.Click
-        Dim PackEXE As String = "dungeondraft-pack.exe"
-        Dim SourceFolderName As String = PackSourceTextBox.Text
-        Dim DestinationFolderName As String = PackDestinationTextBox.Text
-        Dim IsSourceFolderNameValid As String
-        Dim DoesSourceFolderExist As Boolean
-        Dim IsDestinationFolderNameValid As String
-        Dim PackEXEexists As Boolean
-        Dim Message As String
-        Dim Indent As String = "    " '4 spaces
-
-        IsSourceFolderNameValid = IsValidPathName(SourceFolderName)
-        DoesSourceFolderExist = System.IO.Directory.Exists(SourceFolderName)
-        IsDestinationFolderNameValid = IsValidPathName(DestinationFolderName)
-
-        PackEXEexists = My.Computer.FileSystem.FileExists(PackEXE)
-
-        If PackEXEexists Then
-            If SourceFolderName <> "" And IsSourceFolderNameValid And DoesSourceFolderExist Then
-                If DestinationFolderName <> "" And IsDestinationFolderNameValid Then
-
-                    If PackCheckedListBox.CheckedItems.Count >= 1 Then
-                        OutputForm.OutputTextBox.Text = ""
-                        OutputForm.Show()
-                        OutputForm.BringToFront()
-                        Message = "### Starting selected asset folders " & DateTime.Now & "." & vbCrLf
-                        OutputForm.OutputTextBox.AppendText(Message)
-                        For Each AssetFolder As String In PackCheckedListBox.CheckedItems
-                            Message = Indent & "Packing " & AssetFolder & " to " & DestinationFolderName & "\" & AssetFolder & ".dungeondraft_pack" & vbCrLf
-                            OutputForm.OutputTextBox.AppendText(Message)
-                            Dim PackArguments As String = """" & SourceFolderName & "\" & AssetFolder & """ " & """" & DestinationFolderName & """"
-                            Dim PackStartInfo As New ProcessStartInfo With {
-                                .FileName = PackEXE,
-                                .Arguments = PackArguments,
-                                .RedirectStandardError = True,
-                                .RedirectStandardOutput = True,
-                                .UseShellExecute = False,
-                                .CreateNoWindow = True
-                            }
-                            Dim Pack As Process = Process.Start(PackStartInfo)
-                            Pack.WaitForExit()
-                        Next
-                        Message = "### Finished selected asset folders " & DateTime.Now & "." & vbCrLf
-                        OutputForm.OutputTextBox.AppendText(Message)
-                    Else
-                        MsgBox("Nothing was selected.")
-                    End If
-
-                Else
-                    MsgBox("Destination folder name is invalid.")
-                End If
-            Else
-                MsgBox("Source folder name is either invalid or does not exist.")
-            End If
-        Else
-            MsgBox(PackEXE & " not found.")
-        End If
-
-    End Sub
-
+    Public Class GlobalVariables
+        Public Shared Property ConfigFileName As String = "DDTools.config"
+    End Class
 End Class

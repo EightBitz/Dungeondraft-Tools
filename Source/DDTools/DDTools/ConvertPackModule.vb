@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Module ConvertPackModule
     Public Sub ConvertPackSub(Source As String, Destination As String, Pack As String, CreateLog As Boolean, LogFileName As String, Indent As String, ImageMagickEXE As String, UnpackEXE As String, PackEXE As String, CleanUp As Boolean)
+        'Initialize some variables.
         Dim UnpackFolder As String = Destination & "\Unpacked Assets"
         Dim ConvertFolder As String = Destination & "\Converted Folders"
         Dim RepackFolder As String = Destination & "\Converted Packs"

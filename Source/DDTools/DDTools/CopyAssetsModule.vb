@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Module CopyAssetsModule
-    Public Sub CopyAssetsSub(Source As String, Destination As String, CreateTagFile As Boolean, Portals As Boolean, CreateLog As Boolean, LogFileName As String, Indent As String)
+    Public Sub CopyAssetsSub(Source As String, Destination As String, CreateTagFile As Boolean, DefaultTag As String, Portals As Boolean, CreateLog As Boolean, LogFileName As String, Indent As String)
 
         Dim ParentSource As String = Source
         Dim ParentDestination As String = Destination
@@ -16,6 +16,7 @@ Module CopyAssetsModule
         Dim CopyDestination As String
         Dim PortalSource As String
         Dim Message As String
+        Dim BaseName As String
         Dim FileTypes() As String = {".bmp", ".dds", ".exr", ".hdr", ".jpg", ".jpeg", ".png", ".tga", ".svg", ".svgz", ".webp"}
 
         Dim TexturePath As String = "\textures"
@@ -30,9 +31,9 @@ Module CopyAssetsModule
         OutputForm.OutputTextBox.AppendText(Message)
         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
         Dim SourceFiles = From File In (Directory.GetFiles(Source, "*.*", SearchOption.AllDirectories))
-                          Where (FileTypes.Contains(My.Computer.FileSystem.GetFileInfo(File).Extension.ToLower()) _
-                              And Not My.Computer.FileSystem.GetFileInfo(File).Name Like "*_LO.*" _
-                              And Not My.Computer.FileSystem.GetFileInfo(File).Name Like "*_VL.*")
+                          Where FileTypes.Contains(My.Computer.FileSystem.GetFileInfo(File).Extension.ToLower()) _
+                              And Not (Path.GetFileNameWithoutExtension(File)).EndsWith("_LO") _
+                              And Not (Path.GetFileNameWithoutExtension(File)).EndsWith("_VL")
 
         'Assuming CC3+ again, after filtering out "_LO.*" and "_VL." files, we're left with "_VH.*" and "_HI.*"
         '(very high quality and high quality) and standard quality. If we copy all the files, we'll end up with
@@ -46,12 +47,11 @@ Module CopyAssetsModule
         OutputForm.OutputTextBox.AppendText(Message)
         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
         For Each file In SourceFiles
-            Dim FileInfo = My.Computer.FileSystem.GetFileInfo(file)
-            Dim basename = FileInfo.Name.Replace(FileInfo.Extension, "")
-            If basename.EndsWith("_VH") Then
-                VHNames.Add(basename.Replace("_VH", ""))
-            ElseIf basename.EndsWith("_HI") Then
-                HINames.Add(basename.Replace("_HI", ""))
+            BaseName = Path.GetFileNameWithoutExtension(file)
+            If BaseName.EndsWith("_VH") Then
+                VHNames.Add(BaseName.Replace("_VH", ""))
+            ElseIf BaseName.EndsWith("_HI") Then
+                HINames.Add(BaseName.Replace("_HI", ""))
             End If
         Next
 
@@ -64,12 +64,12 @@ Module CopyAssetsModule
         OutputForm.OutputTextBox.AppendText(Message)
         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
         Dim VHDestinationObjects = From File In (Directory.GetFiles(Source, "*.*", SearchOption.AllDirectories))
-                                   Where (FileTypes.Contains(My.Computer.FileSystem.GetFileInfo(File).Extension.ToLower()) _
-                                       And My.Computer.FileSystem.GetFileInfo(File).Name Like "*_VH.*" _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Door ") _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Doors ") _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Window ") _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Windows "))
+                                   Where FileTypes.Contains((Path.GetExtension(File)).ToLower()) _
+                                       And (Path.GetFileNameWithoutExtension(File)).EndsWith("_VH") _
+                                       And Not (Path.GetFileName(File)).StartsWith("Door ") _
+                                       And Not (Path.GetFileName(File)).StartsWith("Doors ") _
+                                       And Not (Path.GetFileName(File)).StartsWith("Window ") _
+                                       And Not (Path.GetFileName(File)).StartsWith("Windows ")
 
         'Here, we're creating a collection of objects that, according to CC3+'s naming conventions,
         'are of high quality and are not portals (doors or windows).
@@ -77,12 +77,12 @@ Module CopyAssetsModule
         OutputForm.OutputTextBox.AppendText(Message)
         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
         Dim HIDestinationObjects = From File In (Directory.GetFiles(Source, "*.*", SearchOption.AllDirectories))
-                                   Where (FileTypes.Contains(My.Computer.FileSystem.GetFileInfo(File).Extension.ToLower()) _
-                                       And My.Computer.FileSystem.GetFileInfo(File).Name Like "*_HI.*" _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Door ") _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Doors ") _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Window ") _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Windows "))
+                                   Where FileTypes.Contains((Path.GetExtension(File)).ToLower()) _
+                                       And (Path.GetFileNameWithoutExtension(File)).EndsWith("_HI") _
+                                       And Not (Path.GetFileName(File)).StartsWith("Door ") _
+                                       And Not (Path.GetFileName(File)).StartsWith("Doors ") _
+                                       And Not (Path.GetFileName(File)).StartsWith("Window ") _
+                                       And Not (Path.GetFileName(File)).StartsWith("Windows ")
 
         'Here, we're creating a collection of objects that, according to CC3+'s naming conventions,
         'are of standard quality and are not portals (doors or windows).
@@ -90,15 +90,15 @@ Module CopyAssetsModule
         OutputForm.OutputTextBox.AppendText(Message)
         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
         Dim STDDestinationObjects = From File In (Directory.GetFiles(Source, "*.*", SearchOption.AllDirectories))
-                                    Where (FileTypes.Contains(My.Computer.FileSystem.GetFileInfo(File).Extension.ToLower()) _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name Like "*_VH.*" _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name Like "*_HI.*" _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name Like "*_LO.*" _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name Like "*_VL.*" _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Door ") _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Doors ") _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Window ") _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Windows "))
+                                    Where FileTypes.Contains((Path.GetExtension(File)).ToLower()) _
+                                       And Not (Path.GetFileNameWithoutExtension(File)).EndsWith("_VH") _
+                                       And Not (Path.GetFileNameWithoutExtension(File)).EndsWith("_HI") _
+                                       And Not (Path.GetFileNameWithoutExtension(File)).EndsWith("_LO") _
+                                       And Not (Path.GetFileNameWithoutExtension(File)).EndsWith("_VL") _
+                                       And Not (Path.GetFileName(File)).StartsWith("Door ") _
+                                       And Not (Path.GetFileName(File)).StartsWith("Doors ") _
+                                       And Not (Path.GetFileName(File)).StartsWith("Window ") _
+                                       And Not (Path.GetFileName(File)).StartsWith("Windows ")
 
         'Very-high quality is the default quality we're after, so any such objects we've found
         'will be added, unconditionally, to our final collection of objects to be copied.
@@ -116,9 +116,8 @@ Module CopyAssetsModule
         OutputForm.OutputTextBox.AppendText(Message)
         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
         For Each file As String In HIDestinationObjects
-            Dim FileInfo = My.Computer.FileSystem.GetFileInfo(file)
-            Dim basename = (FileInfo.Name.Replace(FileInfo.Extension, "")).Replace("_HI", "")
-            If Not VHNames.Contains(basename) Then
+            BaseName = Path.GetFileNameWithoutExtension(file).Replace("_HI", "")
+            If Not VHNames.Contains(BaseName) Then
                 DestinationObjects.Add(file)
             End If
         Next
@@ -132,9 +131,8 @@ Module CopyAssetsModule
         OutputForm.OutputTextBox.AppendText(Message)
         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
         For Each file As String In STDDestinationObjects
-            Dim FileInfo = My.Computer.FileSystem.GetFileInfo(file)
-            Dim basename = FileInfo.Name.Replace(FileInfo.Extension, "")
-            If Not VHNames.Contains(basename) And Not HINames.Contains(basename) Then
+            BaseName = Path.GetFileNameWithoutExtension(file)
+            If Not VHNames.Contains(BaseName) And Not HINames.Contains(BaseName) Then
                 DestinationObjects.Add(file)
             End If
         Next
@@ -145,12 +143,12 @@ Module CopyAssetsModule
         OutputForm.OutputTextBox.AppendText(Message)
         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
         Dim VHDestinationPortals = From File In (Directory.GetFiles(Source, "*.*", SearchOption.AllDirectories))
-                                   Where (FileTypes.Contains(My.Computer.FileSystem.GetFileInfo(File).Extension.ToLower()) _
-                                       And My.Computer.FileSystem.GetFileInfo(File).Name Like "*_VH.*" _
-                                       And (My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Door ") _
-                                       Or My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Doors ") _
-                                       Or My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Window ") _
-                                       Or My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Windows ")))
+                                   Where FileTypes.Contains((Path.GetExtension(File)).ToLower()) _
+                                       And (Path.GetFileNameWithoutExtension(File)).EndsWith("_VH") _
+                                       And ((Path.GetFileName(File)).StartsWith("Door ") _
+                                       Or (Path.GetFileName(File)).StartsWith("Doors ") _
+                                       Or (Path.GetFileName(File)).StartsWith("Window ") _
+                                       Or (Path.GetFileName(File)).StartsWith("Windows "))
 
         'Here, we're creating a collection of objects that, according to CC3+'s naming conventions,
         'are of high-quality and are portals (doors or windows).
@@ -158,12 +156,12 @@ Module CopyAssetsModule
         OutputForm.OutputTextBox.AppendText(Message)
         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
         Dim HIDestinationPortals = From File In (Directory.GetFiles(Source, "*.*", SearchOption.AllDirectories))
-                                   Where (FileTypes.Contains(My.Computer.FileSystem.GetFileInfo(File).Extension.ToLower()) _
-                                       And My.Computer.FileSystem.GetFileInfo(File).Name Like "*_HI.*" _
-                                       And (My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Door ") _
-                                       Or My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Doors ") _
-                                       Or My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Window ") _
-                                       Or My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Windows ")))
+                                   Where FileTypes.Contains((Path.GetExtension(File)).ToLower()) _
+                                       And (Path.GetFileNameWithoutExtension(File)).EndsWith("_HI") _
+                                       And ((Path.GetFileName(File)).StartsWith("Door ") _
+                                       Or (Path.GetFileName(File)).StartsWith("Doors ") _
+                                       Or (Path.GetFileName(File)).StartsWith("Window ") _
+                                       Or (Path.GetFileName(File)).StartsWith("Windows "))
 
         'Here, we're creating a collection of objects that, according to CC3+'s naming conventions,
         'are of standard-quality and are portals (doors or windows).
@@ -171,15 +169,15 @@ Module CopyAssetsModule
         OutputForm.OutputTextBox.AppendText(Message)
         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
         Dim STDDestinationPortals = From File In (Directory.GetFiles(Source, "*.*", SearchOption.AllDirectories))
-                                    Where (FileTypes.Contains(My.Computer.FileSystem.GetFileInfo(File).Extension.ToLower()) _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name Like "*_VH.*" _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name Like "*_HI.*" _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name Like "*_LO.*" _
-                                       And Not My.Computer.FileSystem.GetFileInfo(File).Name Like "*_VL.*" _
-                                       And (My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Door ") _
-                                       Or My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Doors ") _
-                                       Or My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Window ") _
-                                       Or My.Computer.FileSystem.GetFileInfo(File).Name.StartsWith("Windows ")))
+                                    Where FileTypes.Contains((Path.GetExtension(File)).ToLower()) _
+                                       And Not (Path.GetFileNameWithoutExtension(File)).EndsWith("_VH") _
+                                       And Not (Path.GetFileNameWithoutExtension(File)).EndsWith("_HI") _
+                                       And Not (Path.GetFileNameWithoutExtension(File)).EndsWith("_LO") _
+                                       And Not (Path.GetFileNameWithoutExtension(File)).EndsWith("_VL") _
+                                       And ((Path.GetFileName(File)).StartsWith("Door ") _
+                                       Or (Path.GetFileName(File)).StartsWith("Doors ") _
+                                       Or (Path.GetFileName(File)).StartsWith("Window ") _
+                                       Or (Path.GetFileName(File)).StartsWith("Windows "))
 
         'Very-high quality is the default quality we're after, so any such portals we've found
         'will be added, unconditionally, to our final collection of portals to be copied.
@@ -197,9 +195,8 @@ Module CopyAssetsModule
         OutputForm.OutputTextBox.AppendText(Message)
         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
         For Each file As String In HIDestinationPortals
-            Dim FileInfo = My.Computer.FileSystem.GetFileInfo(file)
-            Dim basename = (FileInfo.Name.Replace(FileInfo.Extension, "")).Replace("_HI", "")
-            If Not VHNames.Contains(basename) Then
+            BaseName = (Path.GetFileNameWithoutExtension(file)).Replace("_HI", "")
+            If Not VHNames.Contains(BaseName) Then
                 DestinationPortals.Add(file)
             End If
         Next
@@ -213,9 +210,8 @@ Module CopyAssetsModule
         OutputForm.OutputTextBox.AppendText(Message)
         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
         For Each file As String In STDDestinationPortals
-            Dim FileInfo = My.Computer.FileSystem.GetFileInfo(file)
-            Dim basename = FileInfo.Name.Replace(FileInfo.Extension, "")
-            If Not VHNames.Contains(basename) And Not HINames.Contains(basename) Then
+            BaseName = Path.GetFileNameWithoutExtension(file)
+            If Not VHNames.Contains(BaseName) And Not HINames.Contains(BaseName) Then
                 DestinationPortals.Add(file)
             End If
         Next
@@ -259,13 +255,18 @@ Module CopyAssetsModule
             For Each file As String In DestinationObjects
                 CopySource = My.Computer.FileSystem.GetFileInfo(file).FullName
                 CopyDestination = CopySource.Replace(Source, ReplaceSource)
-                Message = Indent & "Copying from: " & CopySource & vbCrLf
-                OutputForm.OutputTextBox.AppendText(Message)
-                If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
-                Message = Indent & "          to: " & CopyDestination & vbCrLf
-                OutputForm.OutputTextBox.AppendText(Message)
-                If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
-                My.Computer.FileSystem.CopyFile(CopySource, CopyDestination)
+
+                If My.Computer.FileSystem.FileExists(CopyDestination) Then
+                    Message = Indent & "Destination file already exists: " & CopyDestination & vbCrLf
+                    OutputForm.OutputTextBox.AppendText(Message)
+                    If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                Else
+                    Message = Indent & "Copying from: " & CopySource & vbCrLf
+                    Message = Indent & "          to: " & CopyDestination & vbCrLf
+                    OutputForm.OutputTextBox.AppendText(Message)
+                    If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                    My.Computer.FileSystem.CopyFile(CopySource, CopyDestination)
+                End If
             Next
         End If
 
@@ -347,19 +348,23 @@ Module CopyAssetsModule
             For Each file As String In DestinationPortals
                 CopySource = My.Computer.FileSystem.GetFileInfo(file).FullName
                 CopyDestination = CopySource.Replace(PortalSource, ReplaceSource)
-                Message = Indent & "Copying from: " & CopySource & vbCrLf
-                OutputForm.OutputTextBox.AppendText(Message)
-                If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
-                Message = Indent & "          to: " & CopyDestination & vbCrLf
-                OutputForm.OutputTextBox.AppendText(Message)
-                If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
-                My.Computer.FileSystem.CopyFile(CopySource, CopyDestination)
+                If My.Computer.FileSystem.FileExists(CopyDestination) Then
+                    Message = Indent & "Destination file already exists: " & CopyDestination & vbCrLf
+                    OutputForm.OutputTextBox.AppendText(Message)
+                    If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                Else
+                    Message = Indent & "Copying from: " & CopySource & vbCrLf
+                    Message &= Indent & "          to: " & CopyDestination & vbCrLf
+                    OutputForm.OutputTextBox.AppendText(Message)
+                    If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)
+                    My.Computer.FileSystem.CopyFile(CopySource, CopyDestination)
+                End If
             Next
         End If
 
         If CreateTagFile And My.Computer.FileSystem.DirectoryExists(Destination) Then
             Dim AssetFolder As String = My.Computer.FileSystem.GetDirectoryInfo(Destination).Name
-            TagAssetsSub(Destination, AssetFolder, "Miscellaneous", CreateLog, LogFileName, Indent)
+            TagAssetsSub(Destination, AssetFolder, DefaultTag, CreateLog, LogFileName, Indent)
         End If
     End Sub
 End Module

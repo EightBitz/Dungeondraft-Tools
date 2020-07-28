@@ -22,15 +22,21 @@ Partial Class DDToolsForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.SelectScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MainMenuStrip = New System.Windows.Forms.MenuStrip()
+        Me.MainMenuToolStripMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.TagAssetsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConvertAssetsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConvertPacksMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyAssetsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DungeondraftpackexeMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DungeondraftunpackexeMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CopyTilesMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MapDetailsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PackAssetsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.UnpackAssetsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PreferencesToolStripMenu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConvertPacksGroupBox = New System.Windows.Forms.GroupBox()
+        Me.ConvertPacksSelectAllCheckBox = New System.Windows.Forms.CheckBox()
         Me.ConvertPacksLogCheckBox = New System.Windows.Forms.CheckBox()
         Me.ConvertPacksStartButton = New System.Windows.Forms.Button()
         Me.ConvertPacksSelectNoneButton = New System.Windows.Forms.Button()
@@ -45,6 +51,7 @@ Partial Class DDToolsForm
         Me.ConvertPacksDestinationBrowseButton = New System.Windows.Forms.Button()
         Me.ConvertPacksSourceBrowseButton = New System.Windows.Forms.Button()
         Me.TagAssetsGroupBox = New System.Windows.Forms.GroupBox()
+        Me.TagAssetsSelectAllCheckBox = New System.Windows.Forms.CheckBox()
         Me.TagAssetsLogCheckBox = New System.Windows.Forms.CheckBox()
         Me.TagAssetsStartButton = New System.Windows.Forms.Button()
         Me.TagAssetsSelectNoneButton = New System.Windows.Forms.Button()
@@ -60,6 +67,8 @@ Partial Class DDToolsForm
         Me.ConvertPacksDestinationBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
         Me.TagAssetsSourceBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
         Me.CopyAssetsGroupBox = New System.Windows.Forms.GroupBox()
+        Me.CopyAssetsSelectAllCheckBox = New System.Windows.Forms.CheckBox()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.CopyAssetsSelectNoneButton = New System.Windows.Forms.Button()
         Me.CopyAssetsSelectAllButton = New System.Windows.Forms.Button()
         Me.CopyAssetsCheckedListBox = New System.Windows.Forms.CheckedListBox()
@@ -76,6 +85,8 @@ Partial Class DDToolsForm
         Me.CopyAssetsSourceBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
         Me.CopyAssetsDestinationBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
         Me.ConvertAssetsGroupBox = New System.Windows.Forms.GroupBox()
+        Me.ConvertAssetsSelectAllCheckBox = New System.Windows.Forms.CheckBox()
+        Me.Label20 = New System.Windows.Forms.Label()
         Me.ConvertAssetsSelectNoneButton = New System.Windows.Forms.Button()
         Me.ConvertAssetsSelectAllButton = New System.Windows.Forms.Button()
         Me.ConvertAssetsCheckedListBox = New System.Windows.Forms.CheckedListBox()
@@ -93,100 +104,166 @@ Partial Class DDToolsForm
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.UnpackGroupBox = New System.Windows.Forms.GroupBox()
-        Me.UnpackStartButton = New System.Windows.Forms.Button()
-        Me.UnpackSelectNoneButton = New System.Windows.Forms.Button()
-        Me.UnpackSelectAllButton = New System.Windows.Forms.Button()
+        Me.UnpackAssetsGroupBox = New System.Windows.Forms.GroupBox()
+        Me.UnpackAssetsSelectAllCheckBox = New System.Windows.Forms.CheckBox()
+        Me.UnpackAssetsLogCheckBox = New System.Windows.Forms.CheckBox()
+        Me.UnpackAssetsStartButton = New System.Windows.Forms.Button()
+        Me.UnpackAssetsSelectNoneButton = New System.Windows.Forms.Button()
+        Me.UnpackAssetsSelectAllButton = New System.Windows.Forms.Button()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.UnpackCheckedListBox = New System.Windows.Forms.CheckedListBox()
+        Me.UnpackAssetsCheckedListBox = New System.Windows.Forms.CheckedListBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.UnpackSourceTextBox = New System.Windows.Forms.TextBox()
-        Me.UnpackDestinationTextBox = New System.Windows.Forms.TextBox()
+        Me.UnpackAssetsSourceTextBox = New System.Windows.Forms.TextBox()
+        Me.UnpackAssetsDestinationTextBox = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.UnpackDestinationBrowseButton = New System.Windows.Forms.Button()
-        Me.UnpackSourceBrowseButton = New System.Windows.Forms.Button()
-        Me.UnpackSourceBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
-        Me.UnpackDestinationBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
-        Me.PackSourceBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
-        Me.PackDestinationBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
-        Me.PackGroupBox = New System.Windows.Forms.GroupBox()
-        Me.PackStartButton = New System.Windows.Forms.Button()
-        Me.PackSelectNoneButton = New System.Windows.Forms.Button()
-        Me.PackSelectAllButton = New System.Windows.Forms.Button()
+        Me.UnpackAssetsDestinationBrowseButton = New System.Windows.Forms.Button()
+        Me.UnpackAssetsSourceBrowseButton = New System.Windows.Forms.Button()
+        Me.UnpackAssetsSourceBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
+        Me.UnpackAssetsDestinationBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
+        Me.PackAssetsSourceBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
+        Me.PackAssetsDestinationBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
+        Me.PackAssetsGroupBox = New System.Windows.Forms.GroupBox()
+        Me.PackAssetsSelectAllCheckBox = New System.Windows.Forms.CheckBox()
+        Me.PackAssetsOverwriteCheckBox = New System.Windows.Forms.CheckBox()
+        Me.PackAssetsRefreshButton = New System.Windows.Forms.Button()
+        Me.PackAssetsLogCheckBox = New System.Windows.Forms.CheckBox()
+        Me.PackAssetsDataGridView = New System.Windows.Forms.DataGridView()
+        Me.PackAssetsStartButton = New System.Windows.Forms.Button()
+        Me.PackAssetsSelectNoneButton = New System.Windows.Forms.Button()
+        Me.PackAssetsSelectAllButton = New System.Windows.Forms.Button()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.PackCheckedListBox = New System.Windows.Forms.CheckedListBox()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.PackSourceTextBox = New System.Windows.Forms.TextBox()
-        Me.PackDestinationTextBox = New System.Windows.Forms.TextBox()
+        Me.PackAssetsSourceTextBox = New System.Windows.Forms.TextBox()
+        Me.PackAssetsDestinationTextBox = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.PackDestinationBrowseButton = New System.Windows.Forms.Button()
-        Me.PackSourceBrowseButton = New System.Windows.Forms.Button()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.MenuStrip1.SuspendLayout()
+        Me.PackAssetsDestinationBrowseButton = New System.Windows.Forms.Button()
+        Me.PackAssetsSourceBrowseButton = New System.Windows.Forms.Button()
+        Me.CopyTilesGroupBox = New System.Windows.Forms.GroupBox()
+        Me.CopyTilesSelectAllCheckBox = New System.Windows.Forms.CheckBox()
+        Me.CopyTilesDataGridView = New System.Windows.Forms.DataGridView()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.CopyTilesLogCheckBox = New System.Windows.Forms.CheckBox()
+        Me.CopyTilesSourceTextBox = New System.Windows.Forms.TextBox()
+        Me.CopyTilesDestinationTextBox = New System.Windows.Forms.TextBox()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.CopyTilesStartButton = New System.Windows.Forms.Button()
+        Me.CopyTilesDestinationBrowseButton = New System.Windows.Forms.Button()
+        Me.CopyTilesSourceBrowseButton = New System.Windows.Forms.Button()
+        Me.CopyTilesSourceBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
+        Me.CopyTilesDestinationBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
+        Me.MapDetailsGroupBox = New System.Windows.Forms.GroupBox()
+        Me.MapDetailsSelectAllCheckBox = New System.Windows.Forms.CheckBox()
+        Me.MapDetailsLogCheckBox = New System.Windows.Forms.CheckBox()
+        Me.MapDetailsStartButton = New System.Windows.Forms.Button()
+        Me.MapDetailsSelectNoneButton = New System.Windows.Forms.Button()
+        Me.MapDetailsSelectAllButton = New System.Windows.Forms.Button()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.MapDetailsCheckedListBox = New System.Windows.Forms.CheckedListBox()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.MapDetailsSourceTextBox = New System.Windows.Forms.TextBox()
+        Me.MapDetailsBrowseButton = New System.Windows.Forms.Button()
+        Me.MapDetailsSourceBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
+        Me.MainMenuStrip.SuspendLayout()
         Me.ConvertPacksGroupBox.SuspendLayout()
         Me.TagAssetsGroupBox.SuspendLayout()
         Me.CopyAssetsGroupBox.SuspendLayout()
         Me.ConvertAssetsGroupBox.SuspendLayout()
         Me.TitlePanel.SuspendLayout()
-        Me.UnpackGroupBox.SuspendLayout()
-        Me.PackGroupBox.SuspendLayout()
+        Me.UnpackAssetsGroupBox.SuspendLayout()
+        Me.PackAssetsGroupBox.SuspendLayout()
+        CType(Me.PackAssetsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.CopyTilesGroupBox.SuspendLayout()
+        CType(Me.CopyTilesDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MapDetailsGroupBox.SuspendLayout()
         Me.SuspendLayout()
         '
-        'MenuStrip1
+        'MainMenuStrip
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SelectScriptToolStripMenuItem})
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(782, 24)
-        Me.MenuStrip1.TabIndex = 0
-        Me.MenuStrip1.Text = "MenuStrip1"
+        Me.MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MainMenuToolStripMenu, Me.PreferencesToolStripMenu})
+        Me.MainMenuStrip.Location = New System.Drawing.Point(0, 0)
+        Me.MainMenuStrip.Name = "MainMenuStrip"
+        Me.MainMenuStrip.Size = New System.Drawing.Size(980, 24)
+        Me.MainMenuStrip.TabIndex = 0
+        Me.MainMenuStrip.Text = "Main Menu"
         '
-        'SelectScriptToolStripMenuItem
+        'MainMenuToolStripMenu
         '
-        Me.SelectScriptToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TagAssetsMenuItem, Me.ConvertAssetsMenuItem, Me.ConvertPacksMenuItem, Me.CopyAssetsMenuItem, Me.DungeondraftpackexeMenuItem, Me.DungeondraftunpackexeMenuItem})
-        Me.SelectScriptToolStripMenuItem.Name = "SelectScriptToolStripMenuItem"
-        Me.SelectScriptToolStripMenuItem.Size = New System.Drawing.Size(75, 20)
-        Me.SelectScriptToolStripMenuItem.Text = "Select Tool"
+        Me.MainMenuToolStripMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TagAssetsMenuItem, Me.ConvertAssetsMenuItem, Me.ConvertPacksMenuItem, Me.CopyAssetsMenuItem, Me.CopyTilesMenuItem, Me.MapDetailsMenuItem, Me.PackAssetsMenuItem, Me.UnpackAssetsMenuItem})
+        Me.MainMenuToolStripMenu.Name = "MainMenuToolStripMenu"
+        Me.MainMenuToolStripMenu.Size = New System.Drawing.Size(80, 20)
+        Me.MainMenuToolStripMenu.Text = "Main Menu"
         '
         'TagAssetsMenuItem
         '
         Me.TagAssetsMenuItem.Name = "TagAssetsMenuItem"
-        Me.TagAssetsMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.TagAssetsMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.TagAssetsMenuItem.Text = "Tag Assets"
         '
         'ConvertAssetsMenuItem
         '
         Me.ConvertAssetsMenuItem.Name = "ConvertAssetsMenuItem"
-        Me.ConvertAssetsMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ConvertAssetsMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ConvertAssetsMenuItem.Text = "Convert Assets"
         '
         'ConvertPacksMenuItem
         '
         Me.ConvertPacksMenuItem.Name = "ConvertPacksMenuItem"
-        Me.ConvertPacksMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ConvertPacksMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ConvertPacksMenuItem.Text = "Convert Packs"
         '
         'CopyAssetsMenuItem
         '
         Me.CopyAssetsMenuItem.Name = "CopyAssetsMenuItem"
-        Me.CopyAssetsMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.CopyAssetsMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CopyAssetsMenuItem.Text = "Copy Assets"
         '
-        'DungeondraftpackexeMenuItem
+        'CopyTilesMenuItem
         '
-        Me.DungeondraftpackexeMenuItem.Name = "DungeondraftpackexeMenuItem"
-        Me.DungeondraftpackexeMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.DungeondraftpackexeMenuItem.Text = "Pack Assets"
+        Me.CopyTilesMenuItem.Name = "CopyTilesMenuItem"
+        Me.CopyTilesMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CopyTilesMenuItem.Text = "Copy Tiles"
         '
-        'DungeondraftunpackexeMenuItem
+        'MapDetailsMenuItem
         '
-        Me.DungeondraftunpackexeMenuItem.Name = "DungeondraftunpackexeMenuItem"
-        Me.DungeondraftunpackexeMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.DungeondraftunpackexeMenuItem.Text = "Unpack Assets"
+        Me.MapDetailsMenuItem.Name = "MapDetailsMenuItem"
+        Me.MapDetailsMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.MapDetailsMenuItem.Text = "Map Details"
+        '
+        'PackAssetsMenuItem
+        '
+        Me.PackAssetsMenuItem.Name = "PackAssetsMenuItem"
+        Me.PackAssetsMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PackAssetsMenuItem.Text = "Pack Assets"
+        '
+        'UnpackAssetsMenuItem
+        '
+        Me.UnpackAssetsMenuItem.Name = "UnpackAssetsMenuItem"
+        Me.UnpackAssetsMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.UnpackAssetsMenuItem.Text = "Unpack Assets"
+        '
+        'PreferencesToolStripMenu
+        '
+        Me.PreferencesToolStripMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadToolStripMenuItem, Me.SaveToolStripMenuItem})
+        Me.PreferencesToolStripMenu.Name = "PreferencesToolStripMenu"
+        Me.PreferencesToolStripMenu.Size = New System.Drawing.Size(80, 20)
+        Me.PreferencesToolStripMenu.Text = "Preferences"
+        '
+        'LoadToolStripMenuItem
+        '
+        Me.LoadToolStripMenuItem.Name = "LoadToolStripMenuItem"
+        Me.LoadToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
+        Me.LoadToolStripMenuItem.Text = "Load"
+        '
+        'SaveToolStripMenuItem
+        '
+        Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
+        Me.SaveToolStripMenuItem.Text = "Save"
         '
         'ConvertPacksGroupBox
         '
+        Me.ConvertPacksGroupBox.Controls.Add(Me.ConvertPacksSelectAllCheckBox)
         Me.ConvertPacksGroupBox.Controls.Add(Me.ConvertPacksLogCheckBox)
         Me.ConvertPacksGroupBox.Controls.Add(Me.ConvertPacksStartButton)
         Me.ConvertPacksGroupBox.Controls.Add(Me.ConvertPacksSelectNoneButton)
@@ -207,10 +284,20 @@ Partial Class DDToolsForm
         Me.ConvertPacksGroupBox.TabStop = False
         Me.ConvertPacksGroupBox.Text = "Convert Packs"
         '
+        'ConvertPacksSelectAllCheckBox
+        '
+        Me.ConvertPacksSelectAllCheckBox.AutoSize = True
+        Me.ConvertPacksSelectAllCheckBox.Location = New System.Drawing.Point(538, 83)
+        Me.ConvertPacksSelectAllCheckBox.Name = "ConvertPacksSelectAllCheckBox"
+        Me.ConvertPacksSelectAllCheckBox.Size = New System.Drawing.Size(83, 20)
+        Me.ConvertPacksSelectAllCheckBox.TabIndex = 6
+        Me.ConvertPacksSelectAllCheckBox.Text = "Select All"
+        Me.ConvertPacksSelectAllCheckBox.UseVisualStyleBackColor = True
+        '
         'ConvertPacksLogCheckBox
         '
         Me.ConvertPacksLogCheckBox.AutoSize = True
-        Me.ConvertPacksLogCheckBox.Location = New System.Drawing.Point(408, 83)
+        Me.ConvertPacksLogCheckBox.Location = New System.Drawing.Point(314, 83)
         Me.ConvertPacksLogCheckBox.Name = "ConvertPacksLogCheckBox"
         Me.ConvertPacksLogCheckBox.Size = New System.Drawing.Size(218, 20)
         Me.ConvertPacksLogCheckBox.TabIndex = 5
@@ -222,7 +309,7 @@ Partial Class DDToolsForm
         Me.ConvertPacksStartButton.Location = New System.Drawing.Point(658, 194)
         Me.ConvertPacksStartButton.Name = "ConvertPacksStartButton"
         Me.ConvertPacksStartButton.Size = New System.Drawing.Size(94, 26)
-        Me.ConvertPacksStartButton.TabIndex = 9
+        Me.ConvertPacksStartButton.TabIndex = 10
         Me.ConvertPacksStartButton.Text = "Start"
         Me.ConvertPacksStartButton.UseVisualStyleBackColor = True
         '
@@ -231,7 +318,7 @@ Partial Class DDToolsForm
         Me.ConvertPacksSelectNoneButton.Location = New System.Drawing.Point(658, 162)
         Me.ConvertPacksSelectNoneButton.Name = "ConvertPacksSelectNoneButton"
         Me.ConvertPacksSelectNoneButton.Size = New System.Drawing.Size(94, 26)
-        Me.ConvertPacksSelectNoneButton.TabIndex = 8
+        Me.ConvertPacksSelectNoneButton.TabIndex = 9
         Me.ConvertPacksSelectNoneButton.Text = "Select None"
         Me.ConvertPacksSelectNoneButton.UseVisualStyleBackColor = True
         '
@@ -240,7 +327,7 @@ Partial Class DDToolsForm
         Me.ConvertPacksSelectAllButton.Location = New System.Drawing.Point(658, 130)
         Me.ConvertPacksSelectAllButton.Name = "ConvertPacksSelectAllButton"
         Me.ConvertPacksSelectAllButton.Size = New System.Drawing.Size(94, 26)
-        Me.ConvertPacksSelectAllButton.TabIndex = 7
+        Me.ConvertPacksSelectAllButton.TabIndex = 8
         Me.ConvertPacksSelectAllButton.Text = "Select All"
         Me.ConvertPacksSelectAllButton.UseVisualStyleBackColor = True
         '
@@ -250,7 +337,7 @@ Partial Class DDToolsForm
         Me.ConvertPacksCheckedListBox.Location = New System.Drawing.Point(9, 130)
         Me.ConvertPacksCheckedListBox.Name = "ConvertPacksCheckedListBox"
         Me.ConvertPacksCheckedListBox.Size = New System.Drawing.Size(646, 429)
-        Me.ConvertPacksCheckedListBox.TabIndex = 6
+        Me.ConvertPacksCheckedListBox.TabIndex = 7
         '
         'Label3
         '
@@ -266,7 +353,7 @@ Partial Class DDToolsForm
         Me.ConvertPacksCleanUpCheckBox.AutoSize = True
         Me.ConvertPacksCleanUpCheckBox.Checked = True
         Me.ConvertPacksCleanUpCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.ConvertPacksCleanUpCheckBox.Location = New System.Drawing.Point(129, 83)
+        Me.ConvertPacksCleanUpCheckBox.Location = New System.Drawing.Point(39, 83)
         Me.ConvertPacksCleanUpCheckBox.Name = "ConvertPacksCleanUpCheckBox"
         Me.ConvertPacksCleanUpCheckBox.Size = New System.Drawing.Size(273, 20)
         Me.ConvertPacksCleanUpCheckBox.TabIndex = 4
@@ -325,6 +412,7 @@ Partial Class DDToolsForm
         '
         'TagAssetsGroupBox
         '
+        Me.TagAssetsGroupBox.Controls.Add(Me.TagAssetsSelectAllCheckBox)
         Me.TagAssetsGroupBox.Controls.Add(Me.TagAssetsLogCheckBox)
         Me.TagAssetsGroupBox.Controls.Add(Me.TagAssetsStartButton)
         Me.TagAssetsGroupBox.Controls.Add(Me.TagAssetsSelectNoneButton)
@@ -343,6 +431,16 @@ Partial Class DDToolsForm
         Me.TagAssetsGroupBox.TabStop = False
         Me.TagAssetsGroupBox.Text = "Tag Assets"
         '
+        'TagAssetsSelectAllCheckBox
+        '
+        Me.TagAssetsSelectAllCheckBox.AutoSize = True
+        Me.TagAssetsSelectAllCheckBox.Location = New System.Drawing.Point(314, 83)
+        Me.TagAssetsSelectAllCheckBox.Name = "TagAssetsSelectAllCheckBox"
+        Me.TagAssetsSelectAllCheckBox.Size = New System.Drawing.Size(83, 20)
+        Me.TagAssetsSelectAllCheckBox.TabIndex = 4
+        Me.TagAssetsSelectAllCheckBox.Text = "Select All"
+        Me.TagAssetsSelectAllCheckBox.UseVisualStyleBackColor = True
+        '
         'TagAssetsLogCheckBox
         '
         Me.TagAssetsLogCheckBox.AutoSize = True
@@ -358,7 +456,7 @@ Partial Class DDToolsForm
         Me.TagAssetsStartButton.Location = New System.Drawing.Point(658, 194)
         Me.TagAssetsStartButton.Name = "TagAssetsStartButton"
         Me.TagAssetsStartButton.Size = New System.Drawing.Size(94, 26)
-        Me.TagAssetsStartButton.TabIndex = 7
+        Me.TagAssetsStartButton.TabIndex = 8
         Me.TagAssetsStartButton.Text = "Start"
         Me.TagAssetsStartButton.UseVisualStyleBackColor = True
         '
@@ -367,7 +465,7 @@ Partial Class DDToolsForm
         Me.TagAssetsSelectNoneButton.Location = New System.Drawing.Point(658, 162)
         Me.TagAssetsSelectNoneButton.Name = "TagAssetsSelectNoneButton"
         Me.TagAssetsSelectNoneButton.Size = New System.Drawing.Size(94, 26)
-        Me.TagAssetsSelectNoneButton.TabIndex = 6
+        Me.TagAssetsSelectNoneButton.TabIndex = 7
         Me.TagAssetsSelectNoneButton.Text = "Select None"
         Me.TagAssetsSelectNoneButton.UseVisualStyleBackColor = True
         '
@@ -376,7 +474,7 @@ Partial Class DDToolsForm
         Me.TagAssetsSelectAllButton.Location = New System.Drawing.Point(658, 130)
         Me.TagAssetsSelectAllButton.Name = "TagAssetsSelectAllButton"
         Me.TagAssetsSelectAllButton.Size = New System.Drawing.Size(94, 26)
-        Me.TagAssetsSelectAllButton.TabIndex = 5
+        Me.TagAssetsSelectAllButton.TabIndex = 6
         Me.TagAssetsSelectAllButton.Text = "Select All"
         Me.TagAssetsSelectAllButton.UseVisualStyleBackColor = True
         '
@@ -395,7 +493,7 @@ Partial Class DDToolsForm
         Me.TagAssetsCheckedListBox.Location = New System.Drawing.Point(6, 130)
         Me.TagAssetsCheckedListBox.Name = "TagAssetsCheckedListBox"
         Me.TagAssetsCheckedListBox.Size = New System.Drawing.Size(646, 429)
-        Me.TagAssetsCheckedListBox.TabIndex = 4
+        Me.TagAssetsCheckedListBox.TabIndex = 5
         '
         'TagAssetsDefaultTagTextBox
         '
@@ -440,6 +538,7 @@ Partial Class DDToolsForm
         '
         'CopyAssetsGroupBox
         '
+        Me.CopyAssetsGroupBox.Controls.Add(Me.CopyAssetsSelectAllCheckBox)
         Me.CopyAssetsGroupBox.Controls.Add(Me.Label21)
         Me.CopyAssetsGroupBox.Controls.Add(Me.CopyAssetsSelectNoneButton)
         Me.CopyAssetsGroupBox.Controls.Add(Me.CopyAssetsSelectAllButton)
@@ -461,12 +560,31 @@ Partial Class DDToolsForm
         Me.CopyAssetsGroupBox.TabStop = False
         Me.CopyAssetsGroupBox.Text = "Copy Assets"
         '
+        'CopyAssetsSelectAllCheckBox
+        '
+        Me.CopyAssetsSelectAllCheckBox.AutoSize = True
+        Me.CopyAssetsSelectAllCheckBox.Location = New System.Drawing.Point(522, 83)
+        Me.CopyAssetsSelectAllCheckBox.Name = "CopyAssetsSelectAllCheckBox"
+        Me.CopyAssetsSelectAllCheckBox.Size = New System.Drawing.Size(83, 20)
+        Me.CopyAssetsSelectAllCheckBox.TabIndex = 7
+        Me.CopyAssetsSelectAllCheckBox.Text = "Select All"
+        Me.CopyAssetsSelectAllCheckBox.UseVisualStyleBackColor = True
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(6, 111)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(140, 16)
+        Me.Label21.TabIndex = 11
+        Me.Label21.Text = "Asset Folders to Copy"
+        '
         'CopyAssetsSelectNoneButton
         '
         Me.CopyAssetsSelectNoneButton.Location = New System.Drawing.Point(658, 162)
         Me.CopyAssetsSelectNoneButton.Name = "CopyAssetsSelectNoneButton"
         Me.CopyAssetsSelectNoneButton.Size = New System.Drawing.Size(94, 26)
-        Me.CopyAssetsSelectNoneButton.TabIndex = 9
+        Me.CopyAssetsSelectNoneButton.TabIndex = 10
         Me.CopyAssetsSelectNoneButton.Text = "Select None"
         Me.CopyAssetsSelectNoneButton.UseVisualStyleBackColor = True
         '
@@ -475,7 +593,7 @@ Partial Class DDToolsForm
         Me.CopyAssetsSelectAllButton.Location = New System.Drawing.Point(658, 130)
         Me.CopyAssetsSelectAllButton.Name = "CopyAssetsSelectAllButton"
         Me.CopyAssetsSelectAllButton.Size = New System.Drawing.Size(94, 26)
-        Me.CopyAssetsSelectAllButton.TabIndex = 8
+        Me.CopyAssetsSelectAllButton.TabIndex = 9
         Me.CopyAssetsSelectAllButton.Text = "Select All"
         Me.CopyAssetsSelectAllButton.UseVisualStyleBackColor = True
         '
@@ -485,12 +603,12 @@ Partial Class DDToolsForm
         Me.CopyAssetsCheckedListBox.Location = New System.Drawing.Point(9, 130)
         Me.CopyAssetsCheckedListBox.Name = "CopyAssetsCheckedListBox"
         Me.CopyAssetsCheckedListBox.Size = New System.Drawing.Size(646, 429)
-        Me.CopyAssetsCheckedListBox.TabIndex = 7
+        Me.CopyAssetsCheckedListBox.TabIndex = 8
         '
         'CopyAssetsLogCheckBox
         '
         Me.CopyAssetsLogCheckBox.AutoSize = True
-        Me.CopyAssetsLogCheckBox.Location = New System.Drawing.Point(402, 89)
+        Me.CopyAssetsLogCheckBox.Location = New System.Drawing.Point(306, 83)
         Me.CopyAssetsLogCheckBox.Name = "CopyAssetsLogCheckBox"
         Me.CopyAssetsLogCheckBox.Size = New System.Drawing.Size(210, 20)
         Me.CopyAssetsLogCheckBox.TabIndex = 6
@@ -502,7 +620,7 @@ Partial Class DDToolsForm
         Me.CopyAssetsPortalsCheckBox.AutoSize = True
         Me.CopyAssetsPortalsCheckBox.Checked = True
         Me.CopyAssetsPortalsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CopyAssetsPortalsCheckBox.Location = New System.Drawing.Point(268, 89)
+        Me.CopyAssetsPortalsCheckBox.Location = New System.Drawing.Point(172, 83)
         Me.CopyAssetsPortalsCheckBox.Name = "CopyAssetsPortalsCheckBox"
         Me.CopyAssetsPortalsCheckBox.Size = New System.Drawing.Size(128, 20)
         Me.CopyAssetsPortalsCheckBox.TabIndex = 5
@@ -512,7 +630,7 @@ Partial Class DDToolsForm
         'CopyAssetsCreateTagsCheckBox
         '
         Me.CopyAssetsCreateTagsCheckBox.AutoSize = True
-        Me.CopyAssetsCreateTagsCheckBox.Location = New System.Drawing.Point(135, 89)
+        Me.CopyAssetsCreateTagsCheckBox.Location = New System.Drawing.Point(39, 83)
         Me.CopyAssetsCreateTagsCheckBox.Name = "CopyAssetsCreateTagsCheckBox"
         Me.CopyAssetsCreateTagsCheckBox.Size = New System.Drawing.Size(127, 20)
         Me.CopyAssetsCreateTagsCheckBox.TabIndex = 4
@@ -556,7 +674,7 @@ Partial Class DDToolsForm
         Me.CopyAssetsStartButton.Location = New System.Drawing.Point(658, 194)
         Me.CopyAssetsStartButton.Name = "CopyAssetsStartButton"
         Me.CopyAssetsStartButton.Size = New System.Drawing.Size(94, 26)
-        Me.CopyAssetsStartButton.TabIndex = 10
+        Me.CopyAssetsStartButton.TabIndex = 11
         Me.CopyAssetsStartButton.Text = "Start"
         Me.CopyAssetsStartButton.UseVisualStyleBackColor = True
         '
@@ -580,6 +698,7 @@ Partial Class DDToolsForm
         '
         'ConvertAssetsGroupBox
         '
+        Me.ConvertAssetsGroupBox.Controls.Add(Me.ConvertAssetsSelectAllCheckBox)
         Me.ConvertAssetsGroupBox.Controls.Add(Me.Label20)
         Me.ConvertAssetsGroupBox.Controls.Add(Me.ConvertAssetsSelectNoneButton)
         Me.ConvertAssetsGroupBox.Controls.Add(Me.ConvertAssetsSelectAllButton)
@@ -599,12 +718,31 @@ Partial Class DDToolsForm
         Me.ConvertAssetsGroupBox.TabStop = False
         Me.ConvertAssetsGroupBox.Text = "Convert Assets"
         '
+        'ConvertAssetsSelectAllCheckBox
+        '
+        Me.ConvertAssetsSelectAllCheckBox.AutoSize = True
+        Me.ConvertAssetsSelectAllCheckBox.Location = New System.Drawing.Point(359, 83)
+        Me.ConvertAssetsSelectAllCheckBox.Name = "ConvertAssetsSelectAllCheckBox"
+        Me.ConvertAssetsSelectAllCheckBox.Size = New System.Drawing.Size(83, 20)
+        Me.ConvertAssetsSelectAllCheckBox.TabIndex = 5
+        Me.ConvertAssetsSelectAllCheckBox.Text = "Select All"
+        Me.ConvertAssetsSelectAllCheckBox.UseVisualStyleBackColor = True
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(6, 111)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(154, 16)
+        Me.Label20.TabIndex = 9
+        Me.Label20.Text = "Asset Folders to Convert"
+        '
         'ConvertAssetsSelectNoneButton
         '
         Me.ConvertAssetsSelectNoneButton.Location = New System.Drawing.Point(658, 162)
         Me.ConvertAssetsSelectNoneButton.Name = "ConvertAssetsSelectNoneButton"
         Me.ConvertAssetsSelectNoneButton.Size = New System.Drawing.Size(94, 26)
-        Me.ConvertAssetsSelectNoneButton.TabIndex = 7
+        Me.ConvertAssetsSelectNoneButton.TabIndex = 8
         Me.ConvertAssetsSelectNoneButton.Text = "Select None"
         Me.ConvertAssetsSelectNoneButton.UseVisualStyleBackColor = True
         '
@@ -613,7 +751,7 @@ Partial Class DDToolsForm
         Me.ConvertAssetsSelectAllButton.Location = New System.Drawing.Point(658, 130)
         Me.ConvertAssetsSelectAllButton.Name = "ConvertAssetsSelectAllButton"
         Me.ConvertAssetsSelectAllButton.Size = New System.Drawing.Size(94, 26)
-        Me.ConvertAssetsSelectAllButton.TabIndex = 6
+        Me.ConvertAssetsSelectAllButton.TabIndex = 7
         Me.ConvertAssetsSelectAllButton.Text = "Select All"
         Me.ConvertAssetsSelectAllButton.UseVisualStyleBackColor = True
         '
@@ -623,7 +761,7 @@ Partial Class DDToolsForm
         Me.ConvertAssetsCheckedListBox.Location = New System.Drawing.Point(9, 130)
         Me.ConvertAssetsCheckedListBox.Name = "ConvertAssetsCheckedListBox"
         Me.ConvertAssetsCheckedListBox.Size = New System.Drawing.Size(646, 429)
-        Me.ConvertAssetsCheckedListBox.TabIndex = 5
+        Me.ConvertAssetsCheckedListBox.TabIndex = 6
         '
         'ConvertAssetsLogCheckBox
         '
@@ -672,7 +810,7 @@ Partial Class DDToolsForm
         Me.ConvertAssetsStartButton.Location = New System.Drawing.Point(658, 194)
         Me.ConvertAssetsStartButton.Name = "ConvertAssetsStartButton"
         Me.ConvertAssetsStartButton.Size = New System.Drawing.Size(94, 26)
-        Me.ConvertAssetsStartButton.TabIndex = 8
+        Me.ConvertAssetsStartButton.TabIndex = 9
         Me.ConvertAssetsStartButton.Text = "Start"
         Me.ConvertAssetsStartButton.UseVisualStyleBackColor = True
         '
@@ -734,52 +872,74 @@ Partial Class DDToolsForm
         Me.Label12.TabIndex = 1
         Me.Label12.Text = "EightBitz's Dungeondraft Tools"
         '
-        'UnpackGroupBox
+        'UnpackAssetsGroupBox
         '
-        Me.UnpackGroupBox.Controls.Add(Me.UnpackStartButton)
-        Me.UnpackGroupBox.Controls.Add(Me.UnpackSelectNoneButton)
-        Me.UnpackGroupBox.Controls.Add(Me.UnpackSelectAllButton)
-        Me.UnpackGroupBox.Controls.Add(Me.Label16)
-        Me.UnpackGroupBox.Controls.Add(Me.UnpackCheckedListBox)
-        Me.UnpackGroupBox.Controls.Add(Me.Label15)
-        Me.UnpackGroupBox.Controls.Add(Me.UnpackSourceTextBox)
-        Me.UnpackGroupBox.Controls.Add(Me.UnpackDestinationTextBox)
-        Me.UnpackGroupBox.Controls.Add(Me.Label14)
-        Me.UnpackGroupBox.Controls.Add(Me.UnpackDestinationBrowseButton)
-        Me.UnpackGroupBox.Controls.Add(Me.UnpackSourceBrowseButton)
-        Me.UnpackGroupBox.Location = New System.Drawing.Point(12, 33)
-        Me.UnpackGroupBox.Name = "UnpackGroupBox"
-        Me.UnpackGroupBox.Size = New System.Drawing.Size(758, 565)
-        Me.UnpackGroupBox.TabIndex = 10
-        Me.UnpackGroupBox.TabStop = False
-        Me.UnpackGroupBox.Text = "Unpack Assets"
+        Me.UnpackAssetsGroupBox.Controls.Add(Me.UnpackAssetsSelectAllCheckBox)
+        Me.UnpackAssetsGroupBox.Controls.Add(Me.UnpackAssetsLogCheckBox)
+        Me.UnpackAssetsGroupBox.Controls.Add(Me.UnpackAssetsStartButton)
+        Me.UnpackAssetsGroupBox.Controls.Add(Me.UnpackAssetsSelectNoneButton)
+        Me.UnpackAssetsGroupBox.Controls.Add(Me.UnpackAssetsSelectAllButton)
+        Me.UnpackAssetsGroupBox.Controls.Add(Me.Label16)
+        Me.UnpackAssetsGroupBox.Controls.Add(Me.UnpackAssetsCheckedListBox)
+        Me.UnpackAssetsGroupBox.Controls.Add(Me.Label15)
+        Me.UnpackAssetsGroupBox.Controls.Add(Me.UnpackAssetsSourceTextBox)
+        Me.UnpackAssetsGroupBox.Controls.Add(Me.UnpackAssetsDestinationTextBox)
+        Me.UnpackAssetsGroupBox.Controls.Add(Me.Label14)
+        Me.UnpackAssetsGroupBox.Controls.Add(Me.UnpackAssetsDestinationBrowseButton)
+        Me.UnpackAssetsGroupBox.Controls.Add(Me.UnpackAssetsSourceBrowseButton)
+        Me.UnpackAssetsGroupBox.Location = New System.Drawing.Point(12, 33)
+        Me.UnpackAssetsGroupBox.Name = "UnpackAssetsGroupBox"
+        Me.UnpackAssetsGroupBox.Size = New System.Drawing.Size(758, 565)
+        Me.UnpackAssetsGroupBox.TabIndex = 10
+        Me.UnpackAssetsGroupBox.TabStop = False
+        Me.UnpackAssetsGroupBox.Text = "Unpack Assets"
         '
-        'UnpackStartButton
+        'UnpackAssetsSelectAllCheckBox
         '
-        Me.UnpackStartButton.Location = New System.Drawing.Point(658, 194)
-        Me.UnpackStartButton.Name = "UnpackStartButton"
-        Me.UnpackStartButton.Size = New System.Drawing.Size(94, 26)
-        Me.UnpackStartButton.TabIndex = 7
-        Me.UnpackStartButton.Text = "Start"
-        Me.UnpackStartButton.UseVisualStyleBackColor = True
+        Me.UnpackAssetsSelectAllCheckBox.AutoSize = True
+        Me.UnpackAssetsSelectAllCheckBox.Location = New System.Drawing.Point(360, 83)
+        Me.UnpackAssetsSelectAllCheckBox.Name = "UnpackAssetsSelectAllCheckBox"
+        Me.UnpackAssetsSelectAllCheckBox.Size = New System.Drawing.Size(83, 20)
+        Me.UnpackAssetsSelectAllCheckBox.TabIndex = 5
+        Me.UnpackAssetsSelectAllCheckBox.Text = "Select All"
+        Me.UnpackAssetsSelectAllCheckBox.UseVisualStyleBackColor = True
         '
-        'UnpackSelectNoneButton
+        'UnpackAssetsLogCheckBox
         '
-        Me.UnpackSelectNoneButton.Location = New System.Drawing.Point(658, 162)
-        Me.UnpackSelectNoneButton.Name = "UnpackSelectNoneButton"
-        Me.UnpackSelectNoneButton.Size = New System.Drawing.Size(94, 26)
-        Me.UnpackSelectNoneButton.TabIndex = 6
-        Me.UnpackSelectNoneButton.Text = "Select None"
-        Me.UnpackSelectNoneButton.UseVisualStyleBackColor = True
+        Me.UnpackAssetsLogCheckBox.AutoSize = True
+        Me.UnpackAssetsLogCheckBox.Location = New System.Drawing.Point(129, 83)
+        Me.UnpackAssetsLogCheckBox.Name = "UnpackAssetsLogCheckBox"
+        Me.UnpackAssetsLogCheckBox.Size = New System.Drawing.Size(225, 20)
+        Me.UnpackAssetsLogCheckBox.TabIndex = 4
+        Me.UnpackAssetsLogCheckBox.Text = "Send output to UnpackAssets.log"
+        Me.UnpackAssetsLogCheckBox.UseVisualStyleBackColor = True
         '
-        'UnpackSelectAllButton
+        'UnpackAssetsStartButton
         '
-        Me.UnpackSelectAllButton.Location = New System.Drawing.Point(658, 130)
-        Me.UnpackSelectAllButton.Name = "UnpackSelectAllButton"
-        Me.UnpackSelectAllButton.Size = New System.Drawing.Size(94, 26)
-        Me.UnpackSelectAllButton.TabIndex = 5
-        Me.UnpackSelectAllButton.Text = "Select All"
-        Me.UnpackSelectAllButton.UseVisualStyleBackColor = True
+        Me.UnpackAssetsStartButton.Location = New System.Drawing.Point(658, 194)
+        Me.UnpackAssetsStartButton.Name = "UnpackAssetsStartButton"
+        Me.UnpackAssetsStartButton.Size = New System.Drawing.Size(94, 26)
+        Me.UnpackAssetsStartButton.TabIndex = 9
+        Me.UnpackAssetsStartButton.Text = "Start"
+        Me.UnpackAssetsStartButton.UseVisualStyleBackColor = True
+        '
+        'UnpackAssetsSelectNoneButton
+        '
+        Me.UnpackAssetsSelectNoneButton.Location = New System.Drawing.Point(658, 162)
+        Me.UnpackAssetsSelectNoneButton.Name = "UnpackAssetsSelectNoneButton"
+        Me.UnpackAssetsSelectNoneButton.Size = New System.Drawing.Size(94, 26)
+        Me.UnpackAssetsSelectNoneButton.TabIndex = 8
+        Me.UnpackAssetsSelectNoneButton.Text = "Select None"
+        Me.UnpackAssetsSelectNoneButton.UseVisualStyleBackColor = True
+        '
+        'UnpackAssetsSelectAllButton
+        '
+        Me.UnpackAssetsSelectAllButton.Location = New System.Drawing.Point(658, 130)
+        Me.UnpackAssetsSelectAllButton.Name = "UnpackAssetsSelectAllButton"
+        Me.UnpackAssetsSelectAllButton.Size = New System.Drawing.Size(94, 26)
+        Me.UnpackAssetsSelectAllButton.TabIndex = 7
+        Me.UnpackAssetsSelectAllButton.Text = "Select All"
+        Me.UnpackAssetsSelectAllButton.UseVisualStyleBackColor = True
         '
         'Label16
         '
@@ -790,13 +950,13 @@ Partial Class DDToolsForm
         Me.Label16.TabIndex = 7
         Me.Label16.Text = "Pack Files to Unpack"
         '
-        'UnpackCheckedListBox
+        'UnpackAssetsCheckedListBox
         '
-        Me.UnpackCheckedListBox.FormattingEnabled = True
-        Me.UnpackCheckedListBox.Location = New System.Drawing.Point(9, 130)
-        Me.UnpackCheckedListBox.Name = "UnpackCheckedListBox"
-        Me.UnpackCheckedListBox.Size = New System.Drawing.Size(646, 429)
-        Me.UnpackCheckedListBox.TabIndex = 4
+        Me.UnpackAssetsCheckedListBox.FormattingEnabled = True
+        Me.UnpackAssetsCheckedListBox.Location = New System.Drawing.Point(9, 130)
+        Me.UnpackAssetsCheckedListBox.Name = "UnpackAssetsCheckedListBox"
+        Me.UnpackAssetsCheckedListBox.Size = New System.Drawing.Size(646, 429)
+        Me.UnpackAssetsCheckedListBox.TabIndex = 6
         '
         'Label15
         '
@@ -807,19 +967,19 @@ Partial Class DDToolsForm
         Me.Label15.TabIndex = 5
         Me.Label15.Text = "Source Folder"
         '
-        'UnpackSourceTextBox
+        'UnpackAssetsSourceTextBox
         '
-        Me.UnpackSourceTextBox.Location = New System.Drawing.Point(129, 23)
-        Me.UnpackSourceTextBox.Name = "UnpackSourceTextBox"
-        Me.UnpackSourceTextBox.Size = New System.Drawing.Size(523, 22)
-        Me.UnpackSourceTextBox.TabIndex = 0
+        Me.UnpackAssetsSourceTextBox.Location = New System.Drawing.Point(129, 23)
+        Me.UnpackAssetsSourceTextBox.Name = "UnpackAssetsSourceTextBox"
+        Me.UnpackAssetsSourceTextBox.Size = New System.Drawing.Size(523, 22)
+        Me.UnpackAssetsSourceTextBox.TabIndex = 0
         '
-        'UnpackDestinationTextBox
+        'UnpackAssetsDestinationTextBox
         '
-        Me.UnpackDestinationTextBox.Location = New System.Drawing.Point(129, 55)
-        Me.UnpackDestinationTextBox.Name = "UnpackDestinationTextBox"
-        Me.UnpackDestinationTextBox.Size = New System.Drawing.Size(523, 22)
-        Me.UnpackDestinationTextBox.TabIndex = 2
+        Me.UnpackAssetsDestinationTextBox.Location = New System.Drawing.Point(129, 55)
+        Me.UnpackAssetsDestinationTextBox.Name = "UnpackAssetsDestinationTextBox"
+        Me.UnpackAssetsDestinationTextBox.Size = New System.Drawing.Size(523, 22)
+        Me.UnpackAssetsDestinationTextBox.TabIndex = 2
         '
         'Label14
         '
@@ -830,70 +990,123 @@ Partial Class DDToolsForm
         Me.Label14.TabIndex = 2
         Me.Label14.Text = "Destination Folder"
         '
-        'UnpackDestinationBrowseButton
+        'UnpackAssetsDestinationBrowseButton
         '
-        Me.UnpackDestinationBrowseButton.Location = New System.Drawing.Point(658, 53)
-        Me.UnpackDestinationBrowseButton.Name = "UnpackDestinationBrowseButton"
-        Me.UnpackDestinationBrowseButton.Size = New System.Drawing.Size(94, 26)
-        Me.UnpackDestinationBrowseButton.TabIndex = 3
-        Me.UnpackDestinationBrowseButton.Text = "Browse"
-        Me.UnpackDestinationBrowseButton.UseVisualStyleBackColor = True
+        Me.UnpackAssetsDestinationBrowseButton.Location = New System.Drawing.Point(658, 53)
+        Me.UnpackAssetsDestinationBrowseButton.Name = "UnpackAssetsDestinationBrowseButton"
+        Me.UnpackAssetsDestinationBrowseButton.Size = New System.Drawing.Size(94, 26)
+        Me.UnpackAssetsDestinationBrowseButton.TabIndex = 3
+        Me.UnpackAssetsDestinationBrowseButton.Text = "Browse"
+        Me.UnpackAssetsDestinationBrowseButton.UseVisualStyleBackColor = True
         '
-        'UnpackSourceBrowseButton
+        'UnpackAssetsSourceBrowseButton
         '
-        Me.UnpackSourceBrowseButton.Location = New System.Drawing.Point(658, 21)
-        Me.UnpackSourceBrowseButton.Name = "UnpackSourceBrowseButton"
-        Me.UnpackSourceBrowseButton.Size = New System.Drawing.Size(94, 26)
-        Me.UnpackSourceBrowseButton.TabIndex = 1
-        Me.UnpackSourceBrowseButton.Text = "Browse"
-        Me.UnpackSourceBrowseButton.UseVisualStyleBackColor = True
+        Me.UnpackAssetsSourceBrowseButton.Location = New System.Drawing.Point(658, 21)
+        Me.UnpackAssetsSourceBrowseButton.Name = "UnpackAssetsSourceBrowseButton"
+        Me.UnpackAssetsSourceBrowseButton.Size = New System.Drawing.Size(94, 26)
+        Me.UnpackAssetsSourceBrowseButton.TabIndex = 1
+        Me.UnpackAssetsSourceBrowseButton.Text = "Browse"
+        Me.UnpackAssetsSourceBrowseButton.UseVisualStyleBackColor = True
         '
-        'PackGroupBox
+        'PackAssetsGroupBox
         '
-        Me.PackGroupBox.Controls.Add(Me.PackStartButton)
-        Me.PackGroupBox.Controls.Add(Me.PackSelectNoneButton)
-        Me.PackGroupBox.Controls.Add(Me.PackSelectAllButton)
-        Me.PackGroupBox.Controls.Add(Me.Label17)
-        Me.PackGroupBox.Controls.Add(Me.PackCheckedListBox)
-        Me.PackGroupBox.Controls.Add(Me.Label18)
-        Me.PackGroupBox.Controls.Add(Me.PackSourceTextBox)
-        Me.PackGroupBox.Controls.Add(Me.PackDestinationTextBox)
-        Me.PackGroupBox.Controls.Add(Me.Label19)
-        Me.PackGroupBox.Controls.Add(Me.PackDestinationBrowseButton)
-        Me.PackGroupBox.Controls.Add(Me.PackSourceBrowseButton)
-        Me.PackGroupBox.Location = New System.Drawing.Point(12, 33)
-        Me.PackGroupBox.Name = "PackGroupBox"
-        Me.PackGroupBox.Size = New System.Drawing.Size(758, 565)
-        Me.PackGroupBox.TabIndex = 11
-        Me.PackGroupBox.TabStop = False
-        Me.PackGroupBox.Text = "Pack Assets"
+        Me.PackAssetsGroupBox.Controls.Add(Me.PackAssetsSelectAllCheckBox)
+        Me.PackAssetsGroupBox.Controls.Add(Me.PackAssetsOverwriteCheckBox)
+        Me.PackAssetsGroupBox.Controls.Add(Me.PackAssetsRefreshButton)
+        Me.PackAssetsGroupBox.Controls.Add(Me.PackAssetsLogCheckBox)
+        Me.PackAssetsGroupBox.Controls.Add(Me.PackAssetsDataGridView)
+        Me.PackAssetsGroupBox.Controls.Add(Me.PackAssetsStartButton)
+        Me.PackAssetsGroupBox.Controls.Add(Me.PackAssetsSelectNoneButton)
+        Me.PackAssetsGroupBox.Controls.Add(Me.PackAssetsSelectAllButton)
+        Me.PackAssetsGroupBox.Controls.Add(Me.Label17)
+        Me.PackAssetsGroupBox.Controls.Add(Me.Label18)
+        Me.PackAssetsGroupBox.Controls.Add(Me.PackAssetsSourceTextBox)
+        Me.PackAssetsGroupBox.Controls.Add(Me.PackAssetsDestinationTextBox)
+        Me.PackAssetsGroupBox.Controls.Add(Me.Label19)
+        Me.PackAssetsGroupBox.Controls.Add(Me.PackAssetsDestinationBrowseButton)
+        Me.PackAssetsGroupBox.Controls.Add(Me.PackAssetsSourceBrowseButton)
+        Me.PackAssetsGroupBox.Location = New System.Drawing.Point(12, 33)
+        Me.PackAssetsGroupBox.Name = "PackAssetsGroupBox"
+        Me.PackAssetsGroupBox.Size = New System.Drawing.Size(956, 565)
+        Me.PackAssetsGroupBox.TabIndex = 11
+        Me.PackAssetsGroupBox.TabStop = False
+        Me.PackAssetsGroupBox.Text = "Pack Assets"
         '
-        'PackStartButton
+        'PackAssetsSelectAllCheckBox
         '
-        Me.PackStartButton.Location = New System.Drawing.Point(658, 194)
-        Me.PackStartButton.Name = "PackStartButton"
-        Me.PackStartButton.Size = New System.Drawing.Size(94, 26)
-        Me.PackStartButton.TabIndex = 7
-        Me.PackStartButton.Text = "Start"
-        Me.PackStartButton.UseVisualStyleBackColor = True
+        Me.PackAssetsSelectAllCheckBox.AutoSize = True
+        Me.PackAssetsSelectAllCheckBox.Location = New System.Drawing.Point(555, 83)
+        Me.PackAssetsSelectAllCheckBox.Name = "PackAssetsSelectAllCheckBox"
+        Me.PackAssetsSelectAllCheckBox.Size = New System.Drawing.Size(83, 20)
+        Me.PackAssetsSelectAllCheckBox.TabIndex = 6
+        Me.PackAssetsSelectAllCheckBox.Text = "Select All"
+        Me.PackAssetsSelectAllCheckBox.UseVisualStyleBackColor = True
         '
-        'PackSelectNoneButton
+        'PackAssetsOverwriteCheckBox
         '
-        Me.PackSelectNoneButton.Location = New System.Drawing.Point(658, 162)
-        Me.PackSelectNoneButton.Name = "PackSelectNoneButton"
-        Me.PackSelectNoneButton.Size = New System.Drawing.Size(94, 26)
-        Me.PackSelectNoneButton.TabIndex = 6
-        Me.PackSelectNoneButton.Text = "Select None"
-        Me.PackSelectNoneButton.UseVisualStyleBackColor = True
+        Me.PackAssetsOverwriteCheckBox.AutoSize = True
+        Me.PackAssetsOverwriteCheckBox.Location = New System.Drawing.Point(129, 83)
+        Me.PackAssetsOverwriteCheckBox.Name = "PackAssetsOverwriteCheckBox"
+        Me.PackAssetsOverwriteCheckBox.Size = New System.Drawing.Size(194, 20)
+        Me.PackAssetsOverwriteCheckBox.TabIndex = 4
+        Me.PackAssetsOverwriteCheckBox.Text = "Overwrite files in destination."
+        Me.PackAssetsOverwriteCheckBox.UseVisualStyleBackColor = True
         '
-        'PackSelectAllButton
+        'PackAssetsRefreshButton
         '
-        Me.PackSelectAllButton.Location = New System.Drawing.Point(658, 130)
-        Me.PackSelectAllButton.Name = "PackSelectAllButton"
-        Me.PackSelectAllButton.Size = New System.Drawing.Size(94, 26)
-        Me.PackSelectAllButton.TabIndex = 5
-        Me.PackSelectAllButton.Text = "Select All"
-        Me.PackSelectAllButton.UseVisualStyleBackColor = True
+        Me.PackAssetsRefreshButton.Location = New System.Drawing.Point(856, 130)
+        Me.PackAssetsRefreshButton.Name = "PackAssetsRefreshButton"
+        Me.PackAssetsRefreshButton.Size = New System.Drawing.Size(94, 26)
+        Me.PackAssetsRefreshButton.TabIndex = 8
+        Me.PackAssetsRefreshButton.Text = "Refresh"
+        Me.PackAssetsRefreshButton.UseVisualStyleBackColor = True
+        '
+        'PackAssetsLogCheckBox
+        '
+        Me.PackAssetsLogCheckBox.AutoSize = True
+        Me.PackAssetsLogCheckBox.Location = New System.Drawing.Point(340, 83)
+        Me.PackAssetsLogCheckBox.Name = "PackAssetsLogCheckBox"
+        Me.PackAssetsLogCheckBox.Size = New System.Drawing.Size(209, 20)
+        Me.PackAssetsLogCheckBox.TabIndex = 5
+        Me.PackAssetsLogCheckBox.Text = "Send output to PackAssets.log"
+        Me.PackAssetsLogCheckBox.UseVisualStyleBackColor = True
+        '
+        'PackAssetsDataGridView
+        '
+        Me.PackAssetsDataGridView.AllowUserToAddRows = False
+        Me.PackAssetsDataGridView.AllowUserToDeleteRows = False
+        Me.PackAssetsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.PackAssetsDataGridView.Location = New System.Drawing.Point(9, 130)
+        Me.PackAssetsDataGridView.Name = "PackAssetsDataGridView"
+        Me.PackAssetsDataGridView.Size = New System.Drawing.Size(841, 429)
+        Me.PackAssetsDataGridView.TabIndex = 7
+        '
+        'PackAssetsStartButton
+        '
+        Me.PackAssetsStartButton.Location = New System.Drawing.Point(856, 226)
+        Me.PackAssetsStartButton.Name = "PackAssetsStartButton"
+        Me.PackAssetsStartButton.Size = New System.Drawing.Size(94, 26)
+        Me.PackAssetsStartButton.TabIndex = 11
+        Me.PackAssetsStartButton.Text = "Start"
+        Me.PackAssetsStartButton.UseVisualStyleBackColor = True
+        '
+        'PackAssetsSelectNoneButton
+        '
+        Me.PackAssetsSelectNoneButton.Location = New System.Drawing.Point(856, 194)
+        Me.PackAssetsSelectNoneButton.Name = "PackAssetsSelectNoneButton"
+        Me.PackAssetsSelectNoneButton.Size = New System.Drawing.Size(94, 26)
+        Me.PackAssetsSelectNoneButton.TabIndex = 10
+        Me.PackAssetsSelectNoneButton.Text = "Select None"
+        Me.PackAssetsSelectNoneButton.UseVisualStyleBackColor = True
+        '
+        'PackAssetsSelectAllButton
+        '
+        Me.PackAssetsSelectAllButton.Location = New System.Drawing.Point(856, 162)
+        Me.PackAssetsSelectAllButton.Name = "PackAssetsSelectAllButton"
+        Me.PackAssetsSelectAllButton.Size = New System.Drawing.Size(94, 26)
+        Me.PackAssetsSelectAllButton.TabIndex = 9
+        Me.PackAssetsSelectAllButton.Text = "Select All"
+        Me.PackAssetsSelectAllButton.UseVisualStyleBackColor = True
         '
         'Label17
         '
@@ -904,14 +1117,6 @@ Partial Class DDToolsForm
         Me.Label17.TabIndex = 7
         Me.Label17.Text = "Asset Folders to Pack"
         '
-        'PackCheckedListBox
-        '
-        Me.PackCheckedListBox.FormattingEnabled = True
-        Me.PackCheckedListBox.Location = New System.Drawing.Point(9, 130)
-        Me.PackCheckedListBox.Name = "PackCheckedListBox"
-        Me.PackCheckedListBox.Size = New System.Drawing.Size(646, 429)
-        Me.PackCheckedListBox.TabIndex = 4
-        '
         'Label18
         '
         Me.Label18.AutoSize = True
@@ -921,19 +1126,19 @@ Partial Class DDToolsForm
         Me.Label18.TabIndex = 5
         Me.Label18.Text = "Source Folder"
         '
-        'PackSourceTextBox
+        'PackAssetsSourceTextBox
         '
-        Me.PackSourceTextBox.Location = New System.Drawing.Point(129, 23)
-        Me.PackSourceTextBox.Name = "PackSourceTextBox"
-        Me.PackSourceTextBox.Size = New System.Drawing.Size(523, 22)
-        Me.PackSourceTextBox.TabIndex = 0
+        Me.PackAssetsSourceTextBox.Location = New System.Drawing.Point(129, 23)
+        Me.PackAssetsSourceTextBox.Name = "PackAssetsSourceTextBox"
+        Me.PackAssetsSourceTextBox.Size = New System.Drawing.Size(721, 22)
+        Me.PackAssetsSourceTextBox.TabIndex = 0
         '
-        'PackDestinationTextBox
+        'PackAssetsDestinationTextBox
         '
-        Me.PackDestinationTextBox.Location = New System.Drawing.Point(129, 55)
-        Me.PackDestinationTextBox.Name = "PackDestinationTextBox"
-        Me.PackDestinationTextBox.Size = New System.Drawing.Size(523, 22)
-        Me.PackDestinationTextBox.TabIndex = 2
+        Me.PackAssetsDestinationTextBox.Location = New System.Drawing.Point(129, 55)
+        Me.PackAssetsDestinationTextBox.Name = "PackAssetsDestinationTextBox"
+        Me.PackAssetsDestinationTextBox.Size = New System.Drawing.Size(721, 22)
+        Me.PackAssetsDestinationTextBox.TabIndex = 2
         '
         'Label19
         '
@@ -944,63 +1149,272 @@ Partial Class DDToolsForm
         Me.Label19.TabIndex = 2
         Me.Label19.Text = "Destination Folder"
         '
-        'PackDestinationBrowseButton
+        'PackAssetsDestinationBrowseButton
         '
-        Me.PackDestinationBrowseButton.Location = New System.Drawing.Point(658, 53)
-        Me.PackDestinationBrowseButton.Name = "PackDestinationBrowseButton"
-        Me.PackDestinationBrowseButton.Size = New System.Drawing.Size(94, 26)
-        Me.PackDestinationBrowseButton.TabIndex = 3
-        Me.PackDestinationBrowseButton.Text = "Browse"
-        Me.PackDestinationBrowseButton.UseVisualStyleBackColor = True
+        Me.PackAssetsDestinationBrowseButton.Location = New System.Drawing.Point(856, 53)
+        Me.PackAssetsDestinationBrowseButton.Name = "PackAssetsDestinationBrowseButton"
+        Me.PackAssetsDestinationBrowseButton.Size = New System.Drawing.Size(94, 26)
+        Me.PackAssetsDestinationBrowseButton.TabIndex = 3
+        Me.PackAssetsDestinationBrowseButton.Text = "Browse"
+        Me.PackAssetsDestinationBrowseButton.UseVisualStyleBackColor = True
         '
-        'PackSourceBrowseButton
+        'PackAssetsSourceBrowseButton
         '
-        Me.PackSourceBrowseButton.Location = New System.Drawing.Point(658, 21)
-        Me.PackSourceBrowseButton.Name = "PackSourceBrowseButton"
-        Me.PackSourceBrowseButton.Size = New System.Drawing.Size(94, 26)
-        Me.PackSourceBrowseButton.TabIndex = 1
-        Me.PackSourceBrowseButton.Text = "Browse"
-        Me.PackSourceBrowseButton.UseVisualStyleBackColor = True
+        Me.PackAssetsSourceBrowseButton.Location = New System.Drawing.Point(856, 21)
+        Me.PackAssetsSourceBrowseButton.Name = "PackAssetsSourceBrowseButton"
+        Me.PackAssetsSourceBrowseButton.Size = New System.Drawing.Size(94, 26)
+        Me.PackAssetsSourceBrowseButton.TabIndex = 1
+        Me.PackAssetsSourceBrowseButton.Text = "Browse"
+        Me.PackAssetsSourceBrowseButton.UseVisualStyleBackColor = True
         '
-        'Label20
+        'CopyTilesGroupBox
         '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(6, 111)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(154, 16)
-        Me.Label20.TabIndex = 9
-        Me.Label20.Text = "Asset Folders to Convert"
+        Me.CopyTilesGroupBox.Controls.Add(Me.CopyTilesSelectAllCheckBox)
+        Me.CopyTilesGroupBox.Controls.Add(Me.CopyTilesDataGridView)
+        Me.CopyTilesGroupBox.Controls.Add(Me.Label22)
+        Me.CopyTilesGroupBox.Controls.Add(Me.CopyTilesLogCheckBox)
+        Me.CopyTilesGroupBox.Controls.Add(Me.CopyTilesSourceTextBox)
+        Me.CopyTilesGroupBox.Controls.Add(Me.CopyTilesDestinationTextBox)
+        Me.CopyTilesGroupBox.Controls.Add(Me.Label23)
+        Me.CopyTilesGroupBox.Controls.Add(Me.Label24)
+        Me.CopyTilesGroupBox.Controls.Add(Me.CopyTilesStartButton)
+        Me.CopyTilesGroupBox.Controls.Add(Me.CopyTilesDestinationBrowseButton)
+        Me.CopyTilesGroupBox.Controls.Add(Me.CopyTilesSourceBrowseButton)
+        Me.CopyTilesGroupBox.Location = New System.Drawing.Point(12, 33)
+        Me.CopyTilesGroupBox.Name = "CopyTilesGroupBox"
+        Me.CopyTilesGroupBox.Size = New System.Drawing.Size(758, 565)
+        Me.CopyTilesGroupBox.TabIndex = 12
+        Me.CopyTilesGroupBox.TabStop = False
+        Me.CopyTilesGroupBox.Text = "Copy Tiles"
         '
-        'Label21
+        'CopyTilesSelectAllCheckBox
         '
-        Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(6, 111)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(140, 16)
-        Me.Label21.TabIndex = 11
-        Me.Label21.Text = "Asset Folders to Copy"
+        Me.CopyTilesSelectAllCheckBox.AutoSize = True
+        Me.CopyTilesSelectAllCheckBox.Location = New System.Drawing.Point(340, 83)
+        Me.CopyTilesSelectAllCheckBox.Name = "CopyTilesSelectAllCheckBox"
+        Me.CopyTilesSelectAllCheckBox.Size = New System.Drawing.Size(83, 20)
+        Me.CopyTilesSelectAllCheckBox.TabIndex = 5
+        Me.CopyTilesSelectAllCheckBox.Text = "Select All"
+        Me.CopyTilesSelectAllCheckBox.UseVisualStyleBackColor = True
+        '
+        'CopyTilesDataGridView
+        '
+        Me.CopyTilesDataGridView.AllowUserToAddRows = False
+        Me.CopyTilesDataGridView.AllowUserToDeleteRows = False
+        Me.CopyTilesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.CopyTilesDataGridView.Location = New System.Drawing.Point(9, 130)
+        Me.CopyTilesDataGridView.Name = "CopyTilesDataGridView"
+        Me.CopyTilesDataGridView.Size = New System.Drawing.Size(743, 429)
+        Me.CopyTilesDataGridView.TabIndex = 6
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(6, 111)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(87, 16)
+        Me.Label22.TabIndex = 11
+        Me.Label22.Text = "Tiles to Copy"
+        '
+        'CopyTilesLogCheckBox
+        '
+        Me.CopyTilesLogCheckBox.AutoSize = True
+        Me.CopyTilesLogCheckBox.Location = New System.Drawing.Point(135, 83)
+        Me.CopyTilesLogCheckBox.Name = "CopyTilesLogCheckBox"
+        Me.CopyTilesLogCheckBox.Size = New System.Drawing.Size(199, 20)
+        Me.CopyTilesLogCheckBox.TabIndex = 4
+        Me.CopyTilesLogCheckBox.Text = "Send output to CopyTiles.log"
+        Me.CopyTilesLogCheckBox.UseVisualStyleBackColor = True
+        '
+        'CopyTilesSourceTextBox
+        '
+        Me.CopyTilesSourceTextBox.Location = New System.Drawing.Point(135, 23)
+        Me.CopyTilesSourceTextBox.Name = "CopyTilesSourceTextBox"
+        Me.CopyTilesSourceTextBox.Size = New System.Drawing.Size(517, 22)
+        Me.CopyTilesSourceTextBox.TabIndex = 0
+        '
+        'CopyTilesDestinationTextBox
+        '
+        Me.CopyTilesDestinationTextBox.Location = New System.Drawing.Point(135, 55)
+        Me.CopyTilesDestinationTextBox.Name = "CopyTilesDestinationTextBox"
+        Me.CopyTilesDestinationTextBox.Size = New System.Drawing.Size(517, 22)
+        Me.CopyTilesDestinationTextBox.TabIndex = 2
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(12, 58)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(117, 16)
+        Me.Label23.TabIndex = 4
+        Me.Label23.Text = "Destination Folder"
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Location = New System.Drawing.Point(36, 26)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(93, 16)
+        Me.Label24.TabIndex = 3
+        Me.Label24.Text = "Source Folder"
+        '
+        'CopyTilesStartButton
+        '
+        Me.CopyTilesStartButton.Location = New System.Drawing.Point(658, 85)
+        Me.CopyTilesStartButton.Name = "CopyTilesStartButton"
+        Me.CopyTilesStartButton.Size = New System.Drawing.Size(94, 26)
+        Me.CopyTilesStartButton.TabIndex = 7
+        Me.CopyTilesStartButton.Text = "Start"
+        Me.CopyTilesStartButton.UseVisualStyleBackColor = True
+        '
+        'CopyTilesDestinationBrowseButton
+        '
+        Me.CopyTilesDestinationBrowseButton.Location = New System.Drawing.Point(658, 53)
+        Me.CopyTilesDestinationBrowseButton.Name = "CopyTilesDestinationBrowseButton"
+        Me.CopyTilesDestinationBrowseButton.Size = New System.Drawing.Size(94, 26)
+        Me.CopyTilesDestinationBrowseButton.TabIndex = 3
+        Me.CopyTilesDestinationBrowseButton.Text = "Browse"
+        Me.CopyTilesDestinationBrowseButton.UseVisualStyleBackColor = True
+        '
+        'CopyTilesSourceBrowseButton
+        '
+        Me.CopyTilesSourceBrowseButton.Location = New System.Drawing.Point(658, 21)
+        Me.CopyTilesSourceBrowseButton.Name = "CopyTilesSourceBrowseButton"
+        Me.CopyTilesSourceBrowseButton.Size = New System.Drawing.Size(94, 26)
+        Me.CopyTilesSourceBrowseButton.TabIndex = 1
+        Me.CopyTilesSourceBrowseButton.Text = "Browse"
+        Me.CopyTilesSourceBrowseButton.UseVisualStyleBackColor = True
+        '
+        'MapDetailsGroupBox
+        '
+        Me.MapDetailsGroupBox.Controls.Add(Me.MapDetailsSelectAllCheckBox)
+        Me.MapDetailsGroupBox.Controls.Add(Me.MapDetailsLogCheckBox)
+        Me.MapDetailsGroupBox.Controls.Add(Me.MapDetailsStartButton)
+        Me.MapDetailsGroupBox.Controls.Add(Me.MapDetailsSelectNoneButton)
+        Me.MapDetailsGroupBox.Controls.Add(Me.MapDetailsSelectAllButton)
+        Me.MapDetailsGroupBox.Controls.Add(Me.Label25)
+        Me.MapDetailsGroupBox.Controls.Add(Me.MapDetailsCheckedListBox)
+        Me.MapDetailsGroupBox.Controls.Add(Me.Label27)
+        Me.MapDetailsGroupBox.Controls.Add(Me.MapDetailsSourceTextBox)
+        Me.MapDetailsGroupBox.Controls.Add(Me.MapDetailsBrowseButton)
+        Me.MapDetailsGroupBox.Location = New System.Drawing.Point(12, 33)
+        Me.MapDetailsGroupBox.Name = "MapDetailsGroupBox"
+        Me.MapDetailsGroupBox.Size = New System.Drawing.Size(758, 565)
+        Me.MapDetailsGroupBox.TabIndex = 8
+        Me.MapDetailsGroupBox.TabStop = False
+        Me.MapDetailsGroupBox.Text = "Map Details"
+        '
+        'MapDetailsSelectAllCheckBox
+        '
+        Me.MapDetailsSelectAllCheckBox.AutoSize = True
+        Me.MapDetailsSelectAllCheckBox.Location = New System.Drawing.Point(317, 51)
+        Me.MapDetailsSelectAllCheckBox.Name = "MapDetailsSelectAllCheckBox"
+        Me.MapDetailsSelectAllCheckBox.Size = New System.Drawing.Size(83, 20)
+        Me.MapDetailsSelectAllCheckBox.TabIndex = 3
+        Me.MapDetailsSelectAllCheckBox.Text = "Select All"
+        Me.MapDetailsSelectAllCheckBox.UseVisualStyleBackColor = True
+        '
+        'MapDetailsLogCheckBox
+        '
+        Me.MapDetailsLogCheckBox.AutoSize = True
+        Me.MapDetailsLogCheckBox.Location = New System.Drawing.Point(105, 51)
+        Me.MapDetailsLogCheckBox.Name = "MapDetailsLogCheckBox"
+        Me.MapDetailsLogCheckBox.Size = New System.Drawing.Size(206, 20)
+        Me.MapDetailsLogCheckBox.TabIndex = 2
+        Me.MapDetailsLogCheckBox.Text = "Send output to MapDetails.log"
+        Me.MapDetailsLogCheckBox.UseVisualStyleBackColor = True
+        '
+        'MapDetailsStartButton
+        '
+        Me.MapDetailsStartButton.Location = New System.Drawing.Point(658, 194)
+        Me.MapDetailsStartButton.Name = "MapDetailsStartButton"
+        Me.MapDetailsStartButton.Size = New System.Drawing.Size(94, 26)
+        Me.MapDetailsStartButton.TabIndex = 7
+        Me.MapDetailsStartButton.Text = "Start"
+        Me.MapDetailsStartButton.UseVisualStyleBackColor = True
+        '
+        'MapDetailsSelectNoneButton
+        '
+        Me.MapDetailsSelectNoneButton.Location = New System.Drawing.Point(658, 162)
+        Me.MapDetailsSelectNoneButton.Name = "MapDetailsSelectNoneButton"
+        Me.MapDetailsSelectNoneButton.Size = New System.Drawing.Size(94, 26)
+        Me.MapDetailsSelectNoneButton.TabIndex = 6
+        Me.MapDetailsSelectNoneButton.Text = "Select None"
+        Me.MapDetailsSelectNoneButton.UseVisualStyleBackColor = True
+        '
+        'MapDetailsSelectAllButton
+        '
+        Me.MapDetailsSelectAllButton.Location = New System.Drawing.Point(658, 130)
+        Me.MapDetailsSelectAllButton.Name = "MapDetailsSelectAllButton"
+        Me.MapDetailsSelectAllButton.Size = New System.Drawing.Size(94, 26)
+        Me.MapDetailsSelectAllButton.TabIndex = 5
+        Me.MapDetailsSelectAllButton.Text = "Select All"
+        Me.MapDetailsSelectAllButton.UseVisualStyleBackColor = True
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(6, 111)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(67, 16)
+        Me.Label25.TabIndex = 6
+        Me.Label25.Text = "Map Files"
+        '
+        'MapDetailsCheckedListBox
+        '
+        Me.MapDetailsCheckedListBox.FormattingEnabled = True
+        Me.MapDetailsCheckedListBox.Location = New System.Drawing.Point(6, 130)
+        Me.MapDetailsCheckedListBox.Name = "MapDetailsCheckedListBox"
+        Me.MapDetailsCheckedListBox.Size = New System.Drawing.Size(646, 429)
+        Me.MapDetailsCheckedListBox.TabIndex = 4
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(6, 26)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(93, 16)
+        Me.Label27.TabIndex = 2
+        Me.Label27.Text = "Source Folder"
+        '
+        'MapDetailsSourceTextBox
+        '
+        Me.MapDetailsSourceTextBox.Location = New System.Drawing.Point(105, 23)
+        Me.MapDetailsSourceTextBox.Name = "MapDetailsSourceTextBox"
+        Me.MapDetailsSourceTextBox.Size = New System.Drawing.Size(547, 22)
+        Me.MapDetailsSourceTextBox.TabIndex = 0
+        '
+        'MapDetailsBrowseButton
+        '
+        Me.MapDetailsBrowseButton.Location = New System.Drawing.Point(658, 21)
+        Me.MapDetailsBrowseButton.Name = "MapDetailsBrowseButton"
+        Me.MapDetailsBrowseButton.Size = New System.Drawing.Size(94, 26)
+        Me.MapDetailsBrowseButton.TabIndex = 1
+        Me.MapDetailsBrowseButton.Text = "Browse"
+        Me.MapDetailsBrowseButton.UseVisualStyleBackColor = True
         '
         'DDToolsForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(782, 610)
-        Me.Controls.Add(Me.MenuStrip1)
-        Me.Controls.Add(Me.TitlePanel)
-        Me.Controls.Add(Me.CopyAssetsGroupBox)
-        Me.Controls.Add(Me.PackGroupBox)
-        Me.Controls.Add(Me.UnpackGroupBox)
+        Me.ClientSize = New System.Drawing.Size(980, 610)
+        Me.Controls.Add(Me.MainMenuStrip)
         Me.Controls.Add(Me.ConvertPacksGroupBox)
+        Me.Controls.Add(Me.MapDetailsGroupBox)
         Me.Controls.Add(Me.TagAssetsGroupBox)
         Me.Controls.Add(Me.ConvertAssetsGroupBox)
+        Me.Controls.Add(Me.TitlePanel)
+        Me.Controls.Add(Me.CopyTilesGroupBox)
+        Me.Controls.Add(Me.CopyAssetsGroupBox)
+        Me.Controls.Add(Me.PackAssetsGroupBox)
+        Me.Controls.Add(Me.UnpackAssetsGroupBox)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
-        Me.MainMenuStrip = Me.MenuStrip1
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "DDToolsForm"
-        Me.Text = "EightBitz's Dungeondraft Tools"
-        Me.MenuStrip1.ResumeLayout(False)
-        Me.MenuStrip1.PerformLayout()
+        Me.Text = "EightBitz's Dungeondraft Tools - Version 2.2"
+        Me.MainMenuStrip.ResumeLayout(False)
+        Me.MainMenuStrip.PerformLayout()
         Me.ConvertPacksGroupBox.ResumeLayout(False)
         Me.ConvertPacksGroupBox.PerformLayout()
         Me.TagAssetsGroupBox.ResumeLayout(False)
@@ -1011,17 +1425,23 @@ Partial Class DDToolsForm
         Me.ConvertAssetsGroupBox.PerformLayout()
         Me.TitlePanel.ResumeLayout(False)
         Me.TitlePanel.PerformLayout()
-        Me.UnpackGroupBox.ResumeLayout(False)
-        Me.UnpackGroupBox.PerformLayout()
-        Me.PackGroupBox.ResumeLayout(False)
-        Me.PackGroupBox.PerformLayout()
+        Me.UnpackAssetsGroupBox.ResumeLayout(False)
+        Me.UnpackAssetsGroupBox.PerformLayout()
+        Me.PackAssetsGroupBox.ResumeLayout(False)
+        Me.PackAssetsGroupBox.PerformLayout()
+        CType(Me.PackAssetsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.CopyTilesGroupBox.ResumeLayout(False)
+        Me.CopyTilesGroupBox.PerformLayout()
+        CType(Me.CopyTilesDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MapDetailsGroupBox.ResumeLayout(False)
+        Me.MapDetailsGroupBox.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents MenuStrip1 As MenuStrip
-    Friend WithEvents SelectScriptToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MainMenuStrip As MenuStrip
+    Friend WithEvents MainMenuToolStripMenu As ToolStripMenuItem
     Friend WithEvents ConvertAssetsMenuItem As ToolStripMenuItem
     Friend WithEvents ConvertPacksMenuItem As ToolStripMenuItem
     Friend WithEvents CopyAssetsMenuItem As ToolStripMenuItem
@@ -1083,36 +1503,35 @@ Partial Class DDToolsForm
     Friend WithEvents Label13 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents Label11 As Label
-    Friend WithEvents DungeondraftunpackexeMenuItem As ToolStripMenuItem
-    Friend WithEvents UnpackGroupBox As GroupBox
-    Friend WithEvents UnpackStartButton As Button
-    Friend WithEvents UnpackSelectNoneButton As Button
-    Friend WithEvents UnpackSelectAllButton As Button
+    Friend WithEvents UnpackAssetsMenuItem As ToolStripMenuItem
+    Friend WithEvents UnpackAssetsGroupBox As GroupBox
+    Friend WithEvents UnpackAssetsStartButton As Button
+    Friend WithEvents UnpackAssetsSelectNoneButton As Button
+    Friend WithEvents UnpackAssetsSelectAllButton As Button
     Friend WithEvents Label16 As Label
-    Friend WithEvents UnpackCheckedListBox As CheckedListBox
+    Friend WithEvents UnpackAssetsCheckedListBox As CheckedListBox
     Friend WithEvents Label15 As Label
-    Friend WithEvents UnpackSourceTextBox As TextBox
-    Friend WithEvents UnpackDestinationTextBox As TextBox
+    Friend WithEvents UnpackAssetsSourceTextBox As TextBox
+    Friend WithEvents UnpackAssetsDestinationTextBox As TextBox
     Friend WithEvents Label14 As Label
-    Friend WithEvents UnpackDestinationBrowseButton As Button
-    Friend WithEvents UnpackSourceBrowseButton As Button
-    Friend WithEvents UnpackSourceBrowserDialog As FolderBrowserDialog
-    Friend WithEvents UnpackDestinationBrowserDialog As FolderBrowserDialog
-    Friend WithEvents DungeondraftpackexeMenuItem As ToolStripMenuItem
-    Friend WithEvents PackSourceBrowserDialog As FolderBrowserDialog
-    Friend WithEvents PackDestinationBrowserDialog As FolderBrowserDialog
-    Friend WithEvents PackGroupBox As GroupBox
-    Friend WithEvents PackStartButton As Button
-    Friend WithEvents PackSelectNoneButton As Button
-    Friend WithEvents PackSelectAllButton As Button
+    Friend WithEvents UnpackAssetsDestinationBrowseButton As Button
+    Friend WithEvents UnpackAssetsSourceBrowseButton As Button
+    Friend WithEvents UnpackAssetsSourceBrowserDialog As FolderBrowserDialog
+    Friend WithEvents UnpackAssetsDestinationBrowserDialog As FolderBrowserDialog
+    Friend WithEvents PackAssetsMenuItem As ToolStripMenuItem
+    Friend WithEvents PackAssetsSourceBrowserDialog As FolderBrowserDialog
+    Friend WithEvents PackAssetsDestinationBrowserDialog As FolderBrowserDialog
+    Friend WithEvents PackAssetsGroupBox As GroupBox
+    Friend WithEvents PackAssetsStartButton As Button
+    Friend WithEvents PackAssetsSelectNoneButton As Button
+    Friend WithEvents PackAssetsSelectAllButton As Button
     Friend WithEvents Label17 As Label
-    Friend WithEvents PackCheckedListBox As CheckedListBox
     Friend WithEvents Label18 As Label
-    Friend WithEvents PackSourceTextBox As TextBox
-    Friend WithEvents PackDestinationTextBox As TextBox
+    Friend WithEvents PackAssetsSourceTextBox As TextBox
+    Friend WithEvents PackAssetsDestinationTextBox As TextBox
     Friend WithEvents Label19 As Label
-    Friend WithEvents PackDestinationBrowseButton As Button
-    Friend WithEvents PackSourceBrowseButton As Button
+    Friend WithEvents PackAssetsDestinationBrowseButton As Button
+    Friend WithEvents PackAssetsSourceBrowseButton As Button
     Friend WithEvents CopyAssetsSelectNoneButton As Button
     Friend WithEvents CopyAssetsSelectAllButton As Button
     Friend WithEvents CopyAssetsCheckedListBox As CheckedListBox
@@ -1121,4 +1540,46 @@ Partial Class DDToolsForm
     Friend WithEvents ConvertAssetsCheckedListBox As CheckedListBox
     Friend WithEvents Label21 As Label
     Friend WithEvents Label20 As Label
+    Friend WithEvents CopyTilesMenuItem As ToolStripMenuItem
+    Friend WithEvents CopyTilesGroupBox As GroupBox
+    Friend WithEvents CopyTilesDataGridView As DataGridView
+    Friend WithEvents Label22 As Label
+    Friend WithEvents CopyTilesLogCheckBox As CheckBox
+    Friend WithEvents CopyTilesSourceTextBox As TextBox
+    Friend WithEvents CopyTilesDestinationTextBox As TextBox
+    Friend WithEvents Label23 As Label
+    Friend WithEvents Label24 As Label
+    Friend WithEvents CopyTilesStartButton As Button
+    Friend WithEvents CopyTilesDestinationBrowseButton As Button
+    Friend WithEvents CopyTilesSourceBrowseButton As Button
+    Friend WithEvents CopyTilesSourceBrowserDialog As FolderBrowserDialog
+    Friend WithEvents CopyTilesDestinationBrowserDialog As FolderBrowserDialog
+    Friend WithEvents PackAssetsDataGridView As DataGridView
+    Friend WithEvents MapDetailsMenuItem As ToolStripMenuItem
+    Friend WithEvents MapDetailsLogCheckBox As CheckBox
+    Friend WithEvents MapDetailsStartButton As Button
+    Friend WithEvents MapDetailsSelectNoneButton As Button
+    Friend WithEvents MapDetailsSelectAllButton As Button
+    Friend WithEvents Label25 As Label
+    Friend WithEvents MapDetailsCheckedListBox As CheckedListBox
+    Friend WithEvents Label27 As Label
+    Friend WithEvents MapDetailsSourceTextBox As TextBox
+    Friend WithEvents MapDetailsBrowseButton As Button
+    Friend WithEvents MapDetailsGroupBox As GroupBox
+    Friend WithEvents MapDetailsSourceBrowserDialog As FolderBrowserDialog
+    Friend WithEvents PackAssetsLogCheckBox As CheckBox
+    Friend WithEvents PackAssetsOverwriteCheckBox As CheckBox
+    Friend WithEvents PackAssetsRefreshButton As Button
+    Friend WithEvents PreferencesToolStripMenu As ToolStripMenuItem
+    Friend WithEvents LoadToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SaveToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents UnpackAssetsLogCheckBox As CheckBox
+    Friend WithEvents ConvertPacksSelectAllCheckBox As CheckBox
+    Friend WithEvents TagAssetsSelectAllCheckBox As CheckBox
+    Friend WithEvents CopyAssetsSelectAllCheckBox As CheckBox
+    Friend WithEvents ConvertAssetsSelectAllCheckBox As CheckBox
+    Friend WithEvents UnpackAssetsSelectAllCheckBox As CheckBox
+    Friend WithEvents PackAssetsSelectAllCheckBox As CheckBox
+    Friend WithEvents CopyTilesSelectAllCheckBox As CheckBox
+    Friend WithEvents MapDetailsSelectAllCheckBox As CheckBox
 End Class
