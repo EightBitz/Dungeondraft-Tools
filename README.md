@@ -1,6 +1,6 @@
 # EightBitz's Dungeondraft Tools
 
-What follows is a brief description of what this is and what it does, but please read [the full documentation](https://gitlab.com/EightBitz/dungeondraft-tools/-/blob/master/EightBitz's%20Dungeondraft%20Tools.pdf) as it contains important details.
+What follows is a brief description of what this is and what it does, but please read [the full documentation](https://github.com/EightBitz/Dungeondraft-Tools/blob/Version-2.5/EightBitz's%20Dungeondraft%20Tools%20Documentation.pdf) as it contains important details.
 
 ## Getting Started
 
