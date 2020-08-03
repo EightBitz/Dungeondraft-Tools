@@ -1,5 +1,4 @@
 ﻿Imports System.IO
-Imports System.Configuration
 Imports Newtonsoft.Json
 Public Class DDToolsForm
     Private Sub DDToolsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -10,6 +9,7 @@ Public Class DDToolsForm
         ConvertPacksGroupBox.Hide()
         CopyAssetsGroupBox.Hide()
         CopyTilesGroupBox.Hide()
+        DataFilesGroupBox.Hide()
         MapDetailsGroupBox.Hide()
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
@@ -27,12 +27,13 @@ Public Class DDToolsForm
         ConvertPacksGroupBox.Hide()
         CopyAssetsGroupBox.Hide()
         CopyTilesGroupBox.Hide()
+        DataFilesGroupBox.Hide()
         MapDetailsGroupBox.Hide()
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
         Dim ConfigFileName As String = GlobalVariables.ConfigFileName
-        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+        If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "tag_assets"
             GetSavedConfig(ConfigFileName)
@@ -58,12 +59,13 @@ Public Class DDToolsForm
         ConvertPacksGroupBox.Hide()
         CopyAssetsGroupBox.Hide()
         CopyTilesGroupBox.Hide()
+        DataFilesGroupBox.Hide()
         MapDetailsGroupBox.Hide()
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
         Dim ConfigFileName As String = GlobalVariables.ConfigFileName
-        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+        If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "convert_assets"
             GetSavedConfig(ConfigFileName)
@@ -89,12 +91,13 @@ Public Class DDToolsForm
         'ConvertPacksGroupBox.Hide()
         CopyAssetsGroupBox.Hide()
         CopyTilesGroupBox.Hide()
+        DataFilesGroupBox.Hide()
         MapDetailsGroupBox.Hide()
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
         Dim ConfigFileName As String = GlobalVariables.ConfigFileName
-        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+        If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "convert_packs"
             GetSavedConfig(ConfigFileName)
@@ -121,12 +124,13 @@ Public Class DDToolsForm
         ConvertPacksGroupBox.Hide()
         'CopyAssetsGroupBox.Hide()
         CopyTilesGroupBox.Hide()
+        DataFilesGroupBox.Hide()
         MapDetailsGroupBox.Hide()
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
         Dim ConfigFileName As String = GlobalVariables.ConfigFileName
-        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+        If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "copy_assets"
             GetSavedConfig(ConfigFileName)
@@ -153,12 +157,13 @@ Public Class DDToolsForm
         ConvertPacksGroupBox.Hide()
         CopyAssetsGroupBox.Hide()
         'CopyTilesGroupBox.Hide()
+        DataFilesGroupBox.Hide()
         MapDetailsGroupBox.Hide()
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
         Dim ConfigFileName As String = GlobalVariables.ConfigFileName
-        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+        If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "copy_tiles"
             GetSavedConfig(ConfigFileName)
@@ -176,6 +181,38 @@ Public Class DDToolsForm
         CopyTilesGroupBox.BringToFront()
         CopyTilesGroupBox.Show()
     End Sub
+
+    Private Sub DataFilesMenuItem_Click(sender As Object, e As EventArgs) Handles DataFilesMenuItem.Click
+        TitlePanel.Hide()
+        TagAssetsGroupBox.Hide()
+        ConvertAssetsGroupBox.Hide()
+        ConvertPacksGroupBox.Hide()
+        CopyAssetsGroupBox.Hide()
+        CopyTilesGroupBox.Hide()
+        'DataFilesGroupBox.Hide()
+        MapDetailsGroupBox.Hide()
+        PackAssetsGroupBox.Hide()
+        UnpackAssetsGroupBox.Hide()
+
+        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        If File.Exists(ConfigFileName) Then
+            Dim ConfigObject = GetSavedConfig(ConfigFileName)
+            Dim ActiveTool As String = "data_files"
+            GetSavedConfig(ConfigFileName)
+
+            If Not ConfigObject(ActiveTool) Is Nothing Then
+                DataFilesSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+                DataFilesLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+                DataFilesSourceTextBox_LostFocus(sender, e)
+            End If
+        End If
+
+        Me.Size = New Size(1000, 653)
+        PreferencesToolStripMenu.Visible = True
+        DataFilesGroupBox.BringToFront()
+        DataFilesGroupBox.Show()
+    End Sub
+
     Private Sub MapDetailsMenuItem_Click(sender As Object, e As EventArgs) Handles MapDetailsMenuItem.Click
         TitlePanel.Hide()
         TagAssetsGroupBox.Hide()
@@ -183,12 +220,13 @@ Public Class DDToolsForm
         ConvertPacksGroupBox.Hide()
         CopyAssetsGroupBox.Hide()
         CopyTilesGroupBox.Hide()
+        DataFilesGroupBox.Hide()
         'MapDetailsGroupBox.Hide()
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
         Dim ConfigFileName As String = GlobalVariables.ConfigFileName
-        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+        If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "map_details"
             GetSavedConfig(ConfigFileName)
@@ -213,12 +251,13 @@ Public Class DDToolsForm
         ConvertPacksGroupBox.Hide()
         CopyAssetsGroupBox.Hide()
         CopyTilesGroupBox.Hide()
+        DataFilesGroupBox.Hide()
         MapDetailsGroupBox.Hide()
         'PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
         Dim ConfigFileName As String = GlobalVariables.ConfigFileName
-        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+        If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "pack_assets"
             GetSavedConfig(ConfigFileName)
@@ -245,12 +284,13 @@ Public Class DDToolsForm
         ConvertPacksGroupBox.Hide()
         CopyAssetsGroupBox.Hide()
         CopyTilesGroupBox.Hide()
+        DataFilesGroupBox.Hide()
         MapDetailsGroupBox.Hide()
         PackAssetsGroupBox.Hide()
         'UnpackAssetsGroupBox.Hide()
 
         Dim ConfigFileName As String = GlobalVariables.ConfigFileName
-        If My.Computer.FileSystem.FileExists(ConfigFileName) Then
+        If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "unpack_assets"
             GetSavedConfig(ConfigFileName)
@@ -270,7 +310,7 @@ Public Class DDToolsForm
     End Sub
 
     '###### Preference Menu Items ######
-    Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+    Private Sub SavePrefsMenuItem_Click(sender As Object, e As EventArgs) Handles SavePrefsMenuItem.Click
         Dim ConfigFileName As String = GlobalVariables.ConfigFileName
         Dim ConfigObject
         Dim ActiveTool As String
@@ -282,61 +322,138 @@ Public Class DDToolsForm
 
         If TagAssetsGroupBox.Visible = True Then
             ActiveTool = "tag_assets"
+            If ConfigObject(ActiveTool) Is Nothing Then
+                Dim NewPrefs As New Newtonsoft.Json.Linq.JObject
+                ConfigObject.Add(ActiveTool, NewPrefs)
+            End If
+            If ConfigObject(ActiveTool)("source") Is Nothing Then ConfigObject(ActiveTool).Add("source", "")
             ConfigObject(ActiveTool)("source") = TagAssetsSourceTextBox.Text
+            If ConfigObject(ActiveTool)("default_tag") Is Nothing Then ConfigObject(ActiveTool).Add("default_tag", "")
             ConfigObject(ActiveTool)("default_tag") = TagAssetsDefaultTagTextBox.Text
+            If ConfigObject(ActiveTool)("create_log") Is Nothing Then ConfigObject(ActiveTool).Add("create_log", "")
             ConfigObject(ActiveTool)("create_log") = TagAssetsLogCheckBox.Checked
+            If ConfigObject(ActiveTool)("select_all") Is Nothing Then ConfigObject(ActiveTool).Add("select_all", "")
             ConfigObject(ActiveTool)("select_all") = TagAssetsSelectAllCheckBox.Checked
         ElseIf ConvertAssetsGroupBox.Visible = True Then
             ActiveTool = "convert_assets"
+            If ConfigObject(ActiveTool) Is Nothing Then
+                Dim NewPrefs As New Newtonsoft.Json.Linq.JObject
+                ConfigObject.Add(ActiveTool, NewPrefs)
+            End If
+            If ConfigObject(ActiveTool)("source") Is Nothing Then ConfigObject(ActiveTool).Add("source", "")
             ConfigObject(ActiveTool)("source") = ConvertAssetsSourceTextBox.Text
+            If ConfigObject(ActiveTool)("destination") Is Nothing Then ConfigObject(ActiveTool).Add("destination", "")
             ConfigObject(ActiveTool)("destination") = ConvertAssetsDestinationTextBox.Text
+            If ConfigObject(ActiveTool)("create_log") Is Nothing Then ConfigObject(ActiveTool).Add("create_log", "")
             ConfigObject(ActiveTool)("create_log") = ConvertAssetsLogCheckBox.Checked
+            If ConfigObject(ActiveTool)("select_all") Is Nothing Then ConfigObject(ActiveTool).Add("select_all", "")
             ConfigObject(ActiveTool)("select_all") = ConvertAssetsSelectAllCheckBox.Checked
         ElseIf ConvertPacksGroupBox.Visible = True Then
             ActiveTool = "convert_packs"
+            If ConfigObject(ActiveTool) Is Nothing Then
+                Dim NewPrefs As New Newtonsoft.Json.Linq.JObject
+                ConfigObject.Add(ActiveTool, NewPrefs)
+            End If
+            If ConfigObject(ActiveTool)("source") Is Nothing Then ConfigObject(ActiveTool).Add("source", "")
             ConfigObject(ActiveTool)("source") = ConvertPacksSourceTextBox.Text
+            If ConfigObject(ActiveTool)("destination") Is Nothing Then ConfigObject(ActiveTool).Add("destination", "")
             ConfigObject(ActiveTool)("destination") = ConvertPacksDestinationTextBox.Text
+            If ConfigObject(ActiveTool)("cleanup") Is Nothing Then ConfigObject(ActiveTool).Add("cleanup", "")
             ConfigObject(ActiveTool)("cleanup") = ConvertPacksCleanUpCheckBox.Checked
+            If ConfigObject(ActiveTool)("create_log") Is Nothing Then ConfigObject(ActiveTool).Add("create_log", "")
             ConfigObject(ActiveTool)("create_log") = ConvertPacksLogCheckBox.Checked
+            If ConfigObject(ActiveTool)("select_all") Is Nothing Then ConfigObject(ActiveTool).Add("select_all", "")
             ConfigObject(ActiveTool)("select_all") = ConvertPacksSelectAllCheckBox.Checked
         ElseIf CopyAssetsGroupBox.Visible = True Then
             ActiveTool = "copy_assets"
+            If ConfigObject(ActiveTool) Is Nothing Then
+                Dim NewPrefs As New Newtonsoft.Json.Linq.JObject
+                ConfigObject.Add(ActiveTool, NewPrefs)
+            End If
+            If ConfigObject(ActiveTool)("source") Is Nothing Then ConfigObject(ActiveTool).Add("source", "")
             ConfigObject(ActiveTool)("source") = CopyAssetsSourceTextBox.Text
+            If ConfigObject(ActiveTool)("destination") Is Nothing Then ConfigObject(ActiveTool).Add("destination", "")
             ConfigObject(ActiveTool)("destination") = CopyAssetsDestinationTextBox.Text
+            If ConfigObject(ActiveTool)("create_tags") Is Nothing Then ConfigObject(ActiveTool).Add("create_tags", "")
             ConfigObject(ActiveTool)("create_tags") = CopyAssetsCreateTagsCheckBox.Checked
+            If ConfigObject(ActiveTool)("separate_portals") Is Nothing Then ConfigObject(ActiveTool).Add("separate_portals", "")
             ConfigObject(ActiveTool)("separate_portals") = CopyAssetsPortalsCheckBox.Checked
+            If ConfigObject(ActiveTool)("create_log") Is Nothing Then ConfigObject(ActiveTool).Add("create_log", "")
             ConfigObject(ActiveTool)("create_log") = CopyAssetsLogCheckBox.Checked
+            If ConfigObject(ActiveTool)("select_all") Is Nothing Then ConfigObject(ActiveTool).Add("select_all", "")
             ConfigObject(ActiveTool)("select_all") = CopyAssetsSelectAllCheckBox.Checked
         ElseIf CopyTilesGroupBox.Visible = True Then
             ActiveTool = "copy_tiles"
+            If ConfigObject(ActiveTool) Is Nothing Then
+                Dim NewPrefs As New Newtonsoft.Json.Linq.JObject
+                ConfigObject.Add(ActiveTool, NewPrefs)
+            End If
+            If ConfigObject(ActiveTool)("source") Is Nothing Then ConfigObject(ActiveTool).Add("source", "")
             ConfigObject(ActiveTool)("source") = CopyTilesSourceTextBox.Text
+            If ConfigObject(ActiveTool)("destination") Is Nothing Then ConfigObject(ActiveTool).Add("destination", "")
             ConfigObject(ActiveTool)("destination") = CopyTilesDestinationTextBox.Text
+            If ConfigObject(ActiveTool)("create_log") Is Nothing Then ConfigObject(ActiveTool).Add("create_log", "")
             ConfigObject(ActiveTool)("create_log") = CopyTilesLogCheckBox.Checked
+            If ConfigObject(ActiveTool)("select_all") Is Nothing Then ConfigObject(ActiveTool).Add("select_all", "")
             ConfigObject(ActiveTool)("select_all") = CopyTilesSelectAllCheckBox.Checked
+        ElseIf DataFilesGroupBox.Visible = True Then
+            ActiveTool = "data_files"
+            If ConfigObject(ActiveTool) Is Nothing Then
+                Dim NewPrefs As New Newtonsoft.Json.Linq.JObject
+                ConfigObject.Add(ActiveTool, NewPrefs)
+            End If
+            If ConfigObject(ActiveTool)("source") Is Nothing Then ConfigObject(ActiveTool).Add("source", "")
+            ConfigObject(ActiveTool)("source") = DataFilesSourceTextBox.Text
+            If ConfigObject(ActiveTool)("create_log") Is Nothing Then ConfigObject(ActiveTool).Add("create_log", "")
+            ConfigObject(ActiveTool)("create_log") = DataFilesLogCheckBox.Checked
         ElseIf MapDetailsGroupBox.Visible = True Then
             ActiveTool = "map_details"
+            If ConfigObject(ActiveTool) Is Nothing Then
+                Dim NewPrefs As New Newtonsoft.Json.Linq.JObject
+                ConfigObject.Add(ActiveTool, NewPrefs)
+            End If
+            If ConfigObject(ActiveTool)("source") Is Nothing Then ConfigObject(ActiveTool).Add("source", "")
             ConfigObject(ActiveTool)("source") = MapDetailsSourceTextBox.Text
+            If ConfigObject(ActiveTool)("create_log") Is Nothing Then ConfigObject(ActiveTool).Add("create_log", "")
             ConfigObject(ActiveTool)("create_log") = MapDetailsLogCheckBox.Checked
+            If ConfigObject(ActiveTool)("select_all") Is Nothing Then ConfigObject(ActiveTool).Add("select_all", "")
             ConfigObject(ActiveTool)("select_all") = MapDetailsSelectAllCheckBox.Checked
         ElseIf PackAssetsGroupBox.Visible = True Then
             ActiveTool = "pack_assets"
+            If ConfigObject(ActiveTool) Is Nothing Then
+                Dim NewPrefs As New Newtonsoft.Json.Linq.JObject
+                ConfigObject.Add(ActiveTool, NewPrefs)
+            End If
+            If ConfigObject(ActiveTool)("source") Is Nothing Then ConfigObject(ActiveTool).Add("source", "")
             ConfigObject(ActiveTool)("source") = PackAssetsSourceTextBox.Text
+            If ConfigObject(ActiveTool)("destination") Is Nothing Then ConfigObject(ActiveTool).Add("destination", "")
             ConfigObject(ActiveTool)("destination") = PackAssetsDestinationTextBox.Text
+            If ConfigObject(ActiveTool)("overwrite") Is Nothing Then ConfigObject(ActiveTool).Add("overwrite", "")
             ConfigObject(ActiveTool)("overwrite") = PackAssetsOverwriteCheckBox.Checked
+            If ConfigObject(ActiveTool)("create_log") Is Nothing Then ConfigObject(ActiveTool).Add("create_log", "")
             ConfigObject(ActiveTool)("create_log") = PackAssetsLogCheckBox.Checked
+            If ConfigObject(ActiveTool)("select_all") Is Nothing Then ConfigObject(ActiveTool).Add("select_all", "")
             ConfigObject(ActiveTool)("select_all") = PackAssetsSelectAllCheckBox.Checked
         ElseIf UnpackAssetsGroupBox.Visible = True Then
             ActiveTool = "unpack_assets"
+            If ConfigObject(ActiveTool) Is Nothing Then
+                Dim NewPrefs As New Newtonsoft.Json.Linq.JObject
+                ConfigObject.Add(ActiveTool, NewPrefs)
+            End If
+            If ConfigObject(ActiveTool)("source") Is Nothing Then ConfigObject(ActiveTool).Add("source", "")
             ConfigObject(ActiveTool)("source") = UnpackAssetsSourceTextBox.Text
+            If ConfigObject(ActiveTool)("destination") Is Nothing Then ConfigObject(ActiveTool).Add("destination", "")
             ConfigObject(ActiveTool)("destination") = UnpackAssetsDestinationTextBox.Text
+            If ConfigObject(ActiveTool)("create_log") Is Nothing Then ConfigObject(ActiveTool).Add("create_log", "")
             ConfigObject(ActiveTool)("create_log") = UnpackAssetsLogCheckBox.Checked
+            If ConfigObject(ActiveTool)("select_all") Is Nothing Then ConfigObject(ActiveTool).Add("select_all", "")
             ConfigObject(ActiveTool)("select_all") = UnpackAssetsSelectAllCheckBox.Checked
         End If
 
         SaveNewConfig(ConfigObject, ConfigFileName)
     End Sub
 
-    Private Sub LoadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LoadToolStripMenuItem.Click
+    Private Sub LoadPrefsMenuItem_Click(sender As Object, e As EventArgs) Handles LoadPrefsMenuItem.Click
         Dim ConfigFileName As String = GlobalVariables.ConfigFileName
         Dim ActiveTool As String
 
@@ -381,6 +498,11 @@ Public Class DDToolsForm
                 CopyTilesLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
                 CopyTilesSelectAllCheckBox.Checked = ConfigObject(ActiveTool)("select_all")
                 CopyTilesSourceTextBox_LostFocus(sender, e)
+            ElseIf DataFilesGroupBox.Visible = True Then
+                ActiveTool = "data_files"
+                DataFilesSourceTextBox.Text = ConfigObject(ActiveTool)("source")
+                DataFilesLogCheckBox.Checked = ConfigObject(ActiveTool)("create_log")
+                DataFilesSourceTextBox_LostFocus(sender, e)
             ElseIf MapDetailsGroupBox.Visible = True Then
                 ActiveTool = "map_details"
                 MapDetailsSourceTextBox.Text = ConfigObject(ActiveTool)("source")
@@ -1231,6 +1353,143 @@ Public Class DDToolsForm
         End If
     End Sub
 
+    '###### Data Files Group Box ######
+    Private Sub DataFilesSourceTextBox_LostFocus(sender As Object, e As EventArgs) Handles DataFilesSourceTextBox.LostFocus
+        DataFilesDataGridView.Rows.Clear()
+        DataFilesDataGridView.Columns.Clear()
+
+        Dim SourceFolderName As String
+        Dim IsFolderNameValid As Boolean
+        Dim DoesFolderExist As Boolean
+        Dim SourceFolder As System.IO.DirectoryInfo
+
+        SourceFolderName = DataFilesSourceTextBox.Text
+        IsFolderNameValid = IsValidPathName(SourceFolderName)
+        DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
+        If IsFolderNameValid And DoesFolderExist Then
+            SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
+            SourceFolderName.TrimEnd("\")
+            GetTilesAndWalls(SourceFolderName)
+        Else
+            MsgBox("Source folder name is either invalid or does not exist.")
+        End If
+    End Sub
+
+    Private Sub DataFilesSourceBrowseButton_Click(sender As Object, e As EventArgs) Handles DataFilesSourceBrowseButton.Click
+        DataFilesDataGridView.Rows.Clear()
+        DataFilesDataGridView.Columns.Clear()
+        DataFilesSourceBrowserDialog.ShowDialog()
+        DataFilesSourceTextBox.Text = DataFilesSourceBrowserDialog.SelectedPath
+
+        Dim SourceFolderName As String
+        Dim IsFolderNameValid As Boolean
+        Dim DoesFolderExist As Boolean
+        Dim SourceFolder As System.IO.DirectoryInfo
+
+        SourceFolderName = DataFilesSourceTextBox.Text
+        IsFolderNameValid = IsValidPathName(SourceFolderName)
+        DoesFolderExist = System.IO.Directory.Exists(SourceFolderName)
+        If IsFolderNameValid And DoesFolderExist Then
+            SourceFolder = New System.IO.DirectoryInfo(SourceFolderName)
+            SourceFolderName.TrimEnd("\")
+            GetTilesAndWalls(SourceFolderName)
+        Else
+            MsgBox("Source folder name is either invalid or does not exist.")
+        End If
+    End Sub
+
+    Public Sub DataFilesDataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataFilesDataGridView.CellValueChanged
+        If e.ColumnIndex = 2 Then
+            Dim row As DataGridViewRow
+            row = DataFilesDataGridView.Rows(e.RowIndex)
+            If row.Cells(2).Value = "" Then row.Cells(2).Value = "normal"
+        End If
+    End Sub
+
+    Public Sub DataFilesDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataFilesDataGridView.CellDoubleClick
+        If e.ColumnIndex = 3 Then
+            If DataFilesColorDialog.ShowDialog() = DialogResult.OK Then
+                Dim NewColor = DataFilesColorDialog.Color
+                Dim R = Hex(NewColor.R)
+                Dim G = Hex(NewColor.G)
+                Dim B = Hex(NewColor.B)
+                If R.Length = 1 Then R = "0" & R
+                If G.Length = 1 Then G = "0" & G
+                If B.Length = 1 Then B = "0" & B
+                Dim HexColor = R & G & B
+                Dim row As DataGridViewRow
+                row = DataFilesDataGridView.Rows(e.RowIndex)
+                row.Cells(3).Value = HexColor.ToLower
+            End If
+        End If
+    End Sub
+
+    Private Sub DataFilesStartButton_Click(sender As Object, e As EventArgs) Handles DataFilesStartButton.Click
+        Dim DataFolder As String
+        Dim DataFile As String
+        Dim Indent As String = "    "
+        Dim OutputMessage As String
+        Dim LogFileName As String = "DataFiles.log"
+        Dim CreateLog As Boolean = DataFilesLogCheckBox.Checked
+
+        OutputForm.OutputTextBox.Text = ""
+        OutputForm.Show()
+        OutputMessage = "### Starting at " & DateTime.Now & vbCrLf
+        OutputForm.OutputTextBox.AppendText(OutputMessage)
+        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, OutputMessage, False)
+
+        OutputMessage = Indent & "Deleting existing tileset and wall data files to eliminate strays." & vbCrLf
+        OutputForm.OutputTextBox.AppendText(OutputMessage)
+        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, OutputMessage, True)
+
+        Dim DataFolderList() As String = {DataFilesSourceTextBox.Text & "\data\tilesets", DataFilesSourceTextBox.Text & "\data\walls"}
+        For Each SubFolder In DataFolderList
+            If Directory.Exists(SubFolder) Then
+                For Each DataFile In Directory.GetFiles(SubFolder)
+                    File.Delete(DataFile)
+                Next
+            End If
+        Next
+
+        For Each SubFolder In DataFolderList
+            If Directory.Exists(SubFolder) Then
+                OutputMessage = Indent & "Directory exists: " & SubFolder & vbCrLf
+                OutputForm.OutputTextBox.AppendText(OutputMessage)
+                If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, OutputMessage, True)
+            Else
+                OutputMessage = Indent & "Creating directory: " & SubFolder & vbCrLf
+                OutputForm.OutputTextBox.AppendText(OutputMessage)
+                If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, OutputMessage, True)
+                Directory.CreateDirectory(SubFolder)
+            End If
+        Next
+
+        For Each row As DataGridViewRow In DataFilesDataGridView.Rows
+            Dim AssetInfo As New System.Collections.Specialized.OrderedDictionary
+            If row.Cells(0).Value = "Wall" Then
+                AssetInfo.Add("path", row.Cells(6).Value)
+                AssetInfo.Add("color", row.Cells(3).Value)
+            Else
+                AssetInfo.Add("path", row.Cells(6).Value)
+                AssetInfo.Add("name", row.Cells(1).Value)
+                AssetInfo.Add("type", row.Cells(2).Value)
+                AssetInfo.Add("color", row.Cells(3).Value)
+            End If
+            DataFolder = row.Cells(5).Value
+
+            DataFile = DataFolder & "\" & row.Cells(4).Value
+
+            OutputMessage = Indent & "Writing " & DataFile & vbCrLf
+            OutputForm.OutputTextBox.AppendText(OutputMessage)
+            If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, OutputMessage, True)
+            Dim DataContent As String = JsonConvert.SerializeObject(AssetInfo, Formatting.Indented)
+            My.Computer.FileSystem.WriteAllText(DataFile, DataContent, False, System.Text.Encoding.ASCII)
+        Next
+        OutputMessage = "### Finished at " & DateTime.Now
+        OutputForm.OutputTextBox.AppendText(OutputMessage)
+        If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, OutputMessage, True)
+    End Sub
+
     '###### Map Details Group Box ######
     Private Sub MapDetailsSourceTextBox_LostFocus(sender As Object, e As EventArgs) Handles MapDetailsSourceTextBox.LostFocus
         MapDetailsCheckedListBox.Items.Clear()
@@ -1600,6 +1859,8 @@ Public Class DDToolsForm
                     If UnpackAssetsSelectAllCheckBox.Checked Then UnpackAssetsCheckedListBox.SetItemChecked(UnpackAssetsCheckedListBox.Items.Count - 1, True)
                 End If
             Next
+        Else
+            MsgBox("Source folder name is either invalid or does not exist.")
         End If
     End Sub
 

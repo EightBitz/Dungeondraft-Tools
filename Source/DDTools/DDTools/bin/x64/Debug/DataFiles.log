@@ -1,0 +1,9 @@
+﻿### Starting at 8/2/2020 7:50:08 PM
+    Deleting existing tileset and wall data files to eliminate strays.
+    Creating directory: C:\Users\Jim\Documents\Dungeondraft_packs\Source\example - Copy\data\tilesets
+    Directory exists: C:\Users\Jim\Documents\Dungeondraft_packs\Source\example - Copy\data\walls
+    Writing C:\Users\Jim\Documents\Dungeondraft_packs\Source\example - Copy\data\tilesets\tileset_simple.dungeondraft_tileset
+    Writing C:\Users\Jim\Documents\Dungeondraft_packs\Source\example - Copy\data\tilesets\tileset_smart.dungeondraft_tileset
+    Writing C:\Users\Jim\Documents\Dungeondraft_packs\Source\example - Copy\data\tilesets\tileset_smart_double.dungeondraft_tileset
+    Writing C:\Users\Jim\Documents\Dungeondraft_packs\Source\example - Copy\data\walls\sample_wall.dungeondraft_wall
+### Finished at 8/2/2020 7:50:09 PM

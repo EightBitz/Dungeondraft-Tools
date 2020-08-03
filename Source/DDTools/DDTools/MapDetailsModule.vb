@@ -282,12 +282,22 @@ Module MapDetailsModule
                     Message &= vbCrLf & Indent & Indent & "From " & PackName & ", Version " & PackVersion & ", by " & PackAuthor & ":" & vbCrLf
                 End If
                 If UsedAssetList(AssetIndex).Instances = 1 Then Instances = "instance" Else Instances = "instances"
-                Message &= Indent & Indent & Indent & UsedAssetList(AssetIndex).AssetName & ", " & UsedAssetList(AssetIndex).AssetType & ", " & UsedAssetList(AssetIndex).Instances & " " & Instances & " found." & vbCrLf
+                Message &= Indent & Indent & Indent & UsedAssetList(AssetIndex).AssetName & ", " & UsedAssetList(AssetIndex).AssetType & ", " & UsedAssetList(AssetIndex).Instances & " " & Instances & " found." & vbCrLf & vbCrLf
             Next
         Else
             'If our UsedAssetList has no records, then indicate that no custom assets have been used.
-            Message &= Indent & Indent & "No custom assets are in use." & vbCrLf
+            Message &= Indent & Indent & "No custom assets are in use." & vbCrLf & vbCrLf
         End If
+
+        Message &= Indent & "Embedded assets:" & vbCrLf
+        If Not World("embedded") Is Nothing Then
+            For Each Asset In World("embedded")
+                Message &= Indent & Indent & Asset.Name & vbCrLf
+            Next
+        Else
+            Message &= Indent & Indent & "No embedded assets were found." & vbCrLf
+        End If
+
 
         OutputForm.OutputTextBox.AppendText(Message)
         If CreateLog Then My.Computer.FileSystem.WriteAllText(LogFileName, Message, True)

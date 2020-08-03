@@ -29,12 +29,13 @@ Partial Class DDToolsForm
         Me.ConvertPacksMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyAssetsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyTilesMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DataFilesMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MapDetailsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PackAssetsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UnpackAssetsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PreferencesToolStripMenu = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LoadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoadPrefsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SavePrefsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConvertPacksGroupBox = New System.Windows.Forms.GroupBox()
         Me.ConvertPacksSelectAllCheckBox = New System.Windows.Forms.CheckBox()
         Me.ConvertPacksLogCheckBox = New System.Windows.Forms.CheckBox()
@@ -164,6 +165,15 @@ Partial Class DDToolsForm
         Me.MapDetailsSourceTextBox = New System.Windows.Forms.TextBox()
         Me.MapDetailsBrowseButton = New System.Windows.Forms.Button()
         Me.MapDetailsSourceBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
+        Me.DataFilesGroupBox = New System.Windows.Forms.GroupBox()
+        Me.DataFilesDataGridView = New System.Windows.Forms.DataGridView()
+        Me.DataFilesLogCheckBox = New System.Windows.Forms.CheckBox()
+        Me.DataFilesSourceTextBox = New System.Windows.Forms.TextBox()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.DataFilesStartButton = New System.Windows.Forms.Button()
+        Me.DataFilesSourceBrowseButton = New System.Windows.Forms.Button()
+        Me.DataFilesSourceBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
+        Me.DataFilesColorDialog = New System.Windows.Forms.ColorDialog()
         Me.MainMenuStrip.SuspendLayout()
         Me.ConvertPacksGroupBox.SuspendLayout()
         Me.TagAssetsGroupBox.SuspendLayout()
@@ -176,6 +186,8 @@ Partial Class DDToolsForm
         Me.CopyTilesGroupBox.SuspendLayout()
         CType(Me.CopyTilesDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MapDetailsGroupBox.SuspendLayout()
+        Me.DataFilesGroupBox.SuspendLayout()
+        CType(Me.DataFilesDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MainMenuStrip
@@ -189,7 +201,7 @@ Partial Class DDToolsForm
         '
         'MainMenuToolStripMenu
         '
-        Me.MainMenuToolStripMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TagAssetsMenuItem, Me.ConvertAssetsMenuItem, Me.ConvertPacksMenuItem, Me.CopyAssetsMenuItem, Me.CopyTilesMenuItem, Me.MapDetailsMenuItem, Me.PackAssetsMenuItem, Me.UnpackAssetsMenuItem})
+        Me.MainMenuToolStripMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TagAssetsMenuItem, Me.ConvertAssetsMenuItem, Me.ConvertPacksMenuItem, Me.CopyAssetsMenuItem, Me.CopyTilesMenuItem, Me.DataFilesMenuItem, Me.MapDetailsMenuItem, Me.PackAssetsMenuItem, Me.UnpackAssetsMenuItem})
         Me.MainMenuToolStripMenu.Name = "MainMenuToolStripMenu"
         Me.MainMenuToolStripMenu.Size = New System.Drawing.Size(80, 20)
         Me.MainMenuToolStripMenu.Text = "Main Menu"
@@ -224,6 +236,12 @@ Partial Class DDToolsForm
         Me.CopyTilesMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CopyTilesMenuItem.Text = "Copy Tiles"
         '
+        'DataFilesMenuItem
+        '
+        Me.DataFilesMenuItem.Name = "DataFilesMenuItem"
+        Me.DataFilesMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DataFilesMenuItem.Text = "Data Files"
+        '
         'MapDetailsMenuItem
         '
         Me.MapDetailsMenuItem.Name = "MapDetailsMenuItem"
@@ -244,22 +262,22 @@ Partial Class DDToolsForm
         '
         'PreferencesToolStripMenu
         '
-        Me.PreferencesToolStripMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadToolStripMenuItem, Me.SaveToolStripMenuItem})
+        Me.PreferencesToolStripMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LoadPrefsMenuItem, Me.SavePrefsMenuItem})
         Me.PreferencesToolStripMenu.Name = "PreferencesToolStripMenu"
         Me.PreferencesToolStripMenu.Size = New System.Drawing.Size(80, 20)
         Me.PreferencesToolStripMenu.Text = "Preferences"
         '
-        'LoadToolStripMenuItem
+        'LoadPrefsMenuItem
         '
-        Me.LoadToolStripMenuItem.Name = "LoadToolStripMenuItem"
-        Me.LoadToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
-        Me.LoadToolStripMenuItem.Text = "Load"
+        Me.LoadPrefsMenuItem.Name = "LoadPrefsMenuItem"
+        Me.LoadPrefsMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.LoadPrefsMenuItem.Text = "Load"
         '
-        'SaveToolStripMenuItem
+        'SavePrefsMenuItem
         '
-        Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(100, 22)
-        Me.SaveToolStripMenuItem.Text = "Save"
+        Me.SavePrefsMenuItem.Name = "SavePrefsMenuItem"
+        Me.SavePrefsMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SavePrefsMenuItem.Text = "Save"
         '
         'ConvertPacksGroupBox
         '
@@ -333,6 +351,7 @@ Partial Class DDToolsForm
         '
         'ConvertPacksCheckedListBox
         '
+        Me.ConvertPacksCheckedListBox.CheckOnClick = True
         Me.ConvertPacksCheckedListBox.FormattingEnabled = True
         Me.ConvertPacksCheckedListBox.Location = New System.Drawing.Point(9, 130)
         Me.ConvertPacksCheckedListBox.Name = "ConvertPacksCheckedListBox"
@@ -489,6 +508,7 @@ Partial Class DDToolsForm
         '
         'TagAssetsCheckedListBox
         '
+        Me.TagAssetsCheckedListBox.CheckOnClick = True
         Me.TagAssetsCheckedListBox.FormattingEnabled = True
         Me.TagAssetsCheckedListBox.Location = New System.Drawing.Point(6, 130)
         Me.TagAssetsCheckedListBox.Name = "TagAssetsCheckedListBox"
@@ -599,6 +619,7 @@ Partial Class DDToolsForm
         '
         'CopyAssetsCheckedListBox
         '
+        Me.CopyAssetsCheckedListBox.CheckOnClick = True
         Me.CopyAssetsCheckedListBox.FormattingEnabled = True
         Me.CopyAssetsCheckedListBox.Location = New System.Drawing.Point(9, 130)
         Me.CopyAssetsCheckedListBox.Name = "CopyAssetsCheckedListBox"
@@ -757,6 +778,7 @@ Partial Class DDToolsForm
         '
         'ConvertAssetsCheckedListBox
         '
+        Me.ConvertAssetsCheckedListBox.CheckOnClick = True
         Me.ConvertAssetsCheckedListBox.FormattingEnabled = True
         Me.ConvertAssetsCheckedListBox.Location = New System.Drawing.Point(9, 130)
         Me.ConvertAssetsCheckedListBox.Name = "ConvertAssetsCheckedListBox"
@@ -952,6 +974,7 @@ Partial Class DDToolsForm
         '
         'UnpackAssetsCheckedListBox
         '
+        Me.UnpackAssetsCheckedListBox.CheckOnClick = True
         Me.UnpackAssetsCheckedListBox.FormattingEnabled = True
         Me.UnpackAssetsCheckedListBox.Location = New System.Drawing.Point(9, 130)
         Me.UnpackAssetsCheckedListBox.Name = "UnpackAssetsCheckedListBox"
@@ -1064,7 +1087,7 @@ Partial Class DDToolsForm
         'PackAssetsLogCheckBox
         '
         Me.PackAssetsLogCheckBox.AutoSize = True
-        Me.PackAssetsLogCheckBox.Location = New System.Drawing.Point(340, 83)
+        Me.PackAssetsLogCheckBox.Location = New System.Drawing.Point(329, 83)
         Me.PackAssetsLogCheckBox.Name = "PackAssetsLogCheckBox"
         Me.PackAssetsLogCheckBox.Size = New System.Drawing.Size(209, 20)
         Me.PackAssetsLogCheckBox.TabIndex = 5
@@ -1362,6 +1385,7 @@ Partial Class DDToolsForm
         '
         'MapDetailsCheckedListBox
         '
+        Me.MapDetailsCheckedListBox.CheckOnClick = True
         Me.MapDetailsCheckedListBox.FormattingEnabled = True
         Me.MapDetailsCheckedListBox.Location = New System.Drawing.Point(6, 130)
         Me.MapDetailsCheckedListBox.Name = "MapDetailsCheckedListBox"
@@ -1393,26 +1417,96 @@ Partial Class DDToolsForm
         Me.MapDetailsBrowseButton.Text = "Browse"
         Me.MapDetailsBrowseButton.UseVisualStyleBackColor = True
         '
+        'DataFilesGroupBox
+        '
+        Me.DataFilesGroupBox.Controls.Add(Me.DataFilesDataGridView)
+        Me.DataFilesGroupBox.Controls.Add(Me.DataFilesLogCheckBox)
+        Me.DataFilesGroupBox.Controls.Add(Me.DataFilesSourceTextBox)
+        Me.DataFilesGroupBox.Controls.Add(Me.Label29)
+        Me.DataFilesGroupBox.Controls.Add(Me.DataFilesStartButton)
+        Me.DataFilesGroupBox.Controls.Add(Me.DataFilesSourceBrowseButton)
+        Me.DataFilesGroupBox.Location = New System.Drawing.Point(12, 33)
+        Me.DataFilesGroupBox.Name = "DataFilesGroupBox"
+        Me.DataFilesGroupBox.Size = New System.Drawing.Size(956, 565)
+        Me.DataFilesGroupBox.TabIndex = 13
+        Me.DataFilesGroupBox.TabStop = False
+        Me.DataFilesGroupBox.Text = "Data Files"
+        '
+        'DataFilesDataGridView
+        '
+        Me.DataFilesDataGridView.AllowUserToAddRows = False
+        Me.DataFilesDataGridView.AllowUserToDeleteRows = False
+        Me.DataFilesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataFilesDataGridView.Location = New System.Drawing.Point(6, 85)
+        Me.DataFilesDataGridView.Name = "DataFilesDataGridView"
+        Me.DataFilesDataGridView.Size = New System.Drawing.Size(944, 474)
+        Me.DataFilesDataGridView.TabIndex = 3
+        '
+        'DataFilesLogCheckBox
+        '
+        Me.DataFilesLogCheckBox.AutoSize = True
+        Me.DataFilesLogCheckBox.Location = New System.Drawing.Point(102, 51)
+        Me.DataFilesLogCheckBox.Name = "DataFilesLogCheckBox"
+        Me.DataFilesLogCheckBox.Size = New System.Drawing.Size(195, 20)
+        Me.DataFilesLogCheckBox.TabIndex = 2
+        Me.DataFilesLogCheckBox.Text = "Send output to DataFiles.log"
+        Me.DataFilesLogCheckBox.UseVisualStyleBackColor = True
+        '
+        'DataFilesSourceTextBox
+        '
+        Me.DataFilesSourceTextBox.Location = New System.Drawing.Point(102, 23)
+        Me.DataFilesSourceTextBox.Name = "DataFilesSourceTextBox"
+        Me.DataFilesSourceTextBox.Size = New System.Drawing.Size(748, 22)
+        Me.DataFilesSourceTextBox.TabIndex = 0
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Location = New System.Drawing.Point(3, 26)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(93, 16)
+        Me.Label29.TabIndex = 3
+        Me.Label29.Text = "Source Folder"
+        '
+        'DataFilesStartButton
+        '
+        Me.DataFilesStartButton.Location = New System.Drawing.Point(856, 53)
+        Me.DataFilesStartButton.Name = "DataFilesStartButton"
+        Me.DataFilesStartButton.Size = New System.Drawing.Size(94, 26)
+        Me.DataFilesStartButton.TabIndex = 4
+        Me.DataFilesStartButton.Text = "Start"
+        Me.DataFilesStartButton.UseVisualStyleBackColor = True
+        '
+        'DataFilesSourceBrowseButton
+        '
+        Me.DataFilesSourceBrowseButton.Location = New System.Drawing.Point(856, 21)
+        Me.DataFilesSourceBrowseButton.Name = "DataFilesSourceBrowseButton"
+        Me.DataFilesSourceBrowseButton.Size = New System.Drawing.Size(94, 26)
+        Me.DataFilesSourceBrowseButton.TabIndex = 1
+        Me.DataFilesSourceBrowseButton.Text = "Browse"
+        Me.DataFilesSourceBrowseButton.UseVisualStyleBackColor = True
+        '
         'DDToolsForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(980, 610)
         Me.Controls.Add(Me.MainMenuStrip)
+        Me.Controls.Add(Me.DataFilesGroupBox)
+        Me.Controls.Add(Me.CopyTilesGroupBox)
+        Me.Controls.Add(Me.CopyAssetsGroupBox)
+        Me.Controls.Add(Me.UnpackAssetsGroupBox)
         Me.Controls.Add(Me.ConvertPacksGroupBox)
         Me.Controls.Add(Me.MapDetailsGroupBox)
         Me.Controls.Add(Me.TagAssetsGroupBox)
         Me.Controls.Add(Me.ConvertAssetsGroupBox)
         Me.Controls.Add(Me.TitlePanel)
-        Me.Controls.Add(Me.CopyTilesGroupBox)
-        Me.Controls.Add(Me.CopyAssetsGroupBox)
         Me.Controls.Add(Me.PackAssetsGroupBox)
-        Me.Controls.Add(Me.UnpackAssetsGroupBox)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "DDToolsForm"
-        Me.Text = "EightBitz's Dungeondraft Tools - Version 2.2"
+        Me.Text = "EightBitz's Dungeondraft Tools - Version 2.5"
         Me.MainMenuStrip.ResumeLayout(False)
         Me.MainMenuStrip.PerformLayout()
         Me.ConvertPacksGroupBox.ResumeLayout(False)
@@ -1435,6 +1529,9 @@ Partial Class DDToolsForm
         CType(Me.CopyTilesDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MapDetailsGroupBox.ResumeLayout(False)
         Me.MapDetailsGroupBox.PerformLayout()
+        Me.DataFilesGroupBox.ResumeLayout(False)
+        Me.DataFilesGroupBox.PerformLayout()
+        CType(Me.DataFilesDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1571,8 +1668,8 @@ Partial Class DDToolsForm
     Friend WithEvents PackAssetsOverwriteCheckBox As CheckBox
     Friend WithEvents PackAssetsRefreshButton As Button
     Friend WithEvents PreferencesToolStripMenu As ToolStripMenuItem
-    Friend WithEvents LoadToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SaveToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LoadPrefsMenuItem As ToolStripMenuItem
+    Friend WithEvents SavePrefsMenuItem As ToolStripMenuItem
     Friend WithEvents UnpackAssetsLogCheckBox As CheckBox
     Friend WithEvents ConvertPacksSelectAllCheckBox As CheckBox
     Friend WithEvents TagAssetsSelectAllCheckBox As CheckBox
@@ -1582,4 +1679,14 @@ Partial Class DDToolsForm
     Friend WithEvents PackAssetsSelectAllCheckBox As CheckBox
     Friend WithEvents CopyTilesSelectAllCheckBox As CheckBox
     Friend WithEvents MapDetailsSelectAllCheckBox As CheckBox
+    Friend WithEvents DataFilesGroupBox As GroupBox
+    Friend WithEvents DataFilesDataGridView As DataGridView
+    Friend WithEvents DataFilesLogCheckBox As CheckBox
+    Friend WithEvents DataFilesSourceTextBox As TextBox
+    Friend WithEvents Label29 As Label
+    Friend WithEvents DataFilesStartButton As Button
+    Friend WithEvents DataFilesSourceBrowseButton As Button
+    Friend WithEvents DataFilesSourceBrowserDialog As FolderBrowserDialog
+    Friend WithEvents DataFilesMenuItem As ToolStripMenuItem
+    Friend WithEvents DataFilesColorDialog As ColorDialog
 End Class
