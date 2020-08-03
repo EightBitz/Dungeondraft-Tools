@@ -56,6 +56,9 @@ manage how it copies assets.
 ### Copy Tiles
 This tool is similar to Copy Assets, except that it allows you to copy assets as patterns, terrain or tilesets.
 
+### Data Files
+This tool allows you to easily create and manage data files for tilesets and walls.
+
 ### Map Details
 This tool provides details for selected maps, such as when they were created, which version of Dungeondraft they were created with, which cusom asset packs they use, and which assets they use from those asset packs.
 
