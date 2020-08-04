@@ -6,10 +6,10 @@ What follows is a brief description of what this is and what it does, but please
 
 To use this program, download the following files from this repository, and put them all in the same folder:
 
-* [DDTools.exe](https://gitlab.com/EightBitz/dungeondraft-tools/-/blob/master/DDTools.exe)
-* [Newtonsoft.Json.dll](https://gitlab.com/EightBitz/dungeondraft-tools/-/blob/master/Newtonsoft.Json.dll)
-* [dungeondraft-pack.exe](https://gitlab.com/EightBitz/dungeondraft-tools/-/blob/master/dungeondraft-pack.exe)
-* [dungeondraft-unpack.exe](https://gitlab.com/EightBitz/dungeondraft-tools/-/blob/master/dungeondraft-pack.exe)
+* [DDTools.exe](https://github.com/EightBitz/Dungeondraft-Tools/blob/Version-2.5/DDTools.exe)
+* [Newtonsoft.Json.dll](https://github.com/EightBitz/Dungeondraft-Tools/blob/Version-2.5/Newtonsoft.Json.dll)
+* [dungeondraft-pack.exe](https://github.com/EightBitz/Dungeondraft-Tools/blob/Version-2.5/dungeondraft-pack.exe)
+* [dungeondraft-unpack.exe](https://github.com/EightBitz/Dungeondraft-Tools/blob/Version-2.5/dungeondraft-unpack.exe)
 
 If you want to convert files to .webp format, you will also need to download and install [ImageMagick for Windows](https://imagemagick.org/script/download.php#windows).
 
