@@ -27,6 +27,8 @@ This program offers six tools to facilitate creating and managing custom asset p
 * Pack Assets
 * Unpack Assets
 
+If you're looking for my Custom Tags tool, that can be found [here](https://github.com/EightBitz/Dungeondraft-Custom-Tags).
+
 ### Tag Assets
 
 For people who want to create their own custom asset packs, the Tag Assets tool will create a properly
