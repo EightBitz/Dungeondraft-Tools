@@ -7,6 +7,7 @@ Module PreferencesMenuModule
         Dim ConvertPacksConfig As New System.Collections.Specialized.OrderedDictionary
         Dim CopyAssetsConfig As New System.Collections.Specialized.OrderedDictionary
         Dim CopyTilesConfig As New System.Collections.Specialized.OrderedDictionary
+        Dim DataFilesConfig As New System.Collections.Specialized.OrderedDictionary
         Dim MapDetailsConfig As New System.Collections.Specialized.OrderedDictionary
         Dim PackAssetsConfig As New System.Collections.Specialized.OrderedDictionary
         Dim UnpackAssetsConfig As New System.Collections.Specialized.OrderedDictionary
@@ -38,6 +39,9 @@ Module PreferencesMenuModule
         CopyTilesConfig.Add("destination", "")
         CopyTilesConfig.Add("create_log", False)
         CopyTilesConfig.Add("select_all", False)
+
+        DataFilesConfig.Add("source", False)
+        DataFilesConfig.Add("create_log", False)
 
         MapDetailsConfig.Add("source", "")
         MapDetailsConfig.Add("create_log", False)
