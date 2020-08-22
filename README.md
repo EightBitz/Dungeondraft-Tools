@@ -22,6 +22,7 @@ This program offers six tools to facilitate creating and managing custom asset p
 <li>Convert Assets</li>
 <li>Convert Packs</li>
 <li>Copy Assets</li>
+<li>Copy Tiles</li>
 <li>Data Files</li>
 <li>Pack Assets</li>
 <li>Unpack Assets</li>
