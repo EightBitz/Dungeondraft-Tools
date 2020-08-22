@@ -11,8 +11,7 @@
 <li>Double click the "DDTools" desktop icon.</li>
 </ol>
 
-<p>
-If you want to convert files to .webp format, you will also need to download and install <a href="https://imagemagick.org/script/download.php#windows">ImageMagick for Windows</a>.
+<p>If you want to convert files to .webp format, you will also need to download and install <a href="https://imagemagick.org/script/download.php#windows">ImageMagick for Windows</a>.</p>
 
 <h2>What Does it Do?</h2>
 
@@ -28,8 +27,7 @@ This program offers six tools to facilitate creating and managing custom asset p
 <li>Unpack Assets</li>
 </ul>
 
-<p>
-If you're looking for my Custom Tags tool, <a href="https://github.com/EightBitz/Dungeondraft-Custom-Tags">that can be found here</a>.
+<p>If you're looking for my Custom Tags tool, <a href="https://github.com/EightBitz/Dungeondraft-Custom-Tags">that can be found here</a>.</p>
 
 <h3>Tag Assets</h3>
 
@@ -65,4 +63,4 @@ If you're looking for my Custom Tags tool, <a href="https://github.com/EightBitz
 
 <h3>Unpack Assets</h3>
 
-This tool will unpack .dungeondraft_pack files.
+<p>This tool will unpack .dungeondraft_pack files.</p>
