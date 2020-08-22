@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>EIGHTBITZ'S DUNGEONDRAFT TOOLS README</title>
-</head>
-<body>
 <h1>EightBitz's Dungeondraft Tools</h1>
 <p>What follows is a brief description of what this is and what it does, but please read the full documentation as it contains important details.</p>
 
@@ -71,5 +65,3 @@ If you're looking for my Custom Tags tool, <a href="https://github.com/EightBitz
 <h3>Unpack Assets</h3>
 
 This tool will unpack .dungeondraft_pack files.
-</body>
-</html> 
