@@ -1,5 +1,98 @@
 ﻿Imports System.IO
+Imports ImageProcessor
+Imports ImageProcessor.Imaging.Formats
 Module CopyTilesModule
+    Public Function ImageCallBack() As Boolean
+        Return True
+    End Function
+    Public Function LoadThumbnail(ByVal Filename As String)
+        'Dim RowIndex As Integer = 0
+        Dim imgcallback As Image.GetThumbnailImageAbort = New Image.GetThumbnailImageAbort(AddressOf ImageCallBack)
+        'Dim Filename As String
+        Dim FileExtension As String
+        Dim image As Image
+
+        'For Each AssetDataGridRow In AssetDataGridView.Rows
+
+        'Filename = AssetDataGridRow.Cells("FilePath").Value
+        If File.Exists(Filename) Then
+            FileExtension = Path.GetExtension(Filename)
+
+            Select Case FileExtension.ToLower
+                Case ".bmp"
+                    image = New Bitmap(Filename)
+                Case ".dds"
+                    image = Nothing
+                Case ".exr"
+                    image = Nothing
+                Case ".hdr"
+                    image = Nothing
+                Case ".jpg"
+                    image = New Bitmap(Filename)
+                Case ".jpeg"
+                    image = New Bitmap(Filename)
+                Case ".png"
+                    image = New Bitmap(Filename)
+                Case ".svg"
+                    image = Nothing
+                Case ".svgz"
+                    image = Nothing
+                Case ".tga"
+                    image = Nothing
+                Case ".webp"
+                    image = GetWebPImage(Filename)
+                Case Else
+                    image = Nothing
+            End Select
+        Else
+            image = Nothing
+        End If
+
+        '
+        ' Aspect Ratio
+        'https://eikhart.com/blog/aspect-ratio-calculator#:~:text=There%20is%20a%20simple%20formula,%3D%20(%20newHeight%20*%20aspectRatio%20)%20.
+        '
+        Dim imgThumbnail As Bitmap
+        If Not image Is Nothing Then
+            Dim aspectRatio As Double = image.Width / image.Height
+            Dim thumbHeight As Double = 60 / aspectRatio
+            Dim thumbWidth As Double = thumbHeight * aspectRatio
+            imgThumbnail = New Bitmap(image.GetThumbnailImage(CInt(thumbWidth), CInt(thumbHeight), imgcallback, New IntPtr))
+
+            'AssetDataGridRow.Cells("Thumbnail").Value = imgThumbnail
+        Else
+            imgThumbnail = Nothing
+        End If
+
+        Return imgThumbnail
+        'Next
+    End Function
+
+    Private Function GetWebPImage(Filename As String)
+        Dim photoBytes As Byte() = File.ReadAllBytes(Filename)
+        ' Format is automatically detected though can be changed.
+        Dim WebPImage As Image
+
+        Dim format As ISupportedImageFormat = New PngFormat With {
+                .Quality = 70
+            }
+        Dim size As Size = New Size(150, 0)
+
+        Using inStream As MemoryStream = New MemoryStream(photoBytes)
+
+            Using outStream As MemoryStream = New MemoryStream()
+
+                ' Initialize the ImageFactory using the overload to preserve EXIF metadata.
+                Using imageFactory As ImageFactory = New ImageFactory(preserveExifData:=True)
+                    ' Load, resize, set the format and quality and save an image.
+                    imageFactory.Load(inStream).Resize(size).Format(format).Save(outStream)
+                End Using
+                ' Do something with the stream.
+                WebPImage = Image.FromStream(outStream)
+            End Using
+        End Using
+        Return WebPImage
+    End Function
     Public Sub LoadTilesSub(Source As String, CreateLog As Boolean, LogFileName As String, SelectTile As Boolean, Indent As String)
         Dim FileTypes() As String = {".bmp", ".dds", ".exr", ".hdr", ".jpg", ".jpeg", ".png", ".tga", ".svg", ".svgz", ".webp"}
         Dim Message As String
@@ -158,15 +251,18 @@ Module CopyTilesModule
 
             'Get a thumbnail image of the current tile to be used in the thumbnail column of the current row.
             If Not Source.EndsWith("\") Then Source &= "\"
-            Image = Image.FromFile(Source & TileName)
-            Dim Thumbnail = Image.GetThumbnailImage(50, 50, Nothing, New IntPtr())
-            Dim ImgByte() As Byte
-            Dim ms As New MemoryStream
-            Thumbnail.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg)
-            ImgByte = ms.GetBuffer()
+            Dim Filename As String = Source & TileName
+            Dim Thumbnail = LoadThumbnail(Filename)
+
+            'Image = Image.FromFile(Source & TileName)
+            'Dim Thumbnail = Image.GetThumbnailImage(50, 50, Nothing, New IntPtr())
+            'Dim ImgByte() As Byte
+            'Dim ms As New MemoryStream
+            'Thumbnail.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg)
+            'ImgByte = ms.GetBuffer()
 
             'Add a new row for the current tile.
-            NewRow = {SelectTile, ImgByte, TileName, SelectTile, SelectTile, SelectTile}
+            NewRow = {SelectTile, Thumbnail, TileName, SelectTile, SelectTile, SelectTile}
             DDToolsForm.CopyTilesDataGridView.Rows.Add(NewRow)
 
             'Set the height of the row to accomodate the thumbnail image.

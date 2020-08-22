@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DDTools", "DDTools\DDTools.vbproj", "{4A5C2334-BD7B-401A-8B15-6DB9B1A2DAAC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A5C2334-BD7B-401A-8B15-6DB9B1A2DAAC}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{4A5C2334-BD7B-401A-8B15-6DB9B1A2DAAC}.Debug|Any CPU.Build.0 = Debug|x64
+		{4A5C2334-BD7B-401A-8B15-6DB9B1A2DAAC}.Debug|x64.ActiveCfg = Debug|x64
+		{4A5C2334-BD7B-401A-8B15-6DB9B1A2DAAC}.Debug|x64.Build.0 = Debug|x64
+		{4A5C2334-BD7B-401A-8B15-6DB9B1A2DAAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A5C2334-BD7B-401A-8B15-6DB9B1A2DAAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A5C2334-BD7B-401A-8B15-6DB9B1A2DAAC}.Release|x64.ActiveCfg = Release|x64
+		{4A5C2334-BD7B-401A-8B15-6DB9B1A2DAAC}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {07EC7769-ADBE-4382-96BD-48B45A2FF19E}
+	EndGlobalSection
+EndGlobal

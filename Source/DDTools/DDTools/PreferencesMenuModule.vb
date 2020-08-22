@@ -79,8 +79,10 @@ Module PreferencesMenuModule
         Return ConfigObject
     End Function
 
-    Public Sub SaveNewConfig(ConfigObject As Object, ConfigFileName As String)
+    Public Sub SaveNewConfig(ConfigObject As Object, ConfigFolderName As String, ConfigFileName As String)
         Dim NewConfig As String = JsonConvert.SerializeObject(ConfigObject, Formatting.Indented)
+        If Not Directory.Exists(ConfigFolderName) Then Directory.CreateDirectory(ConfigFolderName)
+        ConfigFileName = ConfigFolderName & "\" & ConfigFileName
         My.Computer.FileSystem.WriteAllText(ConfigFileName, NewConfig, False, System.Text.Encoding.ASCII)
     End Sub
 End Module

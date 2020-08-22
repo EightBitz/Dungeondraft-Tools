@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports Newtonsoft.Json
+Imports System.Environment
 Public Class DDToolsForm
     Private Sub DDToolsForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         PreferencesToolStripMenu.Visible = False
@@ -14,9 +15,50 @@ Public Class DDToolsForm
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
-        Me.Size = New Size(802, 249)
+        Me.Text = "EightBitz's DDTools - Version " + My.Application.Info.Version.ToString
+
+        VersionLabel.Text = "Version " & My.Application.Info.Version.ToString
+        GitHubLinkLabel.Text = "The latest version of this program can be found in its GitHub repository."
+        GitHubLinkLabel.Links.Add(55, 17, "https://github.com/EightBitz/Dungeondraft-Custom-Tools")
+        CreativeCommonsLinkLabel.Text = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+        CreativeCommonsLinkLabel.Links.Add(30, 68, "https://creativecommons.org/licenses/by-nc/4.0/legalcode")
+        EmailLinkLabel.Text = "Email: eightbitz73@outlook.com"
+        EmailLinkLabel.Links.Add(7, 23, "mailto:eightbitz73@outlook.com")
+
+        Me.Size = New Size(1000, 453)
         TitlePanel.BringToFront()
         TitlePanel.Show()
+    End Sub
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        AboutBox1.Show()
+    End Sub
+
+    Private Sub GitHubLinkLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles GitHubLinkLabel.LinkClicked
+        System.Diagnostics.Process.Start(e.Link.LinkData)
+    End Sub
+
+    Private Sub CreativeCommonsLinkLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles CreativeCommonsLinkLabel.LinkClicked
+        System.Diagnostics.Process.Start(e.Link.LinkData)
+    End Sub
+
+    Private Sub EmailLinkLabel_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles EmailLinkLabel.LinkClicked
+        System.Diagnostics.Process.Start(e.Link.LinkData)
+    End Sub
+
+    Private Sub DocumentationMenuItem_Click(sender As Object, e As EventArgs) Handles DocumentationMenuItem.Click
+        Dim DocFile As String = My.Application.Info.DirectoryPath & "\Documentation\EightBitz's Dungeondraft Tools Documentation.pdf"
+        System.Diagnostics.Process.Start(DocFile)
+    End Sub
+
+    Private Sub LicenseMenuItem_Click(sender As Object, e As EventArgs) Handles LicenseMenuItem.Click
+        Dim LicenseFile As String = My.Application.Info.DirectoryPath & "\Documentation\LICENSE.html"
+        System.Diagnostics.Process.Start(LicenseFile)
+    End Sub
+
+    Private Sub READMEMenuItem_Click(sender As Object, e As EventArgs) Handles READMEMenuItem.Click
+        Dim READMEFile As String = My.Application.Info.DirectoryPath & "\Documentation\README.html"
+        System.Diagnostics.Process.Start(READMEFile)
     End Sub
 
     '###### Main Menu Items ######
@@ -32,7 +74,7 @@ Public Class DDToolsForm
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
-        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        Dim ConfigFileName As String = GlobalVariables.ConfigFolderName & "\" & GlobalVariables.ConfigFileName
         If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "tag_assets"
@@ -64,7 +106,7 @@ Public Class DDToolsForm
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
-        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        Dim ConfigFileName As String = GlobalVariables.ConfigFolderName & "\" & GlobalVariables.ConfigFileName
         If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "convert_assets"
@@ -96,7 +138,7 @@ Public Class DDToolsForm
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
-        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        Dim ConfigFileName As String = GlobalVariables.ConfigFolderName & "\" & GlobalVariables.ConfigFileName
         If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "convert_packs"
@@ -129,7 +171,7 @@ Public Class DDToolsForm
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
-        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        Dim ConfigFileName As String = GlobalVariables.ConfigFolderName & "\" & GlobalVariables.ConfigFileName
         If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "copy_assets"
@@ -162,7 +204,7 @@ Public Class DDToolsForm
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
-        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        Dim ConfigFileName As String = GlobalVariables.ConfigFolderName & "\" & GlobalVariables.ConfigFileName
         If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "copy_tiles"
@@ -194,7 +236,7 @@ Public Class DDToolsForm
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
-        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        Dim ConfigFileName As String = GlobalVariables.ConfigFolderName & "\" & GlobalVariables.ConfigFileName
         If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "data_files"
@@ -225,7 +267,7 @@ Public Class DDToolsForm
         PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
-        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        Dim ConfigFileName As String = GlobalVariables.ConfigFolderName & "\" & GlobalVariables.ConfigFileName
         If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "map_details"
@@ -256,7 +298,7 @@ Public Class DDToolsForm
         'PackAssetsGroupBox.Hide()
         UnpackAssetsGroupBox.Hide()
 
-        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        Dim ConfigFileName As String = GlobalVariables.ConfigFolderName & "\" & GlobalVariables.ConfigFileName
         If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "pack_assets"
@@ -289,7 +331,7 @@ Public Class DDToolsForm
         PackAssetsGroupBox.Hide()
         'UnpackAssetsGroupBox.Hide()
 
-        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        Dim ConfigFileName As String = GlobalVariables.ConfigFolderName & "\" & GlobalVariables.ConfigFileName
         If File.Exists(ConfigFileName) Then
             Dim ConfigObject = GetSavedConfig(ConfigFileName)
             Dim ActiveTool As String = "unpack_assets"
@@ -312,6 +354,7 @@ Public Class DDToolsForm
     '###### Preference Menu Items ######
     Private Sub SavePrefsMenuItem_Click(sender As Object, e As EventArgs) Handles SavePrefsMenuItem.Click
         Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        Dim ConfigFolderName As String = GlobalVariables.ConfigFolderName
         Dim ConfigObject
         Dim ActiveTool As String
         If My.Computer.FileSystem.FileExists(ConfigFileName) Then
@@ -450,11 +493,11 @@ Public Class DDToolsForm
             ConfigObject(ActiveTool)("select_all") = UnpackAssetsSelectAllCheckBox.Checked
         End If
 
-        SaveNewConfig(ConfigObject, ConfigFileName)
+        SaveNewConfig(ConfigObject, ConfigFolderName, ConfigFileName)
     End Sub
 
     Private Sub LoadPrefsMenuItem_Click(sender As Object, e As EventArgs) Handles LoadPrefsMenuItem.Click
-        Dim ConfigFileName As String = GlobalVariables.ConfigFileName
+        Dim ConfigFileName As String = GlobalVariables.ConfigFolderName & "\" & GlobalVariables.ConfigFileName
         Dim ActiveTool As String
 
         If My.Computer.FileSystem.FileExists(ConfigFileName) Then
@@ -1959,5 +2002,6 @@ Public Class DDToolsForm
 
     Public Class GlobalVariables
         Public Shared Property ConfigFileName As String = "DDTools.config"
+        Public Shared Property ConfigFolderName As String = GetFolderPath(SpecialFolder.ApplicationData) & "\EightBitz\DDTools"
     End Class
 End Class

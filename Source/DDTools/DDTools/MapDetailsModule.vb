@@ -8,6 +8,7 @@ Module MapDetailsModule
         Public Property PackAuthor As String
         Public Property AssetName As String
         Public Property AssetType As String
+        Public Property Color As String
         Public Property LevelName As String
         Public Property Instances As Integer
     End Class
@@ -61,32 +62,6 @@ Module MapDetailsModule
         Dim World = MapInfo("world")
         Dim TraceObject
 
-        'Get some basic map info.
-        Message = Indent & "Created with version: " & Header("creation_build") & vbCrLf
-        Message &= Indent & "Created on (yyyy/m/d): " & Header("creation_date")("year") & "/" & Header("creation_date")("month") & "/" & Header("creation_date")("day") & vbCrLf
-        Message &= Indent & "Grid size (W x H): " & World("width") & " x " & World("height") & vbCrLf
-
-        'If the map includes a trace image, get that info.
-        TraceObject = Header("editor_state")("trace_image")
-        If TraceObject Is Nothing Then
-            Message &= Indent & "Trace Image: none" & vbCrLf & vbCrLf
-        ElseIf TraceObject.HasValues Then
-            Message &= Indent & "Trace Image: " & Header("editor_state")("trace_image")("image") & vbCrLf & vbCrLf
-        Else
-            Message &= Indent & "Trace Image: none" & vbCrLf & vbCrLf
-        End If
-
-        'Get the list of custom asset packs that were selected when this map was saved.
-        Message &= Indent & "Asset Manifest (Pack Name, Version #, Author Name):" & vbCrLf
-        If AssetManifest.Count > 0 Then
-            For Each AssetPack In AssetManifest
-                Message &= Indent & Indent & AssetPack("name") & ", Version " & AssetPack("version") & ", " & AssetPack("author") & vbCrLf
-            Next
-        Else
-            Message &= Indent & Indent & "No custom asset packs found in manifest." & vbCrLf
-        End If
-        Message &= vbCrLf
-
         'Initialize some more variables.
         Dim AssetTypeArray As String() = {"lights", "materials", "objects", "paths", "patterns", "portals", "terrain", "walls"}
         Dim TerrainArray As String() = {"texture_1", "texture_2", "texture_3", "texture_4"}
@@ -95,6 +70,10 @@ Module MapDetailsModule
         Dim texture As String
         Dim layernumber As String
         Dim UsedAssetList As New List(Of TextureClass)
+        Dim ColorAssetList As New List(Of TextureClass)
+        Dim ColorTileList As New List(Of TextureClass)
+        Dim ColorCaveList As New List(Of TextureClass)
+
         Dim SearchIndex As Integer
 
         'Iterate through each level of the map.
@@ -252,8 +231,112 @@ Module MapDetailsModule
                             Next
                         End If
                 End Select
+
+                Dim ColorTypeArray As String() = {"lights", "objects", "patterns", "walls"}
+                Dim assetcolor As String
+                Select Case AssetType
+                    Case "objects"
+                        For Each asset In World("levels")(levelnumber)(AssetType)
+                            Try
+                                assetcolor = asset("custom_color")
+                                If Not assetcolor Is Nothing Then
+                                    Dim ColorAsset As New TextureClass
+                                    texture = asset("texture")
+                                    ColorAsset = ParseTexture(texture, AssetManifest, AssetType, levelname)
+                                    ColorAsset.Color = assetcolor
+                                    ColorAssetList.Add(ColorAsset)
+                                End If
+                            Catch ex As Exception
+                                'Do Nothing
+                            End Try
+                        Next
+                    Case Else
+                        For Each asset In World("levels")(levelnumber)(AssetType)
+                            Try
+                                assetcolor = asset("color")
+                                If Not assetcolor Is Nothing Then
+                                    Dim ColorAsset As New TextureClass
+                                    texture = asset("texture")
+                                    ColorAsset = ParseTexture(texture, AssetManifest, AssetType, levelname)
+                                    ColorAsset.Color = assetcolor
+                                    ColorAssetList.Add(ColorAsset)
+                                End If
+                            Catch ex As Exception
+                                'Do Nothing
+                            End Try
+                        Next
+                End Select
             Next
+
+            Dim Tiles = World("levels")(levelnumber)("tiles")
+            For Each color In Tiles("colors")
+                Dim TileAsset As New TextureClass
+                TileAsset.LevelName = levelname
+                TileAsset.Color = color
+                SearchIndex = ColorTileList.FindIndex(Function(p) p.Color = TileAsset.Color)
+                If SearchIndex < 0 Then
+                    ColorTileList.Add(TileAsset)
+                End If
+            Next
+
+            Dim CaveGround As New TextureClass
+            Dim CaveWall As New TextureClass
+
+            Dim Cave = World("levels")(levelnumber)("cave")
+            CaveGround.LevelName = levelname
+            CaveGround.AssetName = "cave_ground"
+            CaveGround.Color = Cave("ground_color")
+            CaveWall.LevelName = levelname
+            CaveWall.AssetName = "cave_wall"
+            CaveWall.Color = Cave("wall_color")
+
+            ColorCaveList.Add(CaveGround)
+            ColorCaveList.Add(CaveWall)
         Next
+
+        'Get some basic map info.
+        Message = Indent & "Created with version: " & Header("creation_build") & vbCrLf
+        Message &= Indent & "Created on (yyyy/m/d): " & Header("creation_date")("year") & "/" & Header("creation_date")("month") & "/" & Header("creation_date")("day") & vbCrLf
+        Message &= Indent & "Grid size (W x H): " & World("width") & " x " & World("height") & vbCrLf
+
+        'If the map includes a trace image, get that info.
+        TraceObject = Header("editor_state")("trace_image")
+        If TraceObject Is Nothing Then
+            Message &= Indent & "Trace Image: none" & vbCrLf & vbCrLf
+        ElseIf TraceObject.HasValues Then
+            Message &= Indent & "Trace Image: " & Header("editor_state")("trace_image")("image") & vbCrLf & vbCrLf
+        Else
+            Message &= Indent & "Trace Image: none" & vbCrLf & vbCrLf
+        End If
+
+        Message &= Indent & "Colors used for tilesets:" & vbCrLf
+        For Each ColorTile In ColorTileList
+            Message &= Indent & Indent & ColorTile.Color & " on level [" & ColorTile.LevelName & "]" & vbCrLf
+        Next
+        Message &= vbCrLf
+
+        Message &= Indent & "Colors used for caves:" & vbCrLf
+        For Each CaveColor In ColorCaveList
+            Message &= Indent & Indent & CaveColor.Color & " for [" & CaveColor.AssetName & "] on level [" & CaveColor.LevelName & "]" & vbCrLf
+        Next
+        Message &= vbCrLf
+
+        Message &= Indent & "Colors used for assets:" & vbCrLf
+        For Each AssetColor In ColorAssetList
+            Message &= Indent & Indent & AssetColor.Color & " for [" & AssetColor.AssetName & "] of type [" & AssetColor.AssetType & "] on level [" & AssetColor.LevelName & "]" & vbCrLf
+        Next
+        Message &= vbCrLf
+
+        'Get the list of custom asset packs that were selected when this map was saved.
+        Message &= Indent & "Asset Manifest (Pack Name, Version #, Author Name):" & vbCrLf
+        If AssetManifest.Count > 0 Then
+            For Each AssetPack In AssetManifest
+                Message &= Indent & Indent & AssetPack("name") & ", Version " & AssetPack("version") & ", " & AssetPack("author") & vbCrLf
+            Next
+        Else
+            Message &= Indent & Indent & "No custom asset packs found in manifest." & vbCrLf
+        End If
+        Message &= vbCrLf
 
         Message &= Indent & "Custom assets in use:" & vbCrLf
         If UsedAssetList.Count > 0 Then
@@ -267,9 +350,6 @@ Module MapDetailsModule
             UsedAssetList.Sort(Function(x, y) x.PackName.CompareTo(y.PackName))
 
             'List all the custom assets that have been used, grouping them by their respective pack names.
-
-
-            'Message &= Indent & Indent & AssetPack("name") & ", Version " & AssetPack("version") & ", " & AssetPack("author") & vbCrLf
             PackName = UsedAssetList(0).PackName
             PackVersion = UsedAssetList(0).PackVersion
             PackAuthor = UsedAssetList(0).PackAuthor
@@ -282,8 +362,9 @@ Module MapDetailsModule
                     Message &= vbCrLf & Indent & Indent & "From " & PackName & ", Version " & PackVersion & ", by " & PackAuthor & ":" & vbCrLf
                 End If
                 If UsedAssetList(AssetIndex).Instances = 1 Then Instances = "instance" Else Instances = "instances"
-                Message &= Indent & Indent & Indent & UsedAssetList(AssetIndex).AssetName & ", " & UsedAssetList(AssetIndex).AssetType & ", " & UsedAssetList(AssetIndex).Instances & " " & Instances & " found." & vbCrLf & vbCrLf
+                Message &= Indent & Indent & Indent & UsedAssetList(AssetIndex).AssetName & ", " & UsedAssetList(AssetIndex).AssetType & ", " & UsedAssetList(AssetIndex).Instances & " " & Instances & " found." & vbCrLf
             Next
+            Message &= vbCrLf
         Else
             'If our UsedAssetList has no records, then indicate that no custom assets have been used.
             Message &= Indent & Indent & "No custom assets are in use." & vbCrLf & vbCrLf
@@ -291,11 +372,15 @@ Module MapDetailsModule
 
         Message &= Indent & "Embedded assets:" & vbCrLf
         If Not World("embedded") Is Nothing Then
-            For Each Asset In World("embedded")
-                Message &= Indent & Indent & Asset.Name & vbCrLf
-            Next
+            If World("embedded").count <= 0 Then
+                Message &= Indent & Indent & "No embedded assets were found." & vbCrLf
+            Else
+                For Each Asset In World("embedded")
+                    Message &= Indent & Indent & Asset.Name & vbCrLf
+                Next
+            End If
         Else
-            Message &= Indent & Indent & "No embedded assets were found." & vbCrLf
+                Message &= Indent & Indent & "No embedded assets were found." & vbCrLf
         End If
 
 

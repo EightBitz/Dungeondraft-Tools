@@ -22,6 +22,7 @@ Partial Class DDToolsForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DDToolsForm))
         Me.MainMenuStrip = New System.Windows.Forms.MenuStrip()
         Me.MainMenuToolStripMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.TagAssetsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -36,6 +37,10 @@ Partial Class DDToolsForm
         Me.PreferencesToolStripMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoadPrefsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SavePrefsMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DocumentationMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LicenseMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.READMEMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConvertPacksGroupBox = New System.Windows.Forms.GroupBox()
         Me.ConvertPacksSelectAllCheckBox = New System.Windows.Forms.CheckBox()
         Me.ConvertPacksLogCheckBox = New System.Windows.Forms.CheckBox()
@@ -102,8 +107,13 @@ Partial Class DDToolsForm
         Me.ConvertAssetsSourceBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
         Me.ConvertAssetsDestinationBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
         Me.TitlePanel = New System.Windows.Forms.Panel()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.VersionLabel = New System.Windows.Forms.Label()
+        Me.CreativeCommonsLinkLabel = New System.Windows.Forms.LinkLabel()
+        Me.GitHubLinkLabel = New System.Windows.Forms.LinkLabel()
+        Me.EmailLinkLabel = New System.Windows.Forms.LinkLabel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.UnpackAssetsGroupBox = New System.Windows.Forms.GroupBox()
         Me.UnpackAssetsSelectAllCheckBox = New System.Windows.Forms.CheckBox()
@@ -174,12 +184,15 @@ Partial Class DDToolsForm
         Me.DataFilesSourceBrowseButton = New System.Windows.Forms.Button()
         Me.DataFilesSourceBrowserDialog = New System.Windows.Forms.FolderBrowserDialog()
         Me.DataFilesColorDialog = New System.Windows.Forms.ColorDialog()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainMenuStrip.SuspendLayout()
         Me.ConvertPacksGroupBox.SuspendLayout()
         Me.TagAssetsGroupBox.SuspendLayout()
         Me.CopyAssetsGroupBox.SuspendLayout()
         Me.ConvertAssetsGroupBox.SuspendLayout()
         Me.TitlePanel.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.UnpackAssetsGroupBox.SuspendLayout()
         Me.PackAssetsGroupBox.SuspendLayout()
         CType(Me.PackAssetsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -192,7 +205,7 @@ Partial Class DDToolsForm
         '
         'MainMenuStrip
         '
-        Me.MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MainMenuToolStripMenu, Me.PreferencesToolStripMenu})
+        Me.MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MainMenuToolStripMenu, Me.PreferencesToolStripMenu, Me.HelpToolStripMenuItem})
         Me.MainMenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MainMenuStrip.Name = "MainMenuStrip"
         Me.MainMenuStrip.Size = New System.Drawing.Size(980, 24)
@@ -270,14 +283,39 @@ Partial Class DDToolsForm
         'LoadPrefsMenuItem
         '
         Me.LoadPrefsMenuItem.Name = "LoadPrefsMenuItem"
-        Me.LoadPrefsMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.LoadPrefsMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.LoadPrefsMenuItem.Text = "Load"
         '
         'SavePrefsMenuItem
         '
         Me.SavePrefsMenuItem.Name = "SavePrefsMenuItem"
-        Me.SavePrefsMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SavePrefsMenuItem.Size = New System.Drawing.Size(100, 22)
         Me.SavePrefsMenuItem.Text = "Save"
+        '
+        'HelpToolStripMenuItem
+        '
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem, Me.DocumentationMenuItem, Me.LicenseMenuItem, Me.READMEMenuItem})
+        Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.HelpToolStripMenuItem.Text = "Help"
+        '
+        'DocumentationMenuItem
+        '
+        Me.DocumentationMenuItem.Name = "DocumentationMenuItem"
+        Me.DocumentationMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.DocumentationMenuItem.Text = "Documentation"
+        '
+        'LicenseMenuItem
+        '
+        Me.LicenseMenuItem.Name = "LicenseMenuItem"
+        Me.LicenseMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.LicenseMenuItem.Text = "License"
+        '
+        'READMEMenuItem
+        '
+        Me.READMEMenuItem.Name = "READMEMenuItem"
+        Me.READMEMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.READMEMenuItem.Text = "README"
         '
         'ConvertPacksGroupBox
         '
@@ -856,41 +894,99 @@ Partial Class DDToolsForm
         '
         'TitlePanel
         '
+        Me.TitlePanel.Controls.Add(Me.PictureBox2)
+        Me.TitlePanel.Controls.Add(Me.VersionLabel)
+        Me.TitlePanel.Controls.Add(Me.CreativeCommonsLinkLabel)
+        Me.TitlePanel.Controls.Add(Me.GitHubLinkLabel)
+        Me.TitlePanel.Controls.Add(Me.EmailLinkLabel)
+        Me.TitlePanel.Controls.Add(Me.PictureBox1)
         Me.TitlePanel.Controls.Add(Me.Label13)
-        Me.TitlePanel.Controls.Add(Me.Label11)
         Me.TitlePanel.Controls.Add(Me.Label12)
         Me.TitlePanel.Location = New System.Drawing.Point(12, 33)
         Me.TitlePanel.Name = "TitlePanel"
-        Me.TitlePanel.Size = New System.Drawing.Size(758, 150)
+        Me.TitlePanel.Size = New System.Drawing.Size(956, 365)
         Me.TitlePanel.TabIndex = 8
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(0, 298)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(956, 43)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 8
+        Me.PictureBox2.TabStop = False
+        '
+        'VersionLabel
+        '
+        Me.VersionLabel.AutoSize = True
+        Me.VersionLabel.Font = New System.Drawing.Font("Cagliostro", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.VersionLabel.Location = New System.Drawing.Point(246, 83)
+        Me.VersionLabel.Name = "VersionLabel"
+        Me.VersionLabel.Size = New System.Drawing.Size(122, 43)
+        Me.VersionLabel.TabIndex = 7
+        Me.VersionLabel.Text = "Version"
+        '
+        'CreativeCommonsLinkLabel
+        '
+        Me.CreativeCommonsLinkLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CreativeCommonsLinkLabel.Location = New System.Drawing.Point(0, 256)
+        Me.CreativeCommonsLinkLabel.Name = "CreativeCommonsLinkLabel"
+        Me.CreativeCommonsLinkLabel.Size = New System.Drawing.Size(956, 30)
+        Me.CreativeCommonsLinkLabel.TabIndex = 6
+        Me.CreativeCommonsLinkLabel.TabStop = True
+        Me.CreativeCommonsLinkLabel.Text = "LinkLabel3"
+        Me.CreativeCommonsLinkLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'GitHubLinkLabel
+        '
+        Me.GitHubLinkLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GitHubLinkLabel.Location = New System.Drawing.Point(0, 226)
+        Me.GitHubLinkLabel.Name = "GitHubLinkLabel"
+        Me.GitHubLinkLabel.Size = New System.Drawing.Size(956, 30)
+        Me.GitHubLinkLabel.TabIndex = 5
+        Me.GitHubLinkLabel.TabStop = True
+        Me.GitHubLinkLabel.Text = "GitHubLinkLabel"
+        Me.GitHubLinkLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'EmailLinkLabel
+        '
+        Me.EmailLinkLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.EmailLinkLabel.Location = New System.Drawing.Point(0, 193)
+        Me.EmailLinkLabel.Name = "EmailLinkLabel"
+        Me.EmailLinkLabel.Size = New System.Drawing.Size(956, 30)
+        Me.EmailLinkLabel.TabIndex = 4
+        Me.EmailLinkLabel.TabStop = True
+        Me.EmailLinkLabel.Text = "LinkLabel1"
+        Me.EmailLinkLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(6, 3)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(231, 124)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 3
+        Me.PictureBox1.TabStop = False
         '
         'Label13
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Middle Ages", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(52, 102)
+        Me.Label13.Font = New System.Drawing.Font("Cagliostro", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(0, 145)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(655, 23)
+        Me.Label13.Size = New System.Drawing.Size(956, 43)
         Me.Label13.TabIndex = 2
-        Me.Label13.Text = "Select the tool you wish to use from the Select Tool menu"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Middle Ages", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(265, 18)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(229, 36)
-        Me.Label11.TabIndex = 0
-        Me.Label11.Text = "Welcome To"
+        Me.Label13.Text = "Copyright © 2020 EightBitz, Creative Commons CC-BY-NC"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Middle Ages", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(77, 58)
+        Me.Label12.Font = New System.Drawing.Font("Cagliostro", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(243, 3)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(604, 36)
+        Me.Label12.Size = New System.Drawing.Size(678, 65)
         Me.Label12.TabIndex = 1
         Me.Label12.Text = "EightBitz's Dungeondraft Tools"
         '
@@ -1486,12 +1582,20 @@ Partial Class DDToolsForm
         Me.DataFilesSourceBrowseButton.Text = "Browse"
         Me.DataFilesSourceBrowseButton.UseVisualStyleBackColor = True
         '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AboutToolStripMenuItem.Text = "About"
+        '
         'DDToolsForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(980, 610)
         Me.Controls.Add(Me.MainMenuStrip)
+        Me.Controls.Add(Me.TitlePanel)
+        Me.Controls.Add(Me.PackAssetsGroupBox)
         Me.Controls.Add(Me.DataFilesGroupBox)
         Me.Controls.Add(Me.CopyTilesGroupBox)
         Me.Controls.Add(Me.CopyAssetsGroupBox)
@@ -1500,8 +1604,6 @@ Partial Class DDToolsForm
         Me.Controls.Add(Me.MapDetailsGroupBox)
         Me.Controls.Add(Me.TagAssetsGroupBox)
         Me.Controls.Add(Me.ConvertAssetsGroupBox)
-        Me.Controls.Add(Me.TitlePanel)
-        Me.Controls.Add(Me.PackAssetsGroupBox)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Margin = New System.Windows.Forms.Padding(4)
@@ -1519,6 +1621,8 @@ Partial Class DDToolsForm
         Me.ConvertAssetsGroupBox.PerformLayout()
         Me.TitlePanel.ResumeLayout(False)
         Me.TitlePanel.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.UnpackAssetsGroupBox.ResumeLayout(False)
         Me.UnpackAssetsGroupBox.PerformLayout()
         Me.PackAssetsGroupBox.ResumeLayout(False)
@@ -1599,7 +1703,6 @@ Partial Class DDToolsForm
     Friend WithEvents TitlePanel As Panel
     Friend WithEvents Label13 As Label
     Friend WithEvents Label12 As Label
-    Friend WithEvents Label11 As Label
     Friend WithEvents UnpackAssetsMenuItem As ToolStripMenuItem
     Friend WithEvents UnpackAssetsGroupBox As GroupBox
     Friend WithEvents UnpackAssetsStartButton As Button
@@ -1689,4 +1792,15 @@ Partial Class DDToolsForm
     Friend WithEvents DataFilesSourceBrowserDialog As FolderBrowserDialog
     Friend WithEvents DataFilesMenuItem As ToolStripMenuItem
     Friend WithEvents DataFilesColorDialog As ColorDialog
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents VersionLabel As Label
+    Friend WithEvents CreativeCommonsLinkLabel As LinkLabel
+    Friend WithEvents GitHubLinkLabel As LinkLabel
+    Friend WithEvents EmailLinkLabel As LinkLabel
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents HelpToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DocumentationMenuItem As ToolStripMenuItem
+    Friend WithEvents LicenseMenuItem As ToolStripMenuItem
+    Friend WithEvents READMEMenuItem As ToolStripMenuItem
+    Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
 End Class

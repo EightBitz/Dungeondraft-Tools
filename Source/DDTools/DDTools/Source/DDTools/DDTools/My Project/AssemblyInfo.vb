@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("EightBitz's Dungeondraft Tools")>
-<Assembly: AssemblyDescription("Various tools for managing custom assets for Dungeondraft")>
-<Assembly: AssemblyCompany("https://github.com/EightBitz/Dungeondraft-Tools")>
-<Assembly: AssemblyProduct("EightBitz's Dungeondraft Tools")>
-<Assembly: AssemblyCopyright("© 2020 EightBitz, Creative Commons CC-BY-NC")>
+<Assembly: AssemblyTitle("DDTools")>
+<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyProduct("DDTools")>
+<Assembly: AssemblyCopyright("Copyright ©  2020")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("3.0.0.0")>
-<Assembly: AssemblyFileVersion("3.0.0.0")>
+<Assembly: AssemblyVersion("1.0.0.0")>
+<Assembly: AssemblyFileVersion("1.0.0.0")>
