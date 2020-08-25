@@ -11,8 +11,6 @@
 <li>Double click the "DDTools" desktop icon.</li>
 </ol>
 
-<p>If you want to convert files to .webp format, you will also need to download and install <a href="https://imagemagick.org/script/download.php#windows">ImageMagick for Windows</a>.</p>
-
 <h2>What Does it Do?</h2>
 
 This program offers six tools to facilitate creating and managing custom asset packs for Dungeondraft.
