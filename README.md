@@ -5,7 +5,7 @@
 
 <p>To use this program:</p>
 <ol>
-<li><a href="https://github.com/EightBitz/Dungeondraft-Tools/archive/Version-3.5.zip">Download the Zip archive</a>.</li>
+<li><a href="https://github.com/EightBitz/Dungeondraft-Tools/archive/Version-4.0.zip">Download the Zip archive</a>.</li>
 <li>Extract the folder.</li>
 <li>Run Setup.exe</li>
 <li>Double click the "DDTools" desktop icon.</li>
@@ -16,6 +16,8 @@
 This program offers six tools to facilitate creating and managing custom asset packs for Dungeondraft.
 <ul>
 <li>Tag assets</li>
+<li>Color Theme: Apply Theme to Map</li>
+<li>Color Theme: Create Theme from Map</li>
 <li>Convert Assets</li>
 <li>Convert Packs</li>
 <li>Copy Assets</li>
@@ -30,6 +32,14 @@ This program offers six tools to facilitate creating and managing custom asset p
 <h3>Tag Assets</h3>
 
 <p>For people who want to create their own custom asset packs, the Tag Assets tool will create a properly formatted default.dungeondraft_tags file. This is the file that Dungeondraft uses to determine which assets in the object library are associated with which tags.</p>
+
+<h3>Color Theme: Apply Theme to Map</h3>
+    
+<p>This tool will allow you to apply a previously saved color theme to a selected map file.</p>
+    
+<h3>Color Theme: Create Theme from Map</h3>
+    
+<p>This tool will allow you to creae a color theme from a selected map file.</p>
 
 <h3>Convert Assets</h3>
 
