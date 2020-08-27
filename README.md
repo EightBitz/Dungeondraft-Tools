@@ -39,7 +39,7 @@ This program offers six tools to facilitate creating and managing custom asset p
     
 <h3>Color Theme: Create Theme from Map</h3>
     
-<p>This tool will allow you to creae a color theme from a selected map file.</p>
+<p>This tool will allow you to create a color theme from a selected map file.</p>
 
 <h3>Convert Assets</h3>
 
