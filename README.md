@@ -5,7 +5,7 @@
 
 <p>To use this program:</p>
 <ol>
-<li><a href="https://github.com/EightBitz/Dungeondraft-Tools/archive/Version-4.2.zip">Download the Zip archive</a>.</li>
+<li><a href="https://github.com/EightBitz/Dungeondraft-Tools/archive/Version-4.3.zip">Download the Zip archive</a>.</li>
 <li>Extract the folder.</li>
 <li>Run Setup.exe</li>
 <li>Double click the "DDTools" desktop icon.</li>
